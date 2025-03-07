@@ -8,7 +8,7 @@
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
-    <Name>Untitled1</Name>
+    <Name>Database_Connection</Name>
     <ProgramVersion>3.1.4026.14</ProgramVersion>
     <Application>{08a67320-987c-4880-bd6b-6db9841de3f4}</Application>
     <TypeSystem>{6ee02b12-725c-475e-86f9-698c39c4e84b}</TypeSystem>
@@ -61,7 +61,7 @@
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Untitled1.tmc">
+    <None Include="Database_Connection.tmc">
       <SubType>Content</SubType>
     </None>
   </ItemGroup>

@@ -9,9 +9,9 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{6E9274A0-1531-44C0-9147-22F12CB2D0B6}" Name="Untitled1" PrjFilePath="Untitled1\Untitled1.plcproj" TmcFilePath="Untitled1\Untitled1.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+			<Project GUID="{6E9274A0-1531-44C0-9147-22F12CB2D0B6}" Name="Database_Connection" PrjFilePath="Database_Connection\Database_Connection.plcproj" TmcFilePath="Database_Connection\Database_Connection.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
 				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{97970690-9932-DEF1-8757-B50F3878DF78}">
-					<Name>Untitled1 Instance</Name>
+					<Name>Database_Connection Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>
