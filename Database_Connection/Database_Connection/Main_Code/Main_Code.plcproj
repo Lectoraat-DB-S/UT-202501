@@ -8,7 +8,7 @@
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
-    <Name>Database_Code</Name>
+    <Name>Main_Code</Name>
     <ProgramVersion>3.1.4026.14</ProgramVersion>
     <Application>{3915bf53-3f58-45d5-a65d-f6a1e4961e05}</Application>
     <TypeSystem>{916d4197-bc32-46c6-90e9-ce3bb828b3a1}</TypeSystem>

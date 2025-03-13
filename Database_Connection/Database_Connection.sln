@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # TcXaeShell Solution File, Format Version 11.00
 VisualStudioVersion = 17.7.34302.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{B1E792BE-AA5F-4E3C-8C82-674BF9C0715B}") = "Database_Connection", "Database_Connection\Database_Connection.tsproj", "{64E964BB-60BD-4041-BF67-28AD7E4DFF73}"
+Project("{B1E792BE-AA5F-4E3C-8C82-674BF9C0715B}") = "MAIN-Solution", "Database_Connection\MAIN-Solution.tsproj", "{64E964BB-60BD-4041-BF67-28AD7E4DFF73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
