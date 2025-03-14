@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FC_SQL_InsertCommands_Encoder" Id="{9a710d4f-10e7-4140-af7d-b8b826357d37}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FC_SQL_InsertCommands_Encoder : STRING(255)
+VAR_INPUT
+    iSensorValue: INT;
+    iSampleNr: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FC_SQL_InsertCommands_Encoder := 'INSERT INTO [db_accessadmin].[Encoder] (SensorValue, SampleNr, Time) VALUES (';
+FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, INT_TO_STRING(iSensorValue));
+FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, ', ');
+FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, INT_TO_STRING(iSampleNr));
+FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, ', GETDATE());');]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

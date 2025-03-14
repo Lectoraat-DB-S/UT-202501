@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FC_SQL_InsertCommands_TempSensor" Id="{679b0b15-8183-47b4-b50a-239f76f313e1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FC_SQL_InsertCommands_TempSensor : STRING(255)
+VAR_INPUT
+    iSensorValue: INT;
+    iSampleNr: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FC_SQL_InsertCommands_TempSensor := 'INSERT INTO [db_accessadmin].[TempSensor_Data] (SensorValue, SampleNr, Time) VALUES (';
+FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_TempSensor, INT_TO_STRING(iSensorValue));
+FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_TempSensor, ', ');
+FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_TempSensor, INT_TO_STRING(iSampleNr));
+FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_TempSensor, ', GETDATE());');]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
