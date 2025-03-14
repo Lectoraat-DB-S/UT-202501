@@ -32,7 +32,7 @@ CASE iStep OF
         END_IF
 
     30: // Generate INSERT Commands
-        SQL_Commands[1] := FC_SQL_InsertCommands(iSensorValue, iSampleNr);
+        SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(iSensorValue, iSampleNr);
         iStep := 40;
 
     40: // Execute Insert Command

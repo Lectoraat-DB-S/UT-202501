@@ -24,10 +24,16 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FC_SQL_InsertCommands.TcPOU">
+    <Compile Include="POUs\FC_SQL_InsertCommands_TempSensor.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FC_SQL_InsertCommands_LoadCell.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FC_SQL_InsertCommands_Encoder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

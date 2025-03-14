@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="FC_SQL_InsertCommands_LoadCell" Id="{0f58e4bb-fdb9-4988-9a7a-68674d308dc8}" SpecialFunc="None">
+  <POU Name="FC_SQL_InsertCommands_LoadCell" Id="{37e24ba9-fa71-47a0-b3cf-7a91dd5a1b3e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION FC_SQL_InsertCommands_LoadCell : STRING(255)
 VAR_INPUT
     iSensorValue: INT;
