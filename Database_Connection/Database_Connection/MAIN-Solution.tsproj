@@ -8,20 +8,28 @@
 				</Target>
 			</Licenses>
 			<Tasks>
-				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+				<Task Id="3" Priority="20" CycleTime="10000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
 				</Task>
 			</Tasks>
 		</System>
 		<Plc>
 			<Project GUID="{F88F7A59-9E7F-4523-9C0E-4BD9DABD5D28}" Name="Main_Code" PrjFilePath="Main_Code\Main_Code.plcproj" TmcFilePath="Main_Code\Main_Code.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{A77EE75F-6C0D-B6AE-24AB-26D7C49EAEC8}" TmcPath="Main_Code\Main_Code.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{D72E6F75-090A-A180-4840-1E67FFDE247D}" TmcPath="Main_Code\Main_Code.tmc">
 					<Name>Main_Code Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
-							<Name>MAIN.iSensorValue</Name>
+							<Name>MAIN.iLoadCellValue</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.iTempSensorlValue</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.iEncoderValue</Name>
 							<Type>INT</Type>
 						</Var>
 					</Vars>
@@ -33,7 +41,7 @@
 								<OTCID>#x02010030</OTCID>
 							</ManualConfig>
 							<Priority>20</Priority>
-							<CycleTime>10000000</CycleTime>
+							<CycleTime>1000000</CycleTime>
 						</Context>
 					</Contexts>
 					<TaskPouOids>

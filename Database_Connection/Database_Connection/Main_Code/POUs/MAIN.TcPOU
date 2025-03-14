@@ -10,7 +10,11 @@ VAR
     iStep: INT;
     SQL_Commands: ARRAY[1..2] OF STRING(255);
     iSampleNr: INT := 1;
-    iSensorValue: INT := 5431;
+    iLoadCellValue AT %I*: INT;
+	iLoadCellPreviousValue : INT;
+	iTempSensorValue AT %I*: INT;
+	iEncoderValue AT %I*: INT;
+
     sSelectDataCommand : STRING(255);
 END_VAR]]></Declaration>
     <Implementation>
@@ -32,8 +36,15 @@ CASE iStep OF
         END_IF
 
     30: // Generate INSERT Commands
-        SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(iSensorValue, iSampleNr);
-        iStep := 40;
+		SQL_Commands[1] := FC_SQL_InsertCommands_Encoder(iEncoderValue, iSampleNr);
+		SQL_Commands[1] := FC_SQL_InsertCommands_TempSensor(iTempSensorValue, iSampleNr);
+        //check if loadcell value changed
+		IF ABS(iLoadCellValue - iLoadCellPreviousValue) > 100 THEN
+			SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(iLoadCellValue, iSampleNr);
+    		iSampleNr := iSampleNr + 1; // Increment sample number
+    		iLoadCellPreviousValue := iLoadCellValue; // Update previous value tracker
+		END_IF
+		 iStep := 40;
 
     40: // Execute Insert Command
         IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1])) THEN
@@ -49,7 +60,7 @@ CASE iStep OF
             pSQLCmd := ADR(sSelectDataCommand),
             cbSQLCmd := SIZEOF(sSelectDataCommand),
             pSQLDBResult := ADR(FB_SQLResultEvt)); 
-        
+        iStep := 30;
    
 
 END_CASE]]></ST>
