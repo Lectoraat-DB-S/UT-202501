@@ -8,7 +8,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[FC_SQL_InsertCommands_TempSensor := 'INSERT INTO [db_accessadmin].[TempSensor_Data] (SensorValue, SampleNr, Time) VALUES (';
+      <ST><![CDATA[FC_SQL_InsertCommands_TempSensor := 'INSERT INTO [db_accessadmin].[TempSensor] (SensorValue, SampleNr, Time) VALUES (';
 FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_TempSensor, INT_TO_STRING(iSensorValue));
 FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_TempSensor, ', ');
 FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_TempSensor, INT_TO_STRING(iSampleNr));

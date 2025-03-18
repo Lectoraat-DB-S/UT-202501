@@ -8,7 +8,7 @@ VAR
     FB_SQLResultEvt   : FB_SQLResultEvt(sNetID := '', tTimeout := T#5S);
 
     iStep: INT;
-    SQL_Commands: ARRAY[1..2] OF STRING(255);
+    SQL_Commands: ARRAY[1..4] OF STRING(255);
     iSampleNr: INT := 1;
     iLoadCellValue AT %I*: INT;
 	iLoadCellPreviousValue : INT;
@@ -16,54 +16,49 @@ VAR
 	iEncoderValue AT %I*: INT;
 
     sSelectDataCommand : STRING(255);
+	
+	aReadStruct : ARRAY[1..10] OF DUT_SQL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
-CASE iStep OF
-    0:
-        iStep := 10;
+// Connect to Database (only once)
+IF NOT FB_SQLDatabaseEvt.bConnected THEN
+    FB_SQLDatabaseEvt.Connect(hDBID := 1);
+END_IF
 
-    10: // Connect to Database
-        FB_SQLDatabaseEvt.Connect(hDBID := 1);
-        IF FB_SQLDatabaseEvt.bConnected THEN
-            iStep := 20;
-        END_IF
+// Create SQL Command Object (only once)
+IF NOT FB_SQLDatabaseEvt.bBusy  THEN
+    FB_SQLDatabaseEvt.CreateCmd(pSQLCommand := ADR(FB_SQLCommandEvt));
+END_IF
 
-    20: // Create SQL Command Object
-        FB_SQLDatabaseEvt.CreateCmd(pSQLCommand := ADR(FB_SQLCommandEvt));
-        IF NOT FB_SQLDatabaseEvt.bBusy THEN
-            iStep := 30;
-        END_IF
+// Generate and insert LoadCell Data only once (initial check)
+IF ABS(iLoadCellValue - iLoadCellPreviousValue) > 100  THEN
+    SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(iLoadCellValue, iSampleNr);
+    iSampleNr := iSampleNr + 1;  // Increment sample number
+    iLoadCellPreviousValue := iLoadCellValue;  // Update previous load cell value
+    FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1]));
+END_IF
 
-    30: // Generate INSERT Commands
-		SQL_Commands[1] := FC_SQL_InsertCommands_Encoder(iEncoderValue, iSampleNr);
-		SQL_Commands[1] := FC_SQL_InsertCommands_TempSensor(iTempSensorValue, iSampleNr);
-        //check if loadcell value changed
-		IF ABS(iLoadCellValue - iLoadCellPreviousValue) > 100 THEN
-			SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(iLoadCellValue, iSampleNr);
-    		iSampleNr := iSampleNr + 1; // Increment sample number
-    		iLoadCellPreviousValue := iLoadCellValue; // Update previous value tracker
-		END_IF
-		 iStep := 40;
+	//generate INSERT command for all the sensors
+    SQL_Commands[3] := CONCAT(FC_SQL_InsertCommands_Encoder(iEncoderValue, iSampleNr),
+							  FC_SQL_InsertCommands_TempSensor(iTempSensorValue, iSampleNr));
+    
+    // Execute Insert command
+    FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[3]), cbSQLCmd := SIZEOF(SQL_Commands[3]));
+    
 
-    40: // Execute Insert Command
-        IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1])) THEN
-            iStep := 50;
-        END_IF
 
-    50: // Prepare SELECT Query
-        sSelectDataCommand := 'SELECT TOP 10 * FROM [db_accessadmin].[TempSensor_Data] ORDER BY Time DESC;';
-        iStep := 60;
-
-    60: // Execute SELECT Command
-         FB_SQLCommandEvt.ExecuteDataReturn(
-            pSQLCmd := ADR(sSelectDataCommand),
-            cbSQLCmd := SIZEOF(sSelectDataCommand),
-            pSQLDBResult := ADR(FB_SQLResultEvt)); 
-        iStep := 30;
+  // Prepare SELECT Query
+  //      sSelectDataCommand := 'SELECT SensorValue * FROM [db_accessadmin].[TempSensor] ORDER BY Time DESC;';
    
-
-END_CASE]]></ST>
+  // Execute SELECT Command
+  //     FB_SQLCommandEvt.ExecuteDataReturn(ADR(sSelectDataCommand),
+  //         							   SIZEOF(sSelectDataCommand),
+  //          							   ADR(FB_SQLResultEvt)); 
+					
+  //	FB_SQLResultEvt.Read(2, 3, ADR(aReadStruct), SIZEOF(aReadStruct), FALSE, TRUE);	
+      
+   ]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
