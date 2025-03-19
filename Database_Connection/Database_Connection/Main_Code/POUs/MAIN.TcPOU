@@ -3,49 +3,77 @@
   <POU Name="MAIN" Id="{4ef234f8-6ebd-4fcd-beba-a435a8463d67}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-    FB_SQLDatabaseEvt : FB_SQLDatabaseEvt(sNetID := '', tTimeout := T#5S);
+    //database variables
+	FB_SQLDatabaseEvt : FB_SQLDatabaseEvt(sNetID := '', tTimeout := T#5S);
     FB_SQLCommandEvt  : FB_SQLCommandEvt(sNetID := '', tTimeout := T#5S);
     FB_SQLResultEvt   : FB_SQLResultEvt(sNetID := '', tTimeout := T#5S);
-
-    iStep: INT;
-    SQL_Commands: ARRAY[1..4] OF STRING(255);
-    iSampleNr: INT := 1;
+	SQL_Commands: ARRAY[1..6] OF STRING(255);
+	sSelectDataCommand : STRING(255);
+	
+   
+	//inputs from sensor
     iLoadCellValue AT %I*: INT;
 	iLoadCellPreviousValue : INT;
-	iTempSensorValue AT %I*: INT;
+	iTempSensor1Value AT %I*: INT;
+	iTempSensor2Value AT %I*: INT;
+	iTempSensor3Value AT %I*: INT;
+	iTempSensor4Value AT %I*: INT;
 	iEncoderValue AT %I*: INT;
 
-    sSelectDataCommand : STRING(255);
+
 	
 	aReadStruct : ARRAY[1..10] OF DUT_SQL;
+	//Strings to insert
+	sTempSensor1Value: STRING(255);
+	sTempSensor2Value: STRING(255);
+	sTempSensor3Value: STRING(255);
+	sTempSensor4Value: STRING(255);
+	iSampleNr: INT := 1;
+	iSensorIDs : ARRAY[1..4] OF INT := [1,2,3,4];
+
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
 // Connect to Database (only once)
 IF NOT FB_SQLDatabaseEvt.bConnected THEN
     FB_SQLDatabaseEvt.Connect(hDBID := 1);
+	FB_SQLDatabaseEvt.CreateCmd(pSQLCommand := ADR(FB_SQLCommandEvt));
+	  SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(iLoadCellValue, iSampleNr);
+	FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1]));
 END_IF
 
-// Create SQL Command Object (only once)
-IF NOT FB_SQLDatabaseEvt.bBusy  THEN
-    FB_SQLDatabaseEvt.CreateCmd(pSQLCommand := ADR(FB_SQLCommandEvt));
-END_IF
 
 // Generate and insert LoadCell Data only once (initial check)
 IF ABS(iLoadCellValue - iLoadCellPreviousValue) > 100  THEN
     SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(iLoadCellValue, iSampleNr);
+	FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1]));
     iSampleNr := iSampleNr + 1;  // Increment sample number
     iLoadCellPreviousValue := iLoadCellValue;  // Update previous load cell value
-    FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1]));
 END_IF
 
+	//convert temperature values to decimals
+	sTempSensor1Value := CONCAT(INT_TO_STRING(iTempSensor1Value / 10), '.');   // Whole number part
+	sTempSensor1Value := CONCAT(sTempSensor1Value, INT_TO_STRING(ABS(iTempSensor1Value MOD 10)));  // Decimal part
+	sTempSensor2Value := CONCAT(INT_TO_STRING(iTempSensor2Value / 10), '.');   // Whole number part
+	sTempSensor2Value := CONCAT(sTempSensor2Value, INT_TO_STRING(ABS(iTempSensor2Value MOD 10)));  // Decimal part
+	sTempSensor3Value := CONCAT(INT_TO_STRING(iTempSensor3Value / 10), '.');   // Whole number part
+	sTempSensor3Value := CONCAT(sTempSensor3Value, INT_TO_STRING(ABS(iTempSensor3Value MOD 10)));  // Decimal part
+	sTempSensor4Value := CONCAT(INT_TO_STRING(iTempSensor4Value / 10), '.');   // Whole number part
+	sTempSensor4Value := CONCAT(sTempSensor4Value, INT_TO_STRING(ABS(iTempSensor4Value MOD 10)));  // Decimal part
+	
+	
 	//generate INSERT command for all the sensors
-    SQL_Commands[3] := CONCAT(FC_SQL_InsertCommands_Encoder(iEncoderValue, iSampleNr),
-							  FC_SQL_InsertCommands_TempSensor(iTempSensorValue, iSampleNr));
+    SQL_Commands[3] := CONCAT(FC_SQL_InsertCommands_Encoder(iEncoderValue, iSampleNr),FC_SQL_InsertCommands_TempSensor(sTempSensor1Value, iSampleNr, iSensorIDs[1]));
+	SQL_Commands[4] := CONCAT(FC_SQL_InsertCommands_TempSensor(sTempSensor3Value, iSampleNr, iSensorIDs[3]),FC_SQL_InsertCommands_TempSensor(sTempSensor2Value, iSampleNr,iSensorIDs[2]));
+	SQL_Commands[5] := FC_SQL_InsertCommands_TempSensor(sTempSensor4Value, iSampleNr, iSensorIDs[4]);
+	
+						  
+							  
     
     // Execute Insert command
     FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[3]), cbSQLCmd := SIZEOF(SQL_Commands[3]));
-    
+	FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[4]), cbSQLCmd := SIZEOF(SQL_Commands[4]));
+    FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[5]), cbSQLCmd := SIZEOF(SQL_Commands[5]));
 
 
   // Prepare SELECT Query
