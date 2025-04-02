@@ -3,56 +3,113 @@
   <POU Name="MAIN" Id="{4ef234f8-6ebd-4fcd-beba-a435a8463d67}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-    FB_SQLDatabaseEvt : FB_SQLDatabaseEvt(sNetID := '', tTimeout := T#5S);
+    //database variables
+	FB_SQLDatabaseEvt : FB_SQLDatabaseEvt(sNetID := '', tTimeout := T#5S);
     FB_SQLCommandEvt  : FB_SQLCommandEvt(sNetID := '', tTimeout := T#5S);
     FB_SQLResultEvt   : FB_SQLResultEvt(sNetID := '', tTimeout := T#5S);
+	SQL_Commands: ARRAY[1..7] OF STRING(500);
+	sSelectDataCommand : STRING(255);
+	DataBase_Connection: BOOL := FALSE;
+   
+	//inputs from sensor
+    iLoadCellValue AT %I*: INT;
+	iLoadCellPreviousValue : INT;
+	iTempSensor1Value AT %I*: INT;
+	iTempSensor2Value AT %I*: INT;
+	iTempSensor3Value AT %I*: INT;
+	iTempSensor4Value AT %I*: INT;
+	iEncoderValue AT %I*: INT;
+	//Time variables
+	tInsertTimer: TON; (* Timer to control insert intervals *)
+    tInsertInterval: TIME := T#10S; (* 10-second interval *)
+	
 
-    iStep: INT;
-    SQL_Commands: ARRAY[1..2] OF STRING(255);
-    iSampleNr: INT := 1;
-    iSensorValue: INT := 5431;
-    sSelectDataCommand : STRING(255);
+	//read arrays
+	aReadStruct : ARRAY[1..10] OF TempSensor_SelectStruct;
+	//Strings to insert
+	sTempSensor1Value: STRING(255);
+	sTempSensor2Value: STRING(255);
+	sTempSensor3Value: STRING(255);
+	sTempSensor4Value: STRING(255);
+	iSampleNr: INT := 1;
+	iSensorIDs : ARRAY[1..4] OF INT := [1,2,3,4];
+	
+	//state machine control
+	nStep, nNextStep: INT ;
+
+	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
-CASE iStep OF
-    0:
-        iStep := 10;
+//make connection to the database
+// Connect to Database (only once)
+IF NOT DataBase_Connection THEN
+    FB_SQLDatabaseEvt.Connect(hDBID := 1);  // Attempt to connect
 
-    10: // Connect to Database
-        FB_SQLDatabaseEvt.Connect(hDBID := 1);
-        IF FB_SQLDatabaseEvt.bConnected THEN
-            iStep := 20;
-        END_IF
-
-    20: // Create SQL Command Object
+    // Wait until the connection is established
+    IF FB_SQLDatabaseEvt.bConnected THEN
         FB_SQLDatabaseEvt.CreateCmd(pSQLCommand := ADR(FB_SQLCommandEvt));
-        IF NOT FB_SQLDatabaseEvt.bBusy THEN
-            iStep := 30;
+        DataBase_Connection := TRUE;
+    END_IF;
+END_IF
+		
+// Generate and insert LoadCell Data only when changed 
+IF ABS(iLoadCellValue - iLoadCellPreviousValue) > 100  THEN
+    SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(iLoadCellValue, iSampleNr);
+	FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1]));
+    iSampleNr := iSampleNr + 1;  // Increment sample number
+    iLoadCellPreviousValue := iLoadCellValue;  // Update previous load cell value
+END_IF
+
+
+	
+	//INSERT for encoder
+    SQL_Commands[3] := FC_SQL_InsertCommands_Encoder(iEncoderValue, iSampleNr);
+	//INSERT for temp sensors
+	SQL_Commands[4] := CONCAT(FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor1Value), iSampleNr, iSensorIDs[1]),FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor2Value), iSampleNr, iSensorIDs[2]));
+	SQL_Commands[5] := CONCAT(FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor3Value), iSampleNr, iSensorIDs[3]),FC_SQL_InsertCommands_TempSensor(	TempConvert(iTempSensor4Value), iSampleNr, iSensorIDs[4]));
+	
+	//enable Timer					  
+	tInsertTimer(IN := TRUE, PT := tInsertInterval);
+	//check if time passed
+ IF tInsertTimer.Q THEN  				     
+    //state machine for INSERT executes
+	CASE nStep OF
+	 0:
+        //Execute Encoder INSERT
+        IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[3]), cbSQLCmd := SIZEOF(SQL_Commands[3])) THEN
+            nNextStep := 1;
         END_IF
-
-    30: // Generate INSERT Commands
-        SQL_Commands[1] := FC_SQL_InsertCommands(iSensorValue, iSampleNr);
-        iStep := 40;
-
-    40: // Execute Insert Command
-        IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1])) THEN
-            iStep := 50;
+		
+	1:	//execute Temp 1 and 2 INSERT
+		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[4]), cbSQLCmd := SIZEOF(SQL_Commands[4])) THEN
+            nNextStep := 2;
         END_IF
+	2:	//execute Temp 3 and 4 INSERT
+		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[5]), cbSQLCmd := SIZEOF(SQL_Commands[5])) THEN
+            nNextStep := 3;
+        END_IF
+	3:	
+		// Properly reset and restart the timer
+    	tInsertTimer(IN := FALSE); // Stop timer
+    	tInsertTimer(IN := TRUE);  // Restart timer 
+		nNextStep := 0;
+	END_CASE
+   //Advance the state machine step
+	nStep := nNextStep;
+	 	
+END_IF
 
-    50: // Prepare SELECT Query
-        sSelectDataCommand := 'SELECT TOP 10 * FROM [db_accessadmin].[TempSensor_Data] ORDER BY Time DESC;';
-        iStep := 60;
 
-    60: // Execute SELECT Command
-         FB_SQLCommandEvt.ExecuteDataReturn(
-            pSQLCmd := ADR(sSelectDataCommand),
-            cbSQLCmd := SIZEOF(sSelectDataCommand),
-            pSQLDBResult := ADR(FB_SQLResultEvt)); 
-        
+  // Prepare SELECT Query
+     //   sSelectDataCommand := 'SELECT SensorValue * FROM [db_accessadmin].[TempSensor] ORDER BY Time DESC;';
    
-
-END_CASE]]></ST>
+  // Execute SELECT Command
+      // FB_SQLCommandEvt.ExecuteDataReturn(ADR(sSelectDataCommand),
+        //   							   SIZEOF(sSelectDataCommand),
+        //    							   ADR(FB_SQLResultEvt)); 
+					
+  	//FB_SQLResultEvt.Read(2, 3, ADR(aReadStruct), SIZEOF(aReadStruct), FALSE, TRUE);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

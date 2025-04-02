@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FC_SQL_InsertCommands_LoadCell" Id="{6ada8feb-9e5d-4aac-aad1-cbc4c5b15286}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FC_SQL_InsertCommands_LoadCell : STRING(255)
+VAR_INPUT
+    iSensorValue: INT;
+    iSampleNr: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FC_SQL_InsertCommands_LoadCell := 'INSERT INTO [db_accessadmin].[LoadCell] (SensorValue, SampleNr, Time) VALUES (';
+FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, INT_TO_STRING(iSensorValue));
+FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, ', ');
+FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, INT_TO_STRING(iSampleNr));
+FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, ', GETDATE());');]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

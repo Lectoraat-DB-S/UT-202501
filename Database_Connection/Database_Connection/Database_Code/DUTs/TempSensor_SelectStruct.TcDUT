@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="TempSensor_SelectStruct" Id="{f86cf38e-752e-4498-893f-2e6b28d104c2}">
+    <Declaration><![CDATA[TYPE TempSensor_SelectStruct :
+STRUCT
+	SensorValue: STRING(255);
+	SampleNr: DINT;
+	Time_: DT;
+	SensorID: DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
