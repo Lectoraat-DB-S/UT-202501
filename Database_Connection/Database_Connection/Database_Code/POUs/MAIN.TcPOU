@@ -120,7 +120,7 @@ END_IF
 		Process_Status := TRUE;
 	END_IF
 	IF bStop THEN
-		Process_Status := FALSE;
+		Process_Status := FALSE;	
 	END_IF
 
   // Prepare SELECT Query

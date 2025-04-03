@@ -45,6 +45,17 @@
         "asyncWait": true
       },
       {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%ADS.PLC1.MAIN.bStop%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": false
+        },
+        "asyncWait": true
+      },
+      {
         "objectType": "Condition",
         "active": true,
         "parts": [
@@ -54,12 +65,12 @@
                 "compare1": {
                   "objectType": "Symbol",
                   "valueType": "tchmi:general#/definitions/STRING%2880%29",
-                  "symbolExpression": "%s%ADS.PLC1.MAIN.iEncoderMotor%/s%"
+                  "symbolExpression": "%ctrl%InputEncoder::Text%/ctrl%"
                 },
                 "compare2": {
                   "objectType": "StaticValue",
-                  "valueType": "tchmi:general#/definitions/STRING%2880%29",
-                  "value": "NULL"
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": null
                 },
                 "compareOperator": "==",
                 "logic": null
@@ -115,40 +126,70 @@
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onUserInteractionFinished",
     "actions": [
       {
-        "objectType": "WriteToSymbol",
+        "objectType": "Condition",
         "active": true,
-        "symbolExpression": "%ctrl%ConfirmButtonEncoder::IsEnabled%/ctrl%",
-        "value": {
-          "objectType": "StaticValue",
-          "valueType": "tchmi:general#/definitions/Boolean",
-          "value": true
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%ctrl%ConfirmButtonEncoder::BackgroundColor%/ctrl%",
-        "value": {
-          "objectType": "StaticValue",
-          "valueType": "tchmi:framework#/definitions/Color",
-          "value": {
-            "color": "rgba(0, 255, 0, 1)"
+        "parts": [
+          {
+            "if": [
+              {
+                "compare1": {
+                  "objectType": "Symbol",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "symbolExpression": "%ctrl%InputEncoder::Text%/ctrl%"
+                },
+                "compare2": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": ""
+                },
+                "compareOperator": "!=",
+                "logic": null
+              }
+            ],
+            "then": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%ConfirmButtonEncoder::IsEnabled%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/Boolean",
+                  "value": true
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%ConfirmButtonEncoder::BackgroundColor%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:framework#/definitions/Color",
+                  "value": {
+                    "color": "rgba(0, 255, 0, 1)"
+                  }
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%ConfirmButtonEncoder::BorderColor%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:framework#/definitions/Color",
+                  "value": {
+                    "color": "rgba(0, 255, 0, 1)"
+                  }
+                },
+                "asyncWait": true
+              }
+            ]
+          },
+          {
+            "else": []
           }
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%ctrl%ConfirmButtonEncoder::BorderColor%/ctrl%",
-        "value": {
-          "objectType": "StaticValue",
-          "valueType": "tchmi:framework#/definitions/Color",
-          "value": {
-            "color": "rgba(0, 255, 0, 1)"
-          }
-        },
+        ],
         "asyncWait": true
       }
     ]
@@ -205,6 +246,17 @@
           "value": true
         },
         "asyncWait": true
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%ADS.PLC1.MAIN.bStop%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": false
+        },
+        "asyncWait": true
       }
     ]
   }
@@ -232,40 +284,70 @@
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onUserInteractionFinished",
     "actions": [
       {
-        "objectType": "WriteToSymbol",
+        "objectType": "Condition",
         "active": true,
-        "symbolExpression": "%ctrl%ConfirmButtonLoadcell::IsEnabled%/ctrl%",
-        "value": {
-          "objectType": "StaticValue",
-          "valueType": "tchmi:general#/definitions/Boolean",
-          "value": true
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%ctrl%ConfirmButtonLoadcell::BorderColor%/ctrl%",
-        "value": {
-          "objectType": "StaticValue",
-          "valueType": "tchmi:framework#/definitions/Color",
-          "value": {
-            "color": "rgba(0, 255, 0, 1)"
+        "parts": [
+          {
+            "if": [
+              {
+                "compare1": {
+                  "objectType": "Symbol",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "symbolExpression": "%ctrl%InputLoadcell::Text%/ctrl%"
+                },
+                "compare2": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": null
+                },
+                "compareOperator": "!=",
+                "logic": null
+              }
+            ],
+            "then": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%ConfirmButtonLoadcell::IsEnabled%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/Boolean",
+                  "value": true
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%ConfirmButtonLoadcell::BorderColor%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:framework#/definitions/Color",
+                  "value": {
+                    "color": "rgba(0, 255, 0, 1)"
+                  }
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctrl%ConfirmButtonLoadcell::BackgroundColor%/ctrl%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:framework#/definitions/Color",
+                  "value": {
+                    "color": "rgba(0, 255, 0, 1)"
+                  }
+                },
+                "asyncWait": true
+              }
+            ]
+          },
+          {
+            "else": []
           }
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%ctrl%ConfirmButtonLoadcell::BackgroundColor%/ctrl%",
-        "value": {
-          "objectType": "StaticValue",
-          "valueType": "tchmi:framework#/definitions/Color",
-          "value": {
-            "color": "rgba(0, 255, 0, 1)"
-          }
-        },
+        ],
         "asyncWait": true
       }
     ]
@@ -283,7 +365,30 @@
 [
   {
     "event": "%ctx%owner::Id|EventRegistrationMode=Resolve%/ctx%.onPressed",
-    "actions": []
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%ctrl%ConfirmButtonEncoder::IsEnabled%/ctrl%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/Boolean",
+          "value": false
+        },
+        "asyncWait": true
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%ctrl%ConfirmButtonLoadcell::IsEnabled%/ctrl%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/Boolean",
+          "value": false
+        },
+        "asyncWait": true
+      }
+    ]
   },
   {
     "event": "%s%ADS.PLC1.MAIN.bStartEnabled%/s%",
@@ -335,7 +440,7 @@
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%s%ADS.PLC1.MAIN.bLoadcell%/s%",
+        "symbolExpression": "%s%ADS.PLC1.MAIN.bEncoder%/s%",
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:general#/definitions/BOOL",
@@ -346,22 +451,11 @@
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%s%ADS.PLC1.MAIN.iEncoderMotor%/s%",
+        "symbolExpression": "%s%ADS.PLC1.MAIN.bStartEnabled%/s%",
         "value": {
           "objectType": "StaticValue",
-          "valueType": "tchmi:general#/definitions/STRING%2880%29",
-          "value": "\"\""
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%s%ADS.PLC1.MAIN.iLoadCellMotor%/s%",
-        "value": {
-          "objectType": "StaticValue",
-          "valueType": "tchmi:general#/definitions/STRING%2880%29",
-          "value": null
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": false
         },
         "asyncWait": true
       },
@@ -373,6 +467,39 @@
           "objectType": "StaticValue",
           "valueType": "tchmi:general#/definitions/BOOL",
           "value": true
+        },
+        "asyncWait": true
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%ctrl%InputEncoder::Text%/ctrl%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/String",
+          "value": ""
+        },
+        "asyncWait": true
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%ctrl%InputLoadcell::Text%/ctrl%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/String",
+          "value": null
+        },
+        "asyncWait": true
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%ctrl%ButtonStart::IsEnabled%/ctrl%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/Boolean",
+          "value": false
         },
         "asyncWait": true
       }
@@ -478,5 +605,27 @@
   }
 ]
 </script>
+</div>
+<div id="InputMetingen" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiInput" data-tchmi-auto-focus-out="true" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="" data-tchmi-top="279" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-placeholder="Hoeveel metingen">
+<script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
+{
+  "top": 3,
+  "right": 3,
+  "bottom": 3,
+  "left": 3
+}
+</script>
+
+</div>
+<div id="InputTijd" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiInput" data-tchmi-auto-focus-out="true" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-top="348" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-placeholder="hoelang stilstaan">
+<script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
+{
+  "top": 3,
+  "right": 3,
+  "bottom": 3,
+  "left": 3
+}
+</script>
+
 </div>
 </div>
