@@ -93,7 +93,7 @@
 </script>
 
 </div>
-<div id="DataEncoderSensor" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiDatagrid" data-tchmi-height="216" data-tchmi-height-unit="px" data-tchmi-left="457" data-tchmi-left-unit="px" data-tchmi-top="34" data-tchmi-top-unit="px" data-tchmi-width="399" data-tchmi-width-unit="px">
+<div id="DataEncoderSensor" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiDatagrid" data-tchmi-height="216" data-tchmi-height-unit="px" data-tchmi-left="438" data-tchmi-left-unit="px" data-tchmi-top="34" data-tchmi-top-unit="px" data-tchmi-width="399" data-tchmi-width-unit="px">
 <script data-tchmi-target-attribute="data-tchmi-src-column" type="application/json">
 [
   {
