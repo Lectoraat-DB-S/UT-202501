@@ -37,12 +37,14 @@ VAR
 	//state machine control
 	nStep, nNextStep: INT ;
 	//HMI variables
-	iEncoderMotor : STRING;
-	iLoadCellMotor : STRING;
-	bEncoder : BOOL;
-	bLoadcell : BOOL;
+	iEncoderMotor : INT;
+	iLoadCellMotor : INT;
+	iMetingen : INT;
+	iTijd : TIME;
+	bConfirm : BOOL;
+	
 	bStart : BOOL;
-	bStop : BOOL;
+	bStop : BOOL := TRUE;
 	Process_Status : BOOL; 
 	bStartEnabled: BOOL;
 	bDatalogView : BOOL;
@@ -75,10 +77,10 @@ END_IF
 
 	
 	//INSERT for encoder
-    SQL_Commands[3] := FC_SQL_InsertCommands_Encoder(iEncoderValue, iSampleNr);
+    //SQL_Commands[3] := FC_SQL_InsertCommands_Encoder(iEncoderValue, iSampleNr);
 	//INSERT for temp sensors
-	SQL_Commands[4] := CONCAT(FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor1Value), iSampleNr, iSensorIDs[1]),FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor2Value), iSampleNr, iSensorIDs[2]));
-	SQL_Commands[5] := CONCAT(FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor3Value), iSampleNr, iSensorIDs[3]),FC_SQL_InsertCommands_TempSensor(	TempConvert(iTempSensor4Value), iSampleNr, iSensorIDs[4]));
+	//SQL_Commands[4] := CONCAT(FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor1Value), iSampleNr, iSensorIDs[1]),FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor2Value), iSampleNr, iSensorIDs[2]));
+	//SQL_Commands[5] := CONCAT(FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor3Value), iSampleNr, iSensorIDs[3]),FC_SQL_InsertCommands_TempSensor(	TempConvert(iTempSensor4Value), iSampleNr, iSensorIDs[4]));
 	
 	//enable Timer					  
 	tInsertTimer(IN := TRUE, PT := tInsertInterval);
@@ -112,7 +114,7 @@ END_IF
 END_IF
 	
 	//HMI Controls
-	IF(bEncoder AND bLoadcell) THEN
+	IF bConfirm THEN
 		bStartEnabled := TRUE;	
 	END_IF
 	
@@ -124,14 +126,14 @@ END_IF
 	END_IF
 
   // Prepare SELECT Query
-     //   sSelectDataCommand := 'SELECT SensorValue * FROM [db_accessadmin].[TempSensor] ORDER BY Time DESC;';
+        sSelectDataCommand := 'SELECT TOP(10) [SensorValue], [SampleNr], [Time], [SensorID] FROM [db_accessadmin].[TempSensor] ORDER BY TIME DESC;';
    
   // Execute SELECT Command
-      // FB_SQLCommandEvt.ExecuteDataReturn(ADR(sSelectDataCommand),
-        //   							   SIZEOF(sSelectDataCommand),
-        //    							   ADR(FB_SQLResultEvt)); 
+       FB_SQLCommandEvt.ExecuteDataReturn(ADR(sSelectDataCommand),
+           							   SIZEOF(sSelectDataCommand),
+            							   ADR(FB_SQLResultEvt)); 
 					
-  	//FB_SQLResultEvt.Read(2, 3, ADR(aReadStruct), SIZEOF(aReadStruct), FALSE, TRUE);]]></ST>
+  	FB_SQLResultEvt.Read(1, 10, ADR(aReadStruct), SIZEOF(aReadStruct), TRUE, TRUE);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
