@@ -39,8 +39,7 @@
 		<System>
 			<Licenses>
 				<Target>
-					<ManualSelect>{796D380F-D49E-4C0C-A05F-500052FAC883}</ManualSelect>
-					<ManualSelect>{92583661-35AE-45CE-BD4F-C35BFE16F07E}</ManualSelect>
+					<ManualSelect>{4989A799-AEEA-4FEE-88EF-666B99EEFB45}</ManualSelect>
 				</Target>
 			</Licenses>
 			<Tasks>
@@ -51,7 +50,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{F88F7A59-9E7F-4523-9C0E-4BD9DABD5D28}" Name="Database_Code" PrjFilePath="Database_Code\Database_Code.plcproj" TmcFilePath="Database_Code\Database_Code.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{97B8A30D-1150-0B2E-E995-9552A72E01AC}" TmcPath="Database_Code\Database_Code.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{3A995274-CCCE-A773-2C27-9C410525ADC9}" TmcPath="Database_Code\Database_Code.tmc">
 					<Name>Database_Code Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -79,7 +78,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.iEncoderValue</Name>
-							<Type>INT</Type>
+							<Type>UDINT</Type>
 						</Var>
 					</Vars>
 					<Contexts>
@@ -161,7 +160,7 @@ Bit1: Value smaller than Limit2]]></Comment>
 								<Entry Name="Status__TxPDO Toggle" Index="#x6000" Sub="#x10">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Value" Index="#x6000" Sub="#x11">
+								<Entry Name="LoadCellValue" Index="#x6000" Sub="#x11">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
@@ -343,7 +342,7 @@ Bit1: Value smaller than Limit2]]></Comment>
 								<Entry Name="Status__TxPDO Toggle" Index="#x6000" Sub="#x10">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Value" Index="#x6000" Sub="#x11" Flags="#x00050000">
+								<Entry Name="TempSensor1Value" Index="#x6000" Sub="#x11" Flags="#x00050000">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
@@ -373,7 +372,7 @@ Bit1: Value smaller than Limit2]]></Comment>
 								<Entry Name="Status__TxPDO Toggle" Index="#x6010" Sub="#x10">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Value" Index="#x6010" Sub="#x11" Flags="#x00050000">
+								<Entry Name="TempSensor2Value" Index="#x6010" Sub="#x11" Flags="#x00050000">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
@@ -403,7 +402,7 @@ Bit1: Value smaller than Limit2]]></Comment>
 								<Entry Name="Status__TxPDO Toggle" Index="#x6020" Sub="#x10">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Value" Index="#x6020" Sub="#x11" Flags="#x00050000">
+								<Entry Name="TempSensor3Value" Index="#x6020" Sub="#x11" Flags="#x00050000">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
@@ -433,7 +432,7 @@ Bit1: Value smaller than Limit2]]></Comment>
 								<Entry Name="Status__TxPDO Toggle" Index="#x6030" Sub="#x10">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Value" Index="#x6030" Sub="#x11" Flags="#x00050000">
+								<Entry Name="TempSensor4Value" Index="#x6030" Sub="#x11" Flags="#x00050000">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
@@ -474,97 +473,95 @@ Bit1: Value smaller than Limit2]]></Comment>
 							<SyncMan>001080002600010001000000400080008000001026010000</SyncMan>
 							<SyncMan>801080002200010002000000400080008000801022010000</SyncMan>
 							<SyncMan>001100000400000003000000000000000000001104000000</SyncMan>
-							<SyncMan>801114002000010004000000000000001400801120010000</SyncMan>
+							<SyncMan>801106002000010004000000000000001400801120010000</SyncMan>
 							<Fmmu>0000000000000000801100010100000002000000000000000000000000000000</Fmmu>
 							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
 							<BootStrapData>0010f400f410f400</BootStrapData>
 							<DcMode>53796e6368726f6e00000000000000004672656552756e2f534d2d53796e6368726f6e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DcMode>
 							<DcMode>4443000000000000000000000000000044432d53796e6368726f6e00000000000000000000000000000000000000000000000000d08affff00000000000000030100000000000000000000000000000000000000000000000000000000000000</DcMode>
 							<DcMode>4443494e00000000000000000000000044432d53796e6368726f6e2028696e7075742062617365642900000000000000000000001802ffff00000000000000030100000000000000000001000000000000000000000000000000000000000000</DcMode>
-							<Pdo Name="FB Inputs Channel 1" Index="#x1a00" Flags="#x0010" SyncMan="3">
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<Entry Name="Status__Warning" Index="#x6000" Sub="#x01">
+							<MBoxUserCmdData>020003000a00000005000000030000000000000000000000000000000000000020f31005020000000100466c61677300</MBoxUserCmdData>
+							<Pdo Name="FB Inputs Channel 1" Index="#x1a00" Flags="#x0010">
+								<Entry Name="Warning" Index="#x6000" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Error" Index="#x6000" Sub="#x02">
+								<Entry Name="Error" Index="#x6000" Sub="#x02">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Ready" Index="#x6000" Sub="#x03">
+								<Entry Name="Ready" Index="#x6000" Sub="#x03">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__">
+								<Entry>
 									<Type GUID="{18071995-0000-0000-0000-002000000005}">ARRAY [0..4] OF BIT</Type>
 								</Entry>
-								<Entry Name="Status__">
+								<Entry>
 									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
 								</Entry>
-								<Entry Name="Status__Diag" Index="#x6000" Sub="#x0d">
+								<Entry Name="Diag" Index="#x6000" Sub="#x0d">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__TxPDO State" Index="#x6000" Sub="#x0e">
+								<Entry Name="TxPDO State" Index="#x6000" Sub="#x0e">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Input cycle counter" Index="#x6000" Sub="#x0f">
+								<Entry Name="Input cycle counter" Index="#x6000" Sub="#x0f">
 									<Type>BIT2</Type>
 								</Entry>
 								<Entry Name="Position" Index="#x6000" Sub="#x11">
 									<Type>ULINT</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="FB Inputs Channel 2" Index="#x1a01" Flags="#x0010" SyncMan="3">
-								<ExcludePdo>#x1a03</ExcludePdo>
-								<Entry Name="Status__Warning" Index="#x6010" Sub="#x01">
+							<Pdo Name="FB Inputs Channel 2" Index="#x1a01" Flags="#x0010">
+								<Entry Name="Warning" Index="#x6010" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Error" Index="#x6010" Sub="#x02">
+								<Entry Name="Error" Index="#x6010" Sub="#x02">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Ready" Index="#x6010" Sub="#x03">
+								<Entry Name="Ready" Index="#x6010" Sub="#x03">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__">
+								<Entry>
 									<Type GUID="{18071995-0000-0000-0000-002000000005}">ARRAY [0..4] OF BIT</Type>
 								</Entry>
-								<Entry Name="Status__">
+								<Entry>
 									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
 								</Entry>
-								<Entry Name="Status__Diag" Index="#x6010" Sub="#x0d">
+								<Entry Name="Diag" Index="#x6010" Sub="#x0d">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__TxPDO State" Index="#x6010" Sub="#x0e">
+								<Entry Name="TxPDO State" Index="#x6010" Sub="#x0e">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Input cycle counter" Index="#x6010" Sub="#x0f">
+								<Entry Name="Input cycle counter" Index="#x6010" Sub="#x0f">
 									<Type>BIT2</Type>
 								</Entry>
 								<Entry Name="Position" Index="#x6010" Sub="#x11">
 									<Type>ULINT</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="FB Inputs Channel 1 compact" Index="#x1a02" Flags="#x0010">
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<Entry Name="Status__Warning" Index="#x6000" Sub="#x01">
+							<Pdo Name="FB Inputs Channel 1 compact" Index="#x1a02" Flags="#x0010" SyncMan="3">
+								<Entry Name="Warning" Index="#x6000" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Error" Index="#x6000" Sub="#x02">
+								<Entry Name="Error" Index="#x6000" Sub="#x02">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Ready" Index="#x6000" Sub="#x03">
+								<Entry Name="Ready" Index="#x6000" Sub="#x03">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__">
+								<Entry>
 									<Type GUID="{18071995-0000-0000-0000-002000000005}">ARRAY [0..4] OF BIT</Type>
 								</Entry>
-								<Entry Name="Status__">
+								<Entry>
 									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
 								</Entry>
-								<Entry Name="Status__Diag" Index="#x6000" Sub="#x0d">
+								<Entry Name="Diag" Index="#x6000" Sub="#x0d">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__TxPDO State" Index="#x6000" Sub="#x0e">
+								<Entry Name="TxPDO State" Index="#x6000" Sub="#x0e">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Input cycle counter" Index="#x6000" Sub="#x0f">
+								<Entry Name="Input cycle counter" Index="#x6000" Sub="#x0f">
 									<Type>BIT2</Type>
 								</Entry>
 								<Entry Name="Position" Index="#x6000" Sub="#x11">
@@ -572,29 +569,28 @@ Bit1: Value smaller than Limit2]]></Comment>
 								</Entry>
 							</Pdo>
 							<Pdo Name="FB Inputs Channel 2 compact" Index="#x1a03" Flags="#x0010">
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<Entry Name="Status__Warning" Index="#x6010" Sub="#x01">
+								<Entry Name="Warning" Index="#x6010" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Error" Index="#x6010" Sub="#x02">
+								<Entry Name="Error" Index="#x6010" Sub="#x02">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Ready" Index="#x6010" Sub="#x03">
+								<Entry Name="Ready" Index="#x6010" Sub="#x03">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__">
+								<Entry>
 									<Type GUID="{18071995-0000-0000-0000-002000000005}">ARRAY [0..4] OF BIT</Type>
 								</Entry>
-								<Entry Name="Status__">
+								<Entry>
 									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
 								</Entry>
-								<Entry Name="Status__Diag" Index="#x6010" Sub="#x0d">
+								<Entry Name="Diag" Index="#x6010" Sub="#x0d">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__TxPDO State" Index="#x6010" Sub="#x0e">
+								<Entry Name="TxPDO State" Index="#x6010" Sub="#x0e">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Input cycle counter" Index="#x6010" Sub="#x0f">
+								<Entry Name="Input cycle counter" Index="#x6010" Sub="#x0f">
 									<Type>BIT2</Type>
 								</Entry>
 								<Entry Name="Position" Index="#x6010" Sub="#x11">
@@ -624,21 +620,25 @@ Bit1: Value smaller than Limit2]]></Comment>
 				<EtherCAT/>
 			</Device>
 		</Io>
+		<SymbolWatch>
+			<Variable>TIID^Device 3 (EtherCAT)^Term 1 (EK1100)^Term 4 (EL5032)^FB Inputs Channel 1 compact^Position</Variable>
+			<Variable>TIID^Device 3 (EtherCAT)^Term 1 (EK1100)^Term 2 (EL3074)^AI Standard Channel 1^LoadCellValue</Variable>
+		</SymbolWatch>
 	</Project>
 	<Mappings>
 		<MappingInfo Identifier="{00000000-2001-0850-0020-500840000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^Database_Code^Database_Code Instance">
 			<OwnerB Name="TIID^Device 3 (EtherCAT)^Term 1 (EK1100)^Term 2 (EL3074)">
-				<Link VarA="PlcTask Inputs^MAIN.iLoadCellValue" VarB="AI Standard Channel 1^Value"/>
+				<Link VarA="PlcTask Inputs^MAIN.iLoadCellValue" VarB="AI Standard Channel 1^LoadCellValue"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 3 (EtherCAT)^Term 1 (EK1100)^Term 3 (EL3204)">
-				<Link VarA="PlcTask Inputs^MAIN.iTempSensor1Value" VarB="RTD Inputs Channel 1^Value"/>
-				<Link VarA="PlcTask Inputs^MAIN.iTempSensor2Value" VarB="RTD Inputs Channel 2^Value"/>
-				<Link VarA="PlcTask Inputs^MAIN.iTempSensor3Value" VarB="RTD Inputs Channel 3^Value"/>
-				<Link VarA="PlcTask Inputs^MAIN.iTempSensor4Value" VarB="RTD Inputs Channel 4^Value"/>
+				<Link VarA="PlcTask Inputs^MAIN.iTempSensor1Value" VarB="RTD Inputs Channel 1^TempSensor1Value"/>
+				<Link VarA="PlcTask Inputs^MAIN.iTempSensor2Value" VarB="RTD Inputs Channel 2^TempSensor2Value"/>
+				<Link VarA="PlcTask Inputs^MAIN.iTempSensor3Value" VarB="RTD Inputs Channel 3^TempSensor3Value"/>
+				<Link VarA="PlcTask Inputs^MAIN.iTempSensor4Value" VarB="RTD Inputs Channel 4^TempSensor4Value"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 3 (EtherCAT)^Term 1 (EK1100)^Term 4 (EL5032)">
-				<Link VarA="PlcTask Inputs^MAIN.iEncoderValue" VarB="FB Inputs Channel 1^Position"/>
+				<Link VarA="PlcTask Inputs^MAIN.iEncoderValue" VarB="FB Inputs Channel 1 compact^Position"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

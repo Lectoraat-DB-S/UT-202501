@@ -18,7 +18,7 @@ VAR
 	iTempSensor2Value AT %I*: INT;
 	iTempSensor3Value AT %I*: INT;
 	iTempSensor4Value AT %I*: INT;
-	iEncoderValue AT %I*: INT;
+	iEncoderValue AT %I* : UDINT;
 	//Time variables
 	tInsertTimer: TON; (* Timer to control insert intervals *)
     tInsertInterval: TIME := T#10S; (* 10-second interval *)
@@ -36,8 +36,10 @@ VAR
 	
 	//state machine control
 	nStep, nNextStep: INT ;
-
 	
+	
+	
+	i: UDINT;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
@@ -61,8 +63,7 @@ IF ABS(iLoadCellValue - iLoadCellPreviousValue) > 100  THEN
     iLoadCellPreviousValue := iLoadCellValue;  // Update previous load cell value
 END_IF
 
-
-	
+	i := LREAL_TO_UDINT(iEncoderValue/1637500000*180/PI); 
 	//INSERT for encoder
     SQL_Commands[3] := FC_SQL_InsertCommands_Encoder(iEncoderValue, iSampleNr);
 	//INSERT for temp sensors
