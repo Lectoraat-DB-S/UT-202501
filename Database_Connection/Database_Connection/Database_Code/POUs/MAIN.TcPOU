@@ -38,8 +38,7 @@ VAR
 	nStep, nNextStep: INT ;
 	
 	
-	
-	i: UDINT;
+	iEncoderDegrees: LREAL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
@@ -63,7 +62,7 @@ IF ABS(iLoadCellValue - iLoadCellPreviousValue) > 100  THEN
     iLoadCellPreviousValue := iLoadCellValue;  // Update previous load cell value
 END_IF
 
-	i := LREAL_TO_UDINT(iEncoderValue/1637500000*180/PI); 
+	iEncoderDegrees := UDINT_TO_LREAL(iEncoderValue)/1637500000*180/PI; 
 	//INSERT for encoder
     SQL_Commands[3] := FC_SQL_InsertCommands_Encoder(iEncoderValue, iSampleNr);
 	//INSERT for temp sensors
