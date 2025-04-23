@@ -50,7 +50,7 @@
         "symbolExpression": "%s%ADS.PLC1.MAIN.iEncoderMotor%/s%",
         "value": {
           "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/INT",
+          "valueType": "tchmi:general#/definitions/REAL",
           "symbolExpression": "%ctrl%InputEncoder::Text%/ctrl%"
         },
         "asyncWait": true
@@ -83,7 +83,7 @@
         "symbolExpression": "%s%ADS.PLC1.MAIN.iTijd%/s%",
         "value": {
           "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/TIME",
+          "valueType": "tchmi:general#/definitions/INT",
           "symbolExpression": "%f%%ctrl%InputTijd::Text%/ctrl%%/f%"
         },
         "asyncWait": true

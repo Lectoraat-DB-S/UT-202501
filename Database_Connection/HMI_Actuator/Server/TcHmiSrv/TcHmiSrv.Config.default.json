@@ -764,7 +764,7 @@
             "SCHEMA": {
                 "allOf": [
                     {
-                        "$ref": "tchmi:general#/definitions/INT"
+                        "$ref": "tchmi:general#/definitions/REAL"
                     },
                     {
                         "comment": "HMI variables"
@@ -799,7 +799,7 @@
             "DYNAMIC": true,
             "MAPPING": "PLC1::MAIN::iTijd",
             "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/TIME"
+                "$ref": "tchmi:general#/definitions/INT"
             },
             "USEMAPPING": true
         },
@@ -3695,6 +3695,7 @@
                 "ADS.CheckLicense": 3,
                 "ADS.Diagnostics": 3,
                 "ADS.PLC1.MAIN.Process_Status": 3,
+                "ADS.PLC1.MAIN.TijdConvert": 3,
                 "ADS.PLC1.MAIN.bActuatorView": 3,
                 "ADS.PLC1.MAIN.bConfirm": 3,
                 "ADS.PLC1.MAIN.bDatalogView": 3,
