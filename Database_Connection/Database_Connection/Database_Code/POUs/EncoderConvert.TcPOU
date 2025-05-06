@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="EncoderConvert" Id="{257166ef-8fe7-4f81-8d05-dfb44ef5b943}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION EncoderConvert : LREAL
+VAR_INPUT
+	iEncoderValue : UDINT;
+END_VAR
+VAR
+	//CONSTANTS
+	ENCODER_OFFSET : UDINT := 1305092900;
+	ENCODER_CONVERSION : UDINT := 1637500000*180;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[EncoderConvert := UDINT_TO_LREAL((iEncoderValue-ENCODER_OFFSET))/ENCODER_CONVERSION/PI; ]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

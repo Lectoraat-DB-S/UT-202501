@@ -24,6 +24,9 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\EncoderConvert.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\FC_SQL_InsertCommands_Encoder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -31,6 +34,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FC_SQL_InsertCommands_LoadCell.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\LoadcellConvert.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
