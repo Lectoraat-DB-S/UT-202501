@@ -12,7 +12,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[EncoderConvert := UDINT_TO_LREAL((iEncoderValue-ENCODER_OFFSET))/ENCODER_CONVERSION/PI; ]]></ST>
+      <ST><![CDATA[EncoderConvert := DINT_TO_LREAL(UDINT_TO_DINT(iEncoderValue) - 1305092900) / 163750000.0 * 180.0 / PI; ]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

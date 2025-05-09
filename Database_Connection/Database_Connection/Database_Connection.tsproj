@@ -86,8 +86,6 @@
 			<Licenses>
 				<Target>
 					<ManualSelect>{4989A799-AEEA-4FEE-88EF-666B99EEFB45}</ManualSelect>
-					<ManualSelect>{27326EE5-AB30-4084-B15B-8CCA96CCBF0B}</ManualSelect>
-					<ManualSelect>{3DDCAB25-BF0E-412C-A721-DC77C1B8099C}</ManualSelect>
 				</Target>
 			</Licenses>
 			<Tasks>
@@ -98,7 +96,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{F88F7A59-9E7F-4523-9C0E-4BD9DABD5D28}" Name="Database_Code" PrjFilePath="Database_Code\Database_Code.plcproj" TmcFilePath="Database_Code\Database_Code.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{F28A86D7-9516-F69E-AE63-DBE5FC3763B4}" TmcPath="Database_Code\Database_Code.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{92DF4A33-69A3-1F54-1119-876E25458F31}" TmcPath="Database_Code\Database_Code.tmc">
 					<Name>Database_Code Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -113,12 +111,16 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>MAIN.oMotorVelocity</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
 							<Name>MAIN.oEnableStart</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.oMotorVelocity</Name>
-							<Type>INT</Type>
+							<Name>MAIN.oMotorReset</Name>
+							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.oMotorPosition</Name>
@@ -127,6 +129,10 @@
 						<Var>
 							<Name>MAIN.oStartPosition</Name>
 							<Type>UDINT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.oMotorStartType</Name>
+							<Type>INT</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="1">
@@ -137,7 +143,7 @@
 							<Type>INT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.iLichtSluisValue</Name>
+							<Name>MAIN.iLichtSluisValue1</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -161,18 +167,49 @@
 							<Type>UDINT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.RealMotorPosition</Name>
-							<Type>UDINT</Type>
+							<Name>MAIN.iLichtSluisValue2</Name>
+							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.iCapcatiefValue</Name>
 							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.RealMotorPosition</Name>
+							<Type>UDINT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.iMotorStatus</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.iMotorCalibrated</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.iMotorReady</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.iMotorBusy</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.iMotorWarning</Name>
+							<Type>BOOL</Type>
 						</Var>
 					</Vars>
 					<UnrestoredVarLinks ImportTime="2025-04-25T10:01:01">
 						<OwnerA Name="InputDst" Prefix="TIPC^Database_Code^Database_Code Instance" Type="1">
 							<OwnerB Name="TIID^Device 3 (EtherCAT)^Term 1 (EK1100)^Term 5 (EL7031)">
 								<Link VarA="MAIN.MotorPosition" TypeA="UDINT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000008}" VarB="ENC Status^Counter value" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
+					<UnrestoredVarLinks ImportTime="2025-05-07T13:18:05">
+						<OwnerA Name="InputDst" Prefix="TIPC^Database_Code^Database_Code Instance" Type="1">
+							<OwnerB Name="TIID^Device 3 (EtherCAT)^Term 1 (EK1100)^Term 5 (EL7031)">
+								<Link VarA="MAIN.iLichtSluisValue" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="STM Status^Status^MAIN.iLichtSluisValue" Size="1" RestoreInfo="ANotFound"/>
 							</OwnerB>
 						</OwnerA>
 					</UnrestoredVarLinks>
@@ -726,6 +763,8 @@ Bit1: Value smaller than Limit2]]></Comment>
 							<DcMode>4443000000000000000000000000000044432d53796e6368726f6e000000000000000000000000000000000000000000000000000000000000000000000000030100000000000000000000000000000000000000000000000000000000000000</DcMode>
 							<MBoxUserCmdData>004003000c0000000000000003000000000000000000000000000000000000002081f0010400000000001a0000</MBoxUserCmdData>
 							<MBoxUserCmdData>004003000a00000000000000030010000000000000000000000000000000000020f3100502000000010000</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000000c000000030000000000000000000000000000000000000020111001040000006c6f6164537562496e6465782030303100</MBoxUserCmdData>
+							<MBoxUserCmdData>02000300090000000e00000003000000000000000000000000000000000000002012800101000000034f7065726174696f6e206d6f646500</MBoxUserCmdData>
 							<Pdo Name="ENC Status compact" Index="#x1a00" Flags="#x0010">
 								<ExcludePdo>#x1a01</ExcludePdo>
 								<Entry Name="Status__">
@@ -843,10 +882,10 @@ Bit1: Value smaller than Limit2]]></Comment>
 								<Entry Name="Status__">
 									<Type GUID="{18071995-0000-0000-0000-002000000003}">ARRAY [0..2] OF BIT</Type>
 								</Entry>
-								<Entry Name="Status__Digital input 1" Index="#x6010" Sub="#x0c">
+								<Entry Name="Status__MAIN.iLichtSluisValue1" Index="#x6010" Sub="#x0c" Flags="#x00008020">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Digital input 2" Index="#x6010" Sub="#x0d">
+								<Entry Name="Status__MAIN.iLichtSluisValue2" Index="#x6010" Sub="#x0d" Flags="#x00008020">
 									<Type>BIT</Type>
 								</Entry>
 								<Entry Name="Status__Sync error" Index="#x6010" Sub="#x0e">
@@ -1149,11 +1188,19 @@ Bit1: Value smaller than Limit2]]></Comment>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 3 (EtherCAT)^Term 1 (EK1100)^Term 5 (EL7031)">
 				<Link VarA="PlcTask Inputs^MAIN.RealMotorPosition" VarB="ENC Status^Counter value"/>
-				<Link VarA="PlcTask Inputs^MAIN.iLichtSluisValue" VarB="STM Status^Status^Digital input 1"/>
+				<Link VarA="PlcTask Inputs^MAIN.iLichtSluisValue1" VarB="STM Status^Status^MAIN.iLichtSluisValue1"/>
+				<Link VarA="PlcTask Inputs^MAIN.iLichtSluisValue2" VarB="STM Status^Status^MAIN.iLichtSluisValue2"/>
+				<Link VarA="PlcTask Inputs^MAIN.iMotorBusy" VarB="POS Status^Status^Busy"/>
+				<Link VarA="PlcTask Inputs^MAIN.iMotorCalibrated" VarB="POS Status^Status^Calibrated"/>
+				<Link VarA="PlcTask Inputs^MAIN.iMotorReady" VarB="POS Status^Status^Ready to execute"/>
+				<Link VarA="PlcTask Inputs^MAIN.iMotorStatus" VarB="POS Status^Status^Error"/>
+				<Link VarA="PlcTask Inputs^MAIN.iMotorWarning" VarB="POS Status^Status^Warning"/>
 				<Link VarA="PlcTask Outputs^MAIN.oEnableStart" VarB="ENC Control^Control^Set counter"/>
 				<Link VarA="PlcTask Outputs^MAIN.oMotorEnable" VarB="STM Control^Control^Enable"/>
 				<Link VarA="PlcTask Outputs^MAIN.oMotorExecute" VarB="POS Control^Control^Execute"/>
 				<Link VarA="PlcTask Outputs^MAIN.oMotorPosition" VarB="POS Control^Target position"/>
+				<Link VarA="PlcTask Outputs^MAIN.oMotorReset" VarB="STM Control^Control^Reset"/>
+				<Link VarA="PlcTask Outputs^MAIN.oMotorStartType" VarB="POS Control^Start type"/>
 				<Link VarA="PlcTask Outputs^MAIN.oMotorVelocity" VarB="POS Control^Velocity"/>
 				<Link VarA="PlcTask Outputs^MAIN.oStartPosition" VarB="ENC Control^Set counter value"/>
 			</OwnerB>

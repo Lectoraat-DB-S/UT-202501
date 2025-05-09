@@ -1,5 +1,5 @@
 <div id="Desktop" data-tchmi-type="TcHmi.Controls.System.TcHmiView" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width-mode="Content" data-tchmi-min-width="100" data-tchmi-min-width-unit="%" data-tchmi-height-mode="Content" data-tchmi-min-height="100" data-tchmi-min-height-unit="%">
-<div id="ConfirmButton" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="Confirm" data-tchmi-top="352" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-is-enabled="false">
+<div id="ConfirmButton" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="30" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="Confirm" data-tchmi-top="420" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-is-enabled="false">
 
 <script data-tchmi-target-attribute="data-tchmi-text-color" type="application/json">
 {
@@ -96,6 +96,17 @@
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/INT",
           "symbolExpression": "%ctrl%InputTijdStart::Text%/ctrl%"
+        },
+        "asyncWait": true
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%ADS.CX_45B9A2.MAIN.iMotorSpeed%/s%",
+        "value": {
+          "objectType": "Symbol",
+          "valueType": "tchmi:general#/definitions/String",
+          "symbolExpression": "%ctrl%InputmotorSnelheid::Text%/ctrl%"
         },
         "asyncWait": true
       }
@@ -377,6 +388,67 @@
         "asyncWait": true
       }
     ]
+  },
+  {
+    "event": "%s%ADS.CX_45B9A2.MAIN.HomingDone%/s%",
+    "actions": [
+      {
+        "objectType": "Condition",
+        "active": true,
+        "parts": [
+          {
+            "if": [
+              {
+                "compare1": {
+                  "objectType": "Symbol",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "symbolExpression": "%s%ADS.CX_45B9A2.MAIN.HomingDone%/s%"
+                },
+                "compare2": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": "FALSE"
+                },
+                "compareOperator": "==",
+                "logic": null
+              }
+            ],
+            "then": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctx%owner::FillColor%/ctx%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": {
+                    "color": "rgba(240, 166, 16, 1)"
+                  }
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%ctx%owner::BorderColor%/ctx%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": {
+                    "color": "rgba(240, 166, 16, 1)"
+                  }
+                },
+                "asyncWait": true
+              }
+            ]
+          },
+          {
+            "else": []
+          }
+        ],
+        "asyncWait": true
+      }
+    ]
   }
 ]
 </script>
@@ -447,7 +519,75 @@
 
 
 </div>
-<div id="InputTijdUitwijking" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiInput" data-tchmi-auto-focus-out="true" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-top="316" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-placeholder="Hoelang stilstaan op uitwijking">
+<div id="InputTijdUitwijking" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiInput" data-tchmi-auto-focus-out="true" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-top="316" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-placeholder="Tijd in seconden">
+<script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
+{
+  "top": 3,
+  "right": 3,
+  "bottom": 3,
+  "left": 3
+}
+</script>
+
+
+
+
+
+</div>
+<div id="InstellingenTekst" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="Instellingen" data-tchmi-top="22" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
+</div>
+<div id="InputEncoder" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiInput" data-tchmi-auto-focus-out="true" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-top="97" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-placeholder="Graden tussen 9.0 en -9.0">
+<script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
+{
+  "top": 3,
+  "right": 3,
+  "bottom": 3,
+  "left": 3
+}
+</script>
+
+
+
+
+
+</div>
+<div id="InputLoadcell" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiInput" data-tchmi-auto-focus-out="true" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-top="152" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-placeholder="Waarde in Newton">
+<script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
+{
+  "top": 3,
+  "right": 3,
+  "bottom": 3,
+  "left": 3
+}
+</script>
+
+
+
+
+
+</div>
+<div id="TextTijdUitwijking" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="19" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="Hoelang Stilstaan op uitwijking?" data-tchmi-top="297" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
+</div>
+<div id="TextMeting" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="19" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="Hoeveel metingen?" data-tchmi-top="188" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
+</div>
+<div id="TextKracht" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="19" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="Hoeveel kracht op de Loadcell?" data-tchmi-top="133" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
+</div>
+<div id="TextGraden" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="19" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="Hoeveel graden uitwijken?" data-tchmi-top="77" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
+</div>
+<div id="InputTijdStart" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiInput" data-tchmi-auto-focus-out="true" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-reset-to-last-valid-value="true" data-tchmi-text="" data-tchmi-top="261" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-placeholder="Tijd in seconden">
+<script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
+{
+  "top": 3,
+  "right": 3,
+  "bottom": 3,
+  "left": 3
+}
+</script>
+
+</div>
+<div id="TextTijdStart" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="19" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="Hoelang Stilstaan op start?" data-tchmi-top="242" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
+</div>
+<div id="InputmotorSnelheid" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiInput" data-tchmi-auto-focus-out="true" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-top="371" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-placeholder="Waarde tussen 100 en 1000">
 <script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
 {
   "top": 3,
@@ -507,15 +647,17 @@
 ]
 </script>
 </div>
-<div id="InstellingenTekst" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="Instellingen" data-tchmi-top="22" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
+<div id="TextMotorSnelheid" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="19" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="Hoe snel moet de motor?" data-tchmi-top="352" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
 </div>
-<div id="InputEncoder" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiInput" data-tchmi-auto-focus-out="true" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-top="97" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-placeholder="Hoeveel graden uitwijken">
-<script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
+<div id="TcHmiRectangle_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="460" data-tchmi-height-unit="px" data-tchmi-left="90" data-tchmi-left-unit="px" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="185" data-tchmi-width-unit="px">
+
+
+
+
+
+<script data-tchmi-target-attribute="data-tchmi-border-color" type="application/json">
 {
-  "top": 3,
-  "right": 3,
-  "bottom": 3,
-  "left": 3
+  "color": "rgba(25, 10, 84, 1)"
 }
 </script>
 
@@ -523,41 +665,14 @@
 
 
 
-</div>
-<div id="InputLoadcell" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiInput" data-tchmi-auto-focus-out="true" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-top="152" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-placeholder="Hoeveel kracht op loadcell">
-<script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
+
+
+<script data-tchmi-target-attribute="data-tchmi-stroke-color" type="application/json">
 {
-  "top": 3,
-  "right": 3,
-  "bottom": 3,
-  "left": 3
+  "color": "rgba(0, 0, 0, 1)"
 }
 </script>
+</div>
 
 
-
-
-
-</div>
-<div id="TextTijdUitwijking" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="19" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="Hoelang Stilstaan op uitwijking?" data-tchmi-top="297" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
-</div>
-<div id="TextMeting" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="19" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="Hoeveel metingen?" data-tchmi-top="188" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
-</div>
-<div id="TextKracht" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="19" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="Hoeveel kracht op de Loadcell?" data-tchmi-top="133" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
-</div>
-<div id="TextGraden" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="19" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="Hoeveel graden uitwijken?" data-tchmi-top="77" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
-</div>
-<div id="InputTijdStart" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiInput" data-tchmi-auto-focus-out="true" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-reset-to-last-valid-value="true" data-tchmi-text="" data-tchmi-top="261" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-placeholder="Hoelang stilstaan op start">
-<script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
-{
-  "top": 3,
-  "right": 3,
-  "bottom": 3,
-  "left": 3
-}
-</script>
-
-</div>
-<div id="TextTijdStart" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="19" data-tchmi-height-unit="px" data-tchmi-left="102" data-tchmi-left-unit="px" data-tchmi-text="Hoelang Stilstaan op start?" data-tchmi-top="242" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
-</div>
 </div>

@@ -7576,6 +7576,7 @@
             "SYMBOLS": {
                 "ADS.AdsSyncReadDeviceInfoReq": 3,
                 "ADS.AdsSyncReadStateReq": 3,
+                "ADS.CX_45B9A2.MAIN.HomingDone": 3,
                 "ADS.CX_45B9A2.MAIN.bActuatorView": 3,
                 "ADS.CX_45B9A2.MAIN.bConfirm": 3,
                 "ADS.CX_45B9A2.MAIN.bDatalogView": 3,
@@ -7585,6 +7586,7 @@
                 "ADS.CX_45B9A2.MAIN.iEncoderMotor": 3,
                 "ADS.CX_45B9A2.MAIN.iLoadCellMotor": 3,
                 "ADS.CX_45B9A2.MAIN.iMetingen": 3,
+                "ADS.CX_45B9A2.MAIN.iMotorSpeed": 3,
                 "ADS.CX_45B9A2.MAIN.iTijd": 3,
                 "ADS.CX_45B9A2.MAIN.iTijdMeting": 3,
                 "ADS.CheckLicense": 3,

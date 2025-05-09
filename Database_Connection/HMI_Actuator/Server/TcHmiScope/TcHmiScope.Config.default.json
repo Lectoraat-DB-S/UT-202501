@@ -1,7 +1,7 @@
 {
     "CHUNKSIZE": 1048576,
     "COMPRESSION": true,
-    "TIMEOUT": "PT5S",
+    "TIMEOUT": "PT10S",
     "scopeConfigs": {
         "Encoder_Scope": {
             "AUTOSTART_RECORD": true,

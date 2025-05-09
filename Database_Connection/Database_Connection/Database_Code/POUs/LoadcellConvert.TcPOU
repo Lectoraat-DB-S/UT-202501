@@ -10,7 +10,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[Voltage := INT_TO_REAL(LoadCellValue)/32768 * 10.737;
+      <ST><![CDATA[Voltage := INT_TO_REAL(LoadCellValue)/32768 * 10;
 
 LoadCellConvert := REAL_TO_INT(Voltage * 980.7);
 
