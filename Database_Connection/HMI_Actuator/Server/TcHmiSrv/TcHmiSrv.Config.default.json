@@ -485,123 +485,6 @@
             },
             "USEMAPPING": true
         },
-        "ADS.CX_45B9A2.MAIN.bActuatorView": {
-            "ACCESS": 3,
-            "DOMAIN": "ADS",
-            "DYNAMIC": true,
-            "MAPPING": "CX-45B9A2::MAIN::bActuatorView",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
-        "ADS.CX_45B9A2.MAIN.bConfirm": {
-            "ACCESS": 3,
-            "DOMAIN": "ADS",
-            "DYNAMIC": true,
-            "MAPPING": "CX-45B9A2::MAIN::bConfirm",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
-        "ADS.CX_45B9A2.MAIN.bDatalogView": {
-            "ACCESS": 3,
-            "DOMAIN": "ADS",
-            "DYNAMIC": true,
-            "MAPPING": "CX-45B9A2::MAIN::bDatalogView",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
-        "ADS.CX_45B9A2.MAIN.bStart": {
-            "ACCESS": 3,
-            "DOMAIN": "ADS",
-            "DYNAMIC": true,
-            "MAPPING": "CX-45B9A2::MAIN::bStart",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
-        "ADS.CX_45B9A2.MAIN.bStartEnabled": {
-            "ACCESS": 3,
-            "DOMAIN": "ADS",
-            "DYNAMIC": true,
-            "MAPPING": "CX-45B9A2::MAIN::bStartEnabled",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
-        "ADS.CX_45B9A2.MAIN.bStop": {
-            "ACCESS": 3,
-            "DOMAIN": "ADS",
-            "DYNAMIC": true,
-            "MAPPING": "CX-45B9A2::MAIN::bStop",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/BOOL"
-            },
-            "USEMAPPING": true
-        },
-        "ADS.CX_45B9A2.MAIN.iEncoderMotor": {
-            "ACCESS": 3,
-            "DOMAIN": "ADS",
-            "DYNAMIC": true,
-            "MAPPING": "CX-45B9A2::MAIN::iEncoderMotor",
-            "SCHEMA": {
-                "allOf": [
-                    {
-                        "$ref": "tchmi:general#/definitions/REAL"
-                    },
-                    {
-                        "comment": "HMI variables"
-                    }
-                ]
-            },
-            "USEMAPPING": true
-        },
-        "ADS.CX_45B9A2.MAIN.iLoadCellMotor": {
-            "ACCESS": 3,
-            "DOMAIN": "ADS",
-            "DYNAMIC": true,
-            "MAPPING": "CX-45B9A2::MAIN::iLoadCellMotor",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/INT"
-            },
-            "USEMAPPING": true
-        },
-        "ADS.CX_45B9A2.MAIN.iMetingen": {
-            "ACCESS": 3,
-            "DOMAIN": "ADS",
-            "DYNAMIC": true,
-            "MAPPING": "CX-45B9A2::MAIN::iMetingen",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/INT"
-            },
-            "USEMAPPING": true
-        },
-        "ADS.CX_45B9A2.MAIN.iTijd": {
-            "ACCESS": 3,
-            "DOMAIN": "ADS",
-            "DYNAMIC": true,
-            "MAPPING": "CX-45B9A2::MAIN::iTijd",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/INT"
-            },
-            "USEMAPPING": true
-        },
-        "ADS.CX_45B9A2.MAIN.iTijdMeting": {
-            "ACCESS": 3,
-            "DOMAIN": "ADS",
-            "DYNAMIC": true,
-            "MAPPING": "CX-45B9A2::MAIN::iTijdMeting",
-            "SCHEMA": {
-                "$ref": "tchmi:general#/definitions/INT"
-            },
-            "USEMAPPING": true
-        },
         "ADS.CheckLicense": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -816,6 +699,16 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.MAIN.HomingDone": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::HomingDone",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.MAIN.Process_Status": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -923,11 +816,71 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.MAIN.iMotorSpeed": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::iMotorSpeed",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/INT"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.MAIN.iTempSensor1Value": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::iTempSensor1Value",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/INT"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.MAIN.iTempSensor2Value": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::iTempSensor2Value",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/INT"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.MAIN.iTempSensor3Value": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::iTempSensor3Value",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/INT"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.MAIN.iTempSensor4Value": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::iTempSensor4Value",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/INT"
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.MAIN.iTijd": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
             "DYNAMIC": true,
             "MAPPING": "PLC1::MAIN::iTijd",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/INT"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.MAIN.iTijdMeting": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::iTijdMeting",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/INT"
             },
@@ -7587,10 +7540,15 @@
                 "ADS.CX_45B9A2.MAIN.iLoadCellMotor": 3,
                 "ADS.CX_45B9A2.MAIN.iMetingen": 3,
                 "ADS.CX_45B9A2.MAIN.iMotorSpeed": 3,
+                "ADS.CX_45B9A2.MAIN.iTempSensor1Value": 3,
+                "ADS.CX_45B9A2.MAIN.iTempSensor2Value": 3,
+                "ADS.CX_45B9A2.MAIN.iTempSensor3Value": 3,
+                "ADS.CX_45B9A2.MAIN.iTempSensor4Value": 3,
                 "ADS.CX_45B9A2.MAIN.iTijd": 3,
                 "ADS.CX_45B9A2.MAIN.iTijdMeting": 3,
                 "ADS.CheckLicense": 3,
                 "ADS.Diagnostics": 3,
+                "ADS.PLC1.MAIN.HomingDone": 3,
                 "ADS.PLC1.MAIN.Process_Status": 3,
                 "ADS.PLC1.MAIN.TijdConvert": 3,
                 "ADS.PLC1.MAIN.bActuatorView": 3,
@@ -7604,7 +7562,13 @@
                 "ADS.PLC1.MAIN.iEncoderMotor": 3,
                 "ADS.PLC1.MAIN.iLoadCellMotor": 3,
                 "ADS.PLC1.MAIN.iMetingen": 3,
+                "ADS.PLC1.MAIN.iMotorSpeed": 3,
+                "ADS.PLC1.MAIN.iTempSensor1Value": 3,
+                "ADS.PLC1.MAIN.iTempSensor2Value": 3,
+                "ADS.PLC1.MAIN.iTempSensor3Value": 3,
+                "ADS.PLC1.MAIN.iTempSensor4Value": 3,
                 "ADS.PLC1.MAIN.iTijd": 3,
+                "ADS.PLC1.MAIN.iTijdMeting": 3,
                 "ChangeUserSettings": 3,
                 "ConfirmAlarm": 3,
                 "CreateEvent": 3,

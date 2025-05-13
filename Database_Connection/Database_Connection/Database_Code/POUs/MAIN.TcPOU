@@ -22,7 +22,7 @@ VAR
 	iEncoderValue AT %I*: UDINT;
 	iLichtSluisValue1 AT %I* : BOOL;
 	iLichtSluisValue2 AT %I* : BOOL;
-	iCapcatiefValue AT %I* : INT;
+	iCapacitiefValue AT %I* : INT;
 	
 	tInsertTimer: TON; (* Timer to control insert intervals *)
     tInsertInterval: TIME := T#10S; (* 10-second interval *)
@@ -91,13 +91,14 @@ VAR
 	HomingDelayTimer: TON;
 	tHomingInterval: TIME := T#5S;
 	HomingStartTimer : TON;
-	tHomingStartInterval: TIME := T#15S;
-
+	tHomingStartInterval: TIME := T#25S;
+	MotorLeftEdge : UDINT := 314000;
+	MotorRightEdge : UDINT := 0;
 	//timer for motor delay
 	tMotorTimer: TON; (* Timer to control Motor intervals *)
     tMotorInterval: TIME := T#50MS; (* 50-Millisecond interval *)
 	tHomeTimer: TON;
-	tHomeInterval: TIME := T#60S;
+	tHomeInterval: TIME := T#10S;
 	//test case variables
  	CycleCounter : INT := 0;
     State : INT := 0;
@@ -112,13 +113,13 @@ VAR
 
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[iEncoderDegrees := EncoderConvert(iEncoderValue); 
+      <ST><![CDATA[
+//conversion variables
+iEncoderDegrees := EncoderConvert(iEncoderValue); 
 TestForce := LoadcellConvert(iLoadCellValue);
 Voltage := INT_TO_REAL(iLoadCellValue)/32768 * 10.737;
-//create timers
-tHomeTimer(PT := tHomeInterval);
-HomingDelayTimer(PT := tHomingInterval);
-HomingStartTimer(PT := tHomingStartInterval);
+
+
 
 
 //check status of motor and reset if necessary
@@ -140,7 +141,9 @@ CASE Homing OF
     oEnableStart := TRUE;
     oEnableStart := FALSE;
     oMotorEnable := TRUE;
-    oMotorVelocity := 400;
+    oMotorVelocity := 500;
+	HomingDelayTimer(PT := tHomingInterval);
+	HomingStartTimer(PT := tHomingStartInterval);
     Homing := 1;
 
 1: // Try moving CW
@@ -163,7 +166,7 @@ CASE Homing OF
 
 10: // Wait for sensor falling edge (center detected)
 	HomingStartTimer(IN:= TRUE);
-    IF HomingEdgeL.Q OR HomingEdgeR.Q OR HomingStartTimer.Q THEN
+    IF (HomingEdgeL.Q OR HomingEdgeR.Q) OR HomingStartTimer.Q THEN
         oMotorExecute := FALSE;
         Homing := 11;
     END_IF
@@ -177,8 +180,8 @@ CASE Homing OF
         HomingDone := TRUE;
     END_IF
 END_CASE
-END_IF
 
+ELSE
 (*
 // === Test Movement State Machine ===
 CASE State OF
@@ -186,7 +189,7 @@ CASE State OF
 0: // Initialization
     oMotorVelocity := 400;
     tMotorTimer(IN := FALSE);
-    tHomeTimer(IN := FALSE);
+	tHomeTimer(PT := tHomeInterval);
     WaitingAtMid := FALSE;
     State := 1;
 
@@ -250,7 +253,7 @@ CASE State OF
 
 END_CASE 
 
-END_IF
+
 *)
 
 (*
@@ -315,12 +318,12 @@ END_IF
 *)
 	
 	
-(*	
+	
 	
 	//HMI Controls
 IF bConfirm AND HomingDone THEN
-		TijdConvertUitwijking := INT_TO_TIME(iTijd) * 1000;
-		TijdConvertMeting := INT_TO_TIME(iTijdMeting) * 1000;
+		TijdConvertUitwijking := INT_TO_TIME(iTijd) * 1000; //set to seconds
+		TijdConvertMeting := INT_TO_TIME(iTijdMeting) * 1000; //set to seconds
 		IF iEncoderMotor > 9 OR iEncoderMotor < -9 THEN
 		iEncoderMotor := 0.0;
 		END_IF
@@ -338,7 +341,6 @@ IF bStart THEN
 		
 	  0: // Initialize	
 		Process_Status := TRUE;
-		oEnableStart := FALSE;
         oMotorEnable := TRUE;
         oMotorVelocity := iMotorSpeed;
 		//Create timers
@@ -357,9 +359,9 @@ IF bStart THEN
 		IF tMetingTimer.Q THEN 
 		 	//wait before moving motor to chosen position
 			IF iEncoderMotor > 0.1 THEN
-			oMotorPosition := 314000; 
+			oMotorPosition := MotorLeftEdge; 
 			ELSE
-			oMotorPosition := 0;
+			oMotorPosition := MotorRightEdge;
 			END_IF
 			omotorExecute := TRUE;
 			MeasurementState := 2; 	
@@ -367,9 +369,10 @@ IF bStart THEN
 		
 		
 	  2: //move to chosen degrees
-		IF iEncoderDegrees = iEncoderMotor THEN
-			tMetingTimer(IN := FALSE); // Stop timer
-			tUitwijkingTimer(IN := TRUE);  //start timer
+		IF ABS(iEncoderDegrees - iEncoderMotor) < 0.1 THEN
+			oMotorExecute := FALSE; //stop motor
+			tMetingTimer(IN := FALSE); // Stop Metingtimer
+			tUitwijkingTimer(IN := TRUE);  //start Uitijwkingtimer
 		END_IF
 		//wait at chosen degrees
 	 	IF tUitwijkingTimer.Q THEN
@@ -383,6 +386,7 @@ IF bStart THEN
 		 IF RealMotorPosition = oStartPosition THEN
 			 MeasurementsCompleted := Measurementscompleted + 1;
 			 tUitwijkingTimer(IN := FALSE); // Stop timer
+			 oMotorExecute := FALSE; //stop motor
     		 MeasurementState := 4;
 		 END_IF
 		 
@@ -410,8 +414,8 @@ END_IF
 		
 	END_IF
 	
-*)
-	
+
+	END_IF
 (*	
   // Prepare SELECT Query
         sSelectDataCommand := 'SELECT TOP(10) [SensorValue], [SampleNr], [Time], [SensorID] FROM [db_accessadmin].[TempSensor] ORDER BY TIME DESC;';
