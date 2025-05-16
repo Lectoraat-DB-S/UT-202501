@@ -3,13 +3,13 @@
   <POU Name="FC_SQL_InsertCommands_Encoder" Id="{4243be30-0310-4c85-bbee-74be1aa1fdb2}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION FC_SQL_InsertCommands_Encoder : STRING(255)
 VAR_INPUT
-    iSensorValue: UDINT;
+    iSensorValue: LREAL;
     iSampleNr: INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[FC_SQL_InsertCommands_Encoder := 'INSERT INTO [db_accessadmin].[Encoder] (SensorValue, SampleNr, Time) VALUES (';
-FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, UDINT_TO_STRING(iSensorValue));
+FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, LREAL_TO_STRING(iSensorValue));
 FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, ', ');
 FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, INT_TO_STRING(iSampleNr));
 FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, ', GETDATE());');]]></ST>

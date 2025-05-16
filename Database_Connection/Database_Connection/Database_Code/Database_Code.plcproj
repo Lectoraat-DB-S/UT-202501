@@ -27,6 +27,9 @@
     <Compile Include="POUs\EncoderConvert.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\FC_SQL_InsertCommands_Capacitief.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\FC_SQL_InsertCommands_Encoder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -45,6 +48,9 @@
     <Compile Include="POUs\TempConvert.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\TestCase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
@@ -60,6 +66,10 @@
     <PlaceholderReference Include="Tc2_System">
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Utilities">
+      <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Utilities</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Database">
       <DefaultResolution>Tc3_Database, * (Beckhoff Automation GmbH)</DefaultResolution>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FC_SQL_InsertCommands_Capacitief" Id="{f105113b-04e7-42e5-bac4-35a9eab28bd9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FC_SQL_InsertCommands_Capacitief : STRING(255)
+VAR_INPUT
+    iSensorValue: INT;
+    iSampleNr: INT;
+	iSensorID: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FC_SQL_InsertCommands_TempSensor := 'INSERT INTO [db_accessadmin].[Capacitief] (SensorValue, SampleNr, Time, SensorID) VALUES (';
+FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_Capacitief, INT_TO_STRING(iSensorValue));
+FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_Capacitief, ', ');
+FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_Capacitief, INT_TO_STRING(iSampleNr));
+FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_Capacitief, ', GETDATE(), ');
+FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_Capacitief, INT_TO_STRING(iSensorID));
+FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_Capacitief, ');');]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

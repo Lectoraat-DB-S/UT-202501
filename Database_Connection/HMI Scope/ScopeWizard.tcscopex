@@ -5,17 +5,32 @@
   <AutoDeleteMode>Disabled</AutoDeleteMode>
   <AutoDeleteOlderThan>0</AutoDeleteOlderThan>
   <AutoRestartRecord>false</AutoRestartRecord>
-  <AutoSaveExportConfigurationString>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;ExportConfiguration&gt;
+  <AutoSaveExportConfigurationString>&lt;ExportConfiguration&gt;
+  &lt;ExportStartTime&gt;0&lt;/ExportStartTime&gt;
+  &lt;ExportEndTime&gt;0&lt;/ExportEndTime&gt;
   &lt;Silent&gt;False&lt;/Silent&gt;
+  &lt;IncludeAllChannels&gt;True&lt;/IncludeAllChannels&gt;
+  &lt;IncludeAllImages&gt;False&lt;/IncludeAllImages&gt;
   &lt;Format_Properties&gt;
-	&lt;CSVProperties&gt;
-	&lt;/CSVProperties&gt;
+    &lt;CSVProperties&gt;
+      &lt;DecimalMark&gt;,&lt;/DecimalMark&gt;
+      &lt;Seperator&gt;Semicolon&lt;/Seperator&gt;
+      &lt;ArraySeperator&gt;Tab&lt;/ArraySeperator&gt;
+      &lt;ExcludeDoubleTimestamp&gt;False&lt;/ExcludeDoubleTimestamp&gt;
+      &lt;HeaderKonfiguration&gt;0&lt;/HeaderKonfiguration&gt;
+      &lt;SortChannels&gt;False&lt;/SortChannels&gt;
+      &lt;ContainEOF&gt;False&lt;/ContainEOF&gt;
+      &lt;IncludeTriggerInfos&gt;False&lt;/IncludeTriggerInfos&gt;
+      &lt;FullTimeStamp&gt;False&lt;/FullTimeStamp&gt;
+      &lt;IncludeMarkerTables&gt;None&lt;/IncludeMarkerTables&gt;
+      &lt;MarkerTableOnlyIncludedChannels&gt;True&lt;/MarkerTableOnlyIncludedChannels&gt;
+      &lt;MarkerTableOnlyIncludedMarker&gt;True&lt;/MarkerTableOnlyIncludedMarker&gt;
+      &lt;ScaleValues&gt;False&lt;/ScaleValues&gt;
+    &lt;/CSVProperties&gt;
   &lt;/Format_Properties&gt;
-&lt;/ExportConfiguration&gt;
-</AutoSaveExportConfigurationString>
+&lt;/ExportConfiguration&gt;</AutoSaveExportConfigurationString>
   <AutoSaveFileNameMask>{SCOPE}_AutoSave_{HH_mm_ss}</AutoSaveFileNameMask>
-  <AutoSaveMode>None</AutoSaveMode>
+  <AutoSaveMode>Export</AutoSaveMode>
   <AutoSavePath>$ScopeProject$\AutoSave</AutoSavePath>
   <Comment />
   <DisplayColor>Black</DisplayColor>
@@ -44,9 +59,9 @@
     &lt;/SplitLayoutSystem&gt;
   &lt;/DocumentContainer&gt;
 &lt;/Layout&gt;</Layout>
-  <MainServer>127.0.0.1.1.1</MainServer>
+  <MainServer>10.100.5.10.1.1</MainServer>
   <Name>Scope Project</Name>
-  <RecordTime>6000000000</RecordTime>
+  <RecordTime>12000000000</RecordTime>
   <ServerVersions>
     <Version>4.49.84.0</Version>
   </ServerVersions>
@@ -417,7 +432,7 @@
           <DataType>UINT32</DataType>
           <DisplayColor>Black</DisplayColor>
           <Enabled>true</Enabled>
-          <FileHandle>1</FileHandle>
+          <FileHandle>0</FileHandle>
           <ForceOversampling>false</ForceOversampling>
           <Guid>91defe85-cc69-49b6-a699-8e94a634a043</Guid>
           <IndexGroup>61472</IndexGroup>
@@ -515,7 +530,7 @@
           <DataType>REAL64</DataType>
           <DisplayColor>Black</DisplayColor>
           <Enabled>true</Enabled>
-          <FileHandle>2</FileHandle>
+          <FileHandle>0</FileHandle>
           <ForceOversampling>false</ForceOversampling>
           <Guid>497a331e-0a39-4658-a369-ff82df09da5d</Guid>
           <IndexGroup>16448</IndexGroup>
@@ -613,7 +628,7 @@
           <DataType>INT16</DataType>
           <DisplayColor>Black</DisplayColor>
           <Enabled>true</Enabled>
-          <FileHandle>3</FileHandle>
+          <FileHandle>0</FileHandle>
           <ForceOversampling>false</ForceOversampling>
           <Guid>ee9556f2-a21a-4892-b492-d5ed04841a50</Guid>
           <IndexGroup>61472</IndexGroup>
@@ -1342,7 +1357,7 @@
   <SynchronisationMode>Default</SynchronisationMode>
   <TargetConnectionIds />
   <Title>MeasurementMemberBase</Title>
-  <UseAutoSave>false</UseAutoSave>
+  <UseAutoSave>true</UseAutoSave>
   <UseFileStore>true</UseFileStore>
   <Version>1.0.0.5</Version>
   <ViewDetailLevel>Default</ViewDetailLevel>
