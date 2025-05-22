@@ -60,7 +60,7 @@ IF  NOT SampleDone AND SampleTrigger  THEN
     nWriteIndex := nWriteIndex + 1;
 	
 	
-    IF nWriteIndex >= SamplesPerMeasurement THEN
+    IF nWriteIndex > g_aSensorBufferSize THEN
    		 	nWriteIndex := 0;
     		g_aWriteSQL[nWriteBufferIndex] := TRUE;
 
@@ -161,11 +161,11 @@ END_FOR
 (* If done inserting everything *)
 IF bAllInserted AND NOT FB_SQLCommandEvt.bBusy THEN
     bInsertingData := FALSE;
-	IF SampleDone THEN
+	//IF SampleDone THEN
      //Clear buffers now if not already cleared
-       MEMSET(Destaddr := ADR(g_aSensorBuffer), n := SIZEOF(g_aSensorBuffer), FillByte := 0);
-       MEMSET(Destaddr := ADR(g_aWriteSQL), n := SIZEOF(g_aWriteSQL), FillByte := 0);
-	END_IF
+      // MEMSET(Destaddr := ADR(g_aSensorBuffer), n := SIZEOF(g_aSensorBuffer), FillByte := 0);
+      // MEMSET(Destaddr := ADR(g_aWriteSQL), n := SIZEOF(g_aWriteSQL), FillByte := 0);
+	//END_IF
 END_IF]]></ST>
     </Implementation>
   </POU>

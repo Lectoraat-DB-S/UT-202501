@@ -89,32 +89,32 @@
 </div>
 <div id="TextCelsiusSign_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="42" data-tchmi-height-unit="px" data-tchmi-left="356" data-tchmi-left-unit="px" data-tchmi-text="°C" data-tchmi-top="610" data-tchmi-top-unit="px" data-tchmi-width="40" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="23" data-tchmi-zindex="1">
 </div>
-<div id="TcHmiScopeControl_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl" data-tchmi-height="400" data-tchmi-height-unit="px" data-tchmi-left="26" data-tchmi-left-unit="px" data-tchmi-top="76" data-tchmi-top-unit="px" data-tchmi-width="750" data-tchmi-width-unit="px" data-tchmi-zindex="1">
+<div id="TextCapacitief" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="56" data-tchmi-height-unit="px" data-tchmi-left="931" data-tchmi-left-unit="px" data-tchmi-text="Capacitief" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="276" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-style="Auto" data-tchmi-text-font-weight="Bold" data-tchmi-text-font-size="32" data-tchmi-zindex="2">
+</div>
+<div id="TextLoadcell" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="56" data-tchmi-height-unit="px" data-tchmi-left="931" data-tchmi-left-unit="px" data-tchmi-text="LoadCell" data-tchmi-top="486" data-tchmi-top-unit="px" data-tchmi-width="276" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-style="Auto" data-tchmi-text-font-weight="Bold" data-tchmi-text-font-size="32" data-tchmi-zindex="2">
+</div>
+<div id="DisplayTemp4_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="42" data-tchmi-height-unit="px" data-tchmi-left="931" data-tchmi-left-unit="px" data-tchmi-top="610" data-tchmi-top-unit="px" data-tchmi-width="51" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="2" data-tchmi-text-font-size="23" data-tchmi-text="%s%ADS.PLC1.MAIN.TestForce%/s%">
+</div>
+<div id="TextNewtonSign" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="42" data-tchmi-height-unit="px" data-tchmi-left="983" data-tchmi-left-unit="px" data-tchmi-text=" N" data-tchmi-top="610" data-tchmi-top-unit="px" data-tchmi-width="53" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="23" data-tchmi-zindex="1">
+</div>
+<div id="FrameLoadCell" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="199" data-tchmi-height-unit="px" data-tchmi-left="894" data-tchmi-left-unit="px" data-tchmi-top="545" data-tchmi-top-unit="px" data-tchmi-width="314" data-tchmi-width-unit="px" data-tchmi-zindex="0">
+</div>
+<div id="TcHmiScopeControl_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl" data-tchmi-height="400" data-tchmi-height-unit="px" data-tchmi-left="44" data-tchmi-left-unit="px" data-tchmi-top="76" data-tchmi-top-unit="px" data-tchmi-width="750" data-tchmi-width-unit="px" data-tchmi-enable-record-controls="true">
 
 <script data-tchmi-target-attribute="data-tchmi-scope-config" type="application/json">
 {
-  "name": "Scope_Encoder",
+  "name": "ScopeHMI",
   "chart": "YT Chart"
 }
 </script>
 </div>
-<div id="TextCapacitief" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="56" data-tchmi-height-unit="px" data-tchmi-left="901" data-tchmi-left-unit="px" data-tchmi-text="Capacitief" data-tchmi-top="20" data-tchmi-top-unit="px" data-tchmi-width="276" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-style="Auto" data-tchmi-text-font-weight="Bold" data-tchmi-text-font-size="32" data-tchmi-zindex="2">
-</div>
-<div id="TcHmiScopeControl_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl" data-tchmi-height="400" data-tchmi-height-unit="px" data-tchmi-left="834" data-tchmi-left-unit="px" data-tchmi-top="76" data-tchmi-top-unit="px" data-tchmi-width="750" data-tchmi-width-unit="px" data-tchmi-zindex="1">
+<div id="TcHmiScopeControl_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl" data-tchmi-height="400" data-tchmi-height-unit="px" data-tchmi-left="894" data-tchmi-left-unit="px" data-tchmi-top="76" data-tchmi-top-unit="px" data-tchmi-width="750" data-tchmi-width-unit="px" data-tchmi-enable-record-controls="true">
 
 <script data-tchmi-target-attribute="data-tchmi-scope-config" type="application/json">
 {
-  "name": "Scope_Capacitief",
+  "name": "ScopeHMI",
   "chart": "YT Chart (1)"
 }
 </script>
-</div>
-<div id="TextLoadcell" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="56" data-tchmi-height-unit="px" data-tchmi-left="901" data-tchmi-left-unit="px" data-tchmi-text="LoadCell" data-tchmi-top="489" data-tchmi-top-unit="px" data-tchmi-width="276" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-style="Auto" data-tchmi-text-font-weight="Bold" data-tchmi-text-font-size="32" data-tchmi-zindex="2">
-</div>
-<div id="DisplayTemp4_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="42" data-tchmi-height-unit="px" data-tchmi-left="894" data-tchmi-left-unit="px" data-tchmi-top="620" data-tchmi-top-unit="px" data-tchmi-width="48" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="2" data-tchmi-text-font-size="23" data-tchmi-text="%s%ADS.PLC1.MAIN.TestForce%/s%">
-</div>
-<div id="TextNewtonSign" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="42" data-tchmi-height-unit="px" data-tchmi-left="942" data-tchmi-left-unit="px" data-tchmi-text=" N" data-tchmi-top="620" data-tchmi-top-unit="px" data-tchmi-width="40" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="23" data-tchmi-zindex="1">
-</div>
-<div id="FrameLoadCell" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="199" data-tchmi-height-unit="px" data-tchmi-left="834" data-tchmi-left-unit="px" data-tchmi-top="554" data-tchmi-top-unit="px" data-tchmi-width="344" data-tchmi-width-unit="px" data-tchmi-zindex="0">
 </div>
 </div>

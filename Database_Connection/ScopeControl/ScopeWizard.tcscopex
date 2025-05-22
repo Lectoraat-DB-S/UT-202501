@@ -30,10 +30,10 @@
   <Layout>&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;Layout&gt;
   &lt;Window Guid="dad457ad-e5ab-4b85-a67f-295675ccaf3b" LastFocused="133923764833403348" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="250, 400" DocumentWindowGroupGuid="e9ff3a2d-be7a-4b9e-b019-f5cd7415f066" DocumentIndexInWindowGroup="1" DocumentSplitPath="0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
-  &lt;Window Guid="057d0495-d28b-49c0-995b-e854e77336f3" LastFocused="133922047708232751" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="250, 400" DocumentWindowGroupGuid="e9ff3a2d-be7a-4b9e-b019-f5cd7415f066" DocumentIndexInWindowGroup="0" DocumentSplitPath="0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
+  &lt;Window Guid="057d0495-d28b-49c0-995b-e854e77336f3" LastFocused="133923849711559076" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="250, 400" DocumentWindowGroupGuid="e9ff3a2d-be7a-4b9e-b019-f5cd7415f066" DocumentIndexInWindowGroup="0" DocumentSplitPath="0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
   &lt;DocumentContainer Dock="5"&gt;
     &lt;SplitLayoutSystem WorkingSize="250, 400" SplitMode="0"&gt;
-      &lt;ControlLayoutSystem WorkingSize="250, 400" Guid="e9ff3a2d-be7a-4b9e-b019-f5cd7415f066" Collapsed="0" SelectedControl="dad457ad-e5ab-4b85-a67f-295675ccaf3b"&gt;
+      &lt;ControlLayoutSystem WorkingSize="250, 400" Guid="e9ff3a2d-be7a-4b9e-b019-f5cd7415f066" Collapsed="0" SelectedControl="057d0495-d28b-49c0-995b-e854e77336f3"&gt;
         &lt;Controls&gt;
           &lt;Control Guid="057d0495-d28b-49c0-995b-e854e77336f3" /&gt;
           &lt;Control Guid="dad457ad-e5ab-4b85-a67f-295675ccaf3b" /&gt;
@@ -44,7 +44,7 @@
 &lt;/Layout&gt;</Layout>
   <MainServer>127.0.0.1.1.1</MainServer>
   <Name>Scope Project</Name>
-  <RecordTime>6000000000</RecordTime>
+  <RecordTime>36000000000</RecordTime>
   <ServerVersions>
     <Version>4.49.84.0</Version>
   </ServerVersions>
@@ -406,11 +406,11 @@
           <DataType>REAL64</DataType>
           <DisplayColor>Black</DisplayColor>
           <Enabled>true</Enabled>
-          <FileHandle>0</FileHandle>
+          <FileHandle>1</FileHandle>
           <ForceOversampling>false</ForceOversampling>
           <Guid>6a964349-0480-4b88-addb-e54a78323fce</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>442672</IndexOffset>
+          <IndexOffset>446824</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
@@ -504,7 +504,7 @@
           <DataType>INT16</DataType>
           <DisplayColor>Black</DisplayColor>
           <Enabled>true</Enabled>
-          <FileHandle>0</FileHandle>
+          <FileHandle>2</FileHandle>
           <ForceOversampling>false</ForceOversampling>
           <Guid>1bd54492-b6db-4ca8-9bc3-fd5358c48c38</Guid>
           <IndexGroup>61472</IndexGroup>
@@ -602,7 +602,7 @@
           <DataType>INT16</DataType>
           <DisplayColor>Black</DisplayColor>
           <Enabled>true</Enabled>
-          <FileHandle>0</FileHandle>
+          <FileHandle>3</FileHandle>
           <ForceOversampling>false</ForceOversampling>
           <Guid>f99acf45-a350-41f3-a4c0-d8ee348c7a65</Guid>
           <IndexGroup>61472</IndexGroup>

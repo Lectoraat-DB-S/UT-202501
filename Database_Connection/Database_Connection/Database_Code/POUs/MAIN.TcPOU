@@ -10,12 +10,10 @@ END_VAR
 VAR
 	
     //database variables
-	
 	FB_SQLDatabaseEvt : FB_SQLDatabaseEvt(sNetID := sLocalID, tTimeout := T#10S);
     FB_SQLCommandEvt  : FB_SQLCommandEvt(sNetID := sLocalID, tTimeout := T#10S);
     FB_SQLResultEvt   : FB_SQLResultEvt(sNetID := sLocalID, tTimeout := T#10S);
 	SQL_Commands: ARRAY[1..10] OF STRING(500);
-	sSelectDataCommand : STRING(255);
 	DataBase_Connection: BOOL := FALSE;
    
 	//inputs from sensor
@@ -31,8 +29,6 @@ VAR
 	iCapacitief1Value AT %I* : INT;
 	iCapacitief2Value AT %I* : INT;
 
-	//read arrays
-	aReadStruct : ARRAY[1..10] OF TempSensor_SelectStruct;
 	//Strings to insert
 	iSensorIDs : ARRAY[1..4] OF INT := [1,2,3,4];
 	fbBufferManager: FB_BufferManager;
@@ -107,13 +103,14 @@ VAR
 	MotorLeftEdge : UDINT := 314000;
 	MotorRightEdge : UDINT := 0;
 	MotorStartValue : UDINT := 157000;
-	
+	//motor loadcell control
+	iMotorExecutePOS AT %Q* : BOOL;
+	iMotorExecuteNEG AT %Q* : BOOL;
 
 	
 	
 	//conversion variables
 	TestForce : INT;
-	Voltage: REAL;
 	iEncoderDegrees: LREAL;
 	
 	
@@ -127,10 +124,9 @@ VAR PERSISTENT
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
-//conversion variables
+//conversion variables for measurement and hmi control
 iEncoderDegrees := EncoderConvert(iEncoderValue); 
 TestForce := LoadcellConvert(iLoadCellValue);
-Voltage := INT_TO_REAL(iLoadCellValue)/32768 * 10;
 Temp1Value := TempConvert(iTempSensor1Value);
 Temp2Value := Tempconvert(iTempSensor2Value);
 Temp3Value := TempConvert(iTempSensor3Value);
@@ -238,14 +234,27 @@ IF bStart AND NOT bStop THEN
         //Create timers
         tUitwijkingTimer(PT := TijdConvertUitwijking); 
         tMetingTimer(PT := TijdConvertMeting);
-		tInsertTimer(PT := TijdConvertSample); 
-        //Insert Loadcell value at Start 
+		tInsertTimer(PT := TijdConvertSample);
+		IF TestForce < iLoadCellMotor THEN
+			//move motor Clockwise
+			iMotorExecuteNEG := TRUE;
+		ELSIF TestForce > iLoadCellmotor THEN
+			//move motor CounterClockwise
+			iMotorExecutePOS := TRUE;
+		END_IF
+		//loadcell is set at chosen Newtons 
+       // IF TestForce = iLoadCellMotor THEN
+		//stop motor
+		iMotorExecutePOS := FALSE;
+		iMotorExecuteNEG := FALSE;	
+		//Insert Loadcell value at Start 
 		iSampleNr := iSampleNr + 1;
         SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(LoadcellConvert(iLoadCellValue), iSampleNr);
         FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1]));
         
 		//go to next state
         MeasurementState := 1;
+		//END_IF
 
       1: //Wait at start
         tMetingTimer(IN := TRUE); // Start timer 
@@ -328,9 +337,6 @@ IF bStart AND NOT bStop THEN
       5: // Stop measurement
         bStop := TRUE; // reset bStop
         MeasurementState := 0; //reset state machine
- 
- 
-
     END_CASE
 END_IF
 END_IF
@@ -345,9 +351,7 @@ IF bStop AND HomingDone THEN
 	ELSE
 		oMotorEnable := FALSE;
     	oMotorExecute := FALSE;
-	END_IF
-    
-    
+	END_IF    
 END_IF
 	//insert buffer to database
 	fbBufferManager(
@@ -359,17 +363,7 @@ END_IF
     EncoderValue := iEncoderValue,
     Cap1Value := iCapacitief1Value,
     Cap2Value := iCapacitief2Value);
-(*	
-  // Prepare SELECT Query
-        sSelectDataCommand := 'SELECT TOP(10) [SensorValue], [SampleNr], [Time], [SensorID] FROM [db_accessadmin].[TempSensor] ORDER BY TIME DESC;';
-   
-  // Execute SELECT Command
-       FB_SQLCommandEvt.ExecuteDataReturn(ADR(sSelectDataCommand),
-           							   SIZEOF(sSelectDataCommand),
-            							   ADR(FB_SQLResultEvt)); 
-					
-  	FB_SQLResultEvt.Read(1, 10, ADR(aReadStruct), SIZEOF(aReadStruct), TRUE, TRUE);
-*)	]]></ST>
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

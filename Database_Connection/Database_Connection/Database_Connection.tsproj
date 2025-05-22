@@ -100,11 +100,20 @@
 		</System>
 		<Plc>
 			<Project GUID="{F88F7A59-9E7F-4523-9C0E-4BD9DABD5D28}" Name="Database_Code" PrjFilePath="Database_Code\Database_Code.plcproj" TmcFilePath="Database_Code\Database_Code.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{63771D8F-8520-679E-D613-DF6C3168111C}" TmcPath="Database_Code\Database_Code.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{B05F21C2-5F97-30BC-6CBE-A4D380C3F2C5}" TmcPath="Database_Code\Database_Code.tmc">
 					<Name>Database_Code Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>MAIN.iMotorExecutePOS</Name>
+							<Comment><![CDATA[motor loadcell control]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.iMotorExecuteNEG</Name>
+							<Type>BOOL</Type>
+						</Var>
 						<Var>
 							<Name>MAIN.oMotorEnable</Name>
 							<Comment><![CDATA[motor controls]]></Comment>
@@ -1299,6 +1308,10 @@ Bit1: Value smaller than Limit2]]></Comment>
 				<Link VarA="PlcTask Outputs^MAIN.oMotorStartType" VarB="POS Control^Start type"/>
 				<Link VarA="PlcTask Outputs^MAIN.oMotorVelocity" VarB="POS Control^Velocity"/>
 				<Link VarA="PlcTask Outputs^MAIN.oStartPosition" VarB="ENC Control^Set counter value"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 3 (EtherCAT)^Term 6 (EK1100)^Term 12 (EL2809)">
+				<Link VarA="PlcTask Outputs^MAIN.iMotorExecuteNEG" VarB="Channel 2^Output"/>
+				<Link VarA="PlcTask Outputs^MAIN.iMotorExecutePOS" VarB="Channel 1^Output"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 3 (EtherCAT)^Term 6 (EK1100)^Term 7 (EL3074)">
 				<Link VarA="PlcTask Inputs^MAIN.iCapacitief1Value" VarB="AI Standard Channel 2^Value"/>
