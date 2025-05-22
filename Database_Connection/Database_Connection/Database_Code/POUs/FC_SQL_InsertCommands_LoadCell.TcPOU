@@ -5,14 +5,17 @@
 VAR_INPUT
     iSensorValue: INT;
     iSampleNr: INT;
+
 END_VAR
+
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[FC_SQL_InsertCommands_LoadCell := 'INSERT INTO [db_accessadmin].[LoadCell] (SensorValue, SampleNr, Time) VALUES (';
 FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, INT_TO_STRING(iSensorValue));
 FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, ', ');
 FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, INT_TO_STRING(iSampleNr));
-FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, ', GETDATE());');]]></ST>
+FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, ', GETDATE()); ');
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

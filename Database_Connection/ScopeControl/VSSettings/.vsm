@@ -1,20 +1,26 @@
 <Node>
-  <Title>HMI Scope</Title>
+  <Title>ScopeControl</Title>
   <Expanded>False</Expanded>
   <FileName></FileName>
   <Children>
     <Node>
       <Title>ScopeWizard</Title>
-      <Expanded>False</Expanded>
-      <FileName>C:\Users\Jonathan\FvdT-Repo\Database_Connection\HMI Scope\ScopeWizard.tcscopex</FileName>
+      <Expanded>True</Expanded>
+      <FileName>C:\Users\Jonathan\FvdT-Repo\Database_Connection\ScopeControl\ScopeWizard.tcscopex</FileName>
       <Children>
         <Node>
           <Title>DataPool</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
-              <Title>iCapacitiefValue </Title>
+              <Title>iCapacitief1Value</Title>
+              <Expanded>False</Expanded>
+              <FileName></FileName>
+              <Children />
+            </Node>
+            <Node>
+              <Title>iCapacitief2Value</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -25,17 +31,11 @@
               <FileName></FileName>
               <Children />
             </Node>
-            <Node>
-              <Title>iEncoderValue</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
           </Children>
         </Node>
         <Node>
-          <Title>Encoder</Title>
-          <Expanded>False</Expanded>
+          <Title>YT Chart</Title>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -44,7 +44,7 @@
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>iEncoderValue</Title>
+                  <Title>iEncoderDegrees</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -54,37 +54,30 @@
           </Children>
         </Node>
         <Node>
-          <Title>Capacitief</Title>
-          <Expanded>False</Expanded>
+          <Title>YT Chart (1)</Title>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>Axis Group (1)</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>iCapacitiefValue </Title>
+                  <Title>iCapacitief1Value</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
               </Children>
             </Node>
-          </Children>
-        </Node>
-        <Node>
-          <Title>Encoder Graden</Title>
-          <Expanded>False</Expanded>
-          <FileName></FileName>
-          <Children>
             <Node>
               <Title>Axis Group (2)</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>iEncoderDegrees</Title>
+                  <Title>iCapacitief2Value</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />

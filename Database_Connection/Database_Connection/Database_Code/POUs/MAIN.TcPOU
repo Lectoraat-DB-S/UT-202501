@@ -2,13 +2,19 @@
 <TcPlcObject Version="1.1.0.1">
   <POU Name="MAIN" Id="{4ef234f8-6ebd-4fcd-beba-a435a8463d67}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
+VAR CONSTANT
+	BufferSampleSize : INT := 999;
+END_VAR
+
+
 VAR
 	
     //database variables
-	FB_SQLDatabaseEvt : FB_SQLDatabaseEvt(sNetID := '145.44.56.240.1.1', tTimeout := T#5S);
-    FB_SQLCommandEvt  : FB_SQLCommandEvt(sNetID := '145.44.56.240.1.1', tTimeout := T#5S);
-    FB_SQLResultEvt   : FB_SQLResultEvt(sNetID := '145.44.56.240.1.1', tTimeout := T#5S);
-	SQL_Commands: ARRAY[1..7] OF STRING(500);
+	
+	FB_SQLDatabaseEvt : FB_SQLDatabaseEvt(sNetID := sLocalID, tTimeout := T#10S);
+    FB_SQLCommandEvt  : FB_SQLCommandEvt(sNetID := sLocalID, tTimeout := T#10S);
+    FB_SQLResultEvt   : FB_SQLResultEvt(sNetID := sLocalID, tTimeout := T#10S);
+	SQL_Commands: ARRAY[1..10] OF STRING(500);
 	sSelectDataCommand : STRING(255);
 	DataBase_Connection: BOOL := FALSE;
    
@@ -22,21 +28,23 @@ VAR
 	iEncoderValue AT %I*: UDINT;
 	iLichtSluisValue1 AT %I* : BOOL;
 	iLichtSluisValue2 AT %I* : BOOL;
-	iCapacitiefValue AT %I* : INT;
-	
+	iCapacitief1Value AT %I* : INT;
+	iCapacitief2Value AT %I* : INT;
 
 	//read arrays
 	aReadStruct : ARRAY[1..10] OF TempSensor_SelectStruct;
 	//Strings to insert
-	sTempSensor1Value: STRING(255);
-	sTempSensor2Value: STRING(255);
-	sTempSensor3Value: STRING(255);
-	sTempSensor4Value: STRING(255);
 	iSensorIDs : ARRAY[1..4] OF INT := [1,2,3,4];
-	
-	
+	fbBufferManager: FB_BufferManager;
+	//sample control
+	SampleDone : BOOL; 
+	SampleCounter : INT;
+	SampleTrigger: BOOL;
+	SamplingRate_Hz : INT := 1000;
+	InsertingDone : BOOL;
 	// INSERT state machine control
-	nStep: INT ;
+	TempInsert: INT ;
+	
 	//HMI variables
 	iEncoderMotor : REAL;
 	iLoadCellMotor : INT;
@@ -46,6 +54,11 @@ VAR
 	iTijdMeting : INT;
 	iTijdSample : INT;
 	bConfirm : BOOL;
+	//hmi display variables
+	Temp1Value: STRING;  
+	Temp2Value: STRING;
+	Temp3Value: STRING;
+	Temp4Value: STRING;
 	
 	
 	bStart : BOOL;
@@ -102,11 +115,14 @@ VAR
 	TestForce : INT;
 	Voltage: REAL;
 	iEncoderDegrees: LREAL;
-
 	
+	
+	
+	
+
 END_VAR
 
-VAR RETAIN
+VAR PERSISTENT
 		iSampleNr: INT;
 END_VAR]]></Declaration>
     <Implementation>
@@ -115,6 +131,10 @@ END_VAR]]></Declaration>
 iEncoderDegrees := EncoderConvert(iEncoderValue); 
 TestForce := LoadcellConvert(iLoadCellValue);
 Voltage := INT_TO_REAL(iLoadCellValue)/32768 * 10;
+Temp1Value := TempConvert(iTempSensor1Value);
+Temp2Value := Tempconvert(iTempSensor2Value);
+Temp3Value := TempConvert(iTempSensor3Value);
+Temp4Value := TempConvert(iTempSensor4Value);
 
 //make connection to the database
 IF NOT DataBase_Connection THEN
@@ -125,6 +145,7 @@ IF NOT DataBase_Connection THEN
         FB_SQLDatabaseEvt.CreateCmd(pSQLCommand := ADR(FB_SQLCommandEvt));
         DataBase_Connection := TRUE;
     END_IF;
+
 END_IF
 
 
@@ -189,58 +210,6 @@ CASE Homing OF
 END_CASE
 
 ELSE
-
-
-
-
-
-
-
-(*
-// Generate and insert LoadCell Data only when changed 
-IF ABS(iLoadCellValue - iLoadCellPreviousValue) > 100  THEN
-    SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(LoadcellConvert(iLoadCellValue), iSampleNr);
-	FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1]));
-    iSampleNr := iSampleNr + 1;  // Increment sample number
-    iLoadCellPreviousValue := iLoadCellValue;  // Update previous load cell value
-END_IF
-*)
-
-	
-	//INSERT for encoder
-    SQL_Commands[2] := FC_SQL_InsertCommands_Encoder(EncoderConvert(iEncoderValue), iSampleNr);
-	//INSERT for temp sensors
-	SQL_Commands[3] := CONCAT(FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor1Value), iSampleNr, iSensorIDs[1]),FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor2Value), iSampleNr, iSensorIDs[2]));
-	SQL_Commands[4] := CONCAT(FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor3Value), iSampleNr, iSensorIDs[3]),FC_SQL_InsertCommands_TempSensor(	TempConvert(iTempSensor4Value), iSampleNr, iSensorIDs[4]));
-	//INSERT for Capacitive sensors
-	SQL_Commands[5] := CONCAT(FC_SQL_InsertCommands_Capacitief(iCapacitiefValue, iSampleNr, iSensorIDs[1]),FC_SQL_InsertCommands_Capacitief(iCapacitiefValue, iSampleNr, iSensorIDs[2]));					  
-	
-(*			     
-    //state machine for INSERT executes
-	CASE nStep OF
-	 0:
-        //Execute Encoder INSERT
-        IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[2]), cbSQLCmd := SIZEOF(SQL_Commands[2])) THEN
-            nStep := 1;
-        END_IF
-		
-	1:	//execute Temp 1 and 2 INSERT
-		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[3]), cbSQLCmd := SIZEOF(SQL_Commands[3])) THEN
-            nStep := 2;
-        END_IF
-	2:	//execute Temp 3 and 4 INSERT
-		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[4]), cbSQLCmd := SIZEOF(SQL_Commands[4])) THEN
-            nStep := 3;
-        END_IF
-	3:	//execute Capactive Sensors
-		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[5]), cbSQLCmd := SIZEOF(SQL_Commands[5])) THEN
-            nStep := 0;
-        END_IF
-	END_CASE
-
-*)	 	
-
-
 	
 	//HMI Controls
 IF bConfirm AND HomingDone THEN
@@ -250,7 +219,7 @@ IF bConfirm AND HomingDone THEN
 		IF iEncoderMotor > 9 OR iEncoderMotor < -9 THEN
 		iEncoderMotor := 0.0;
 		END_IF
-		IF iMotorSpeed < 100 OR iMotorSpeed > 1000 THEN
+		IF iMotorSpeed < 100 OR iMotorSpeed > 4000 THEN
 			iMotorSpeed := 500;
 		END_IF
 		bStartEnabled := TRUE;
@@ -271,10 +240,10 @@ IF bStart AND NOT bStop THEN
         tMetingTimer(PT := TijdConvertMeting);
 		tInsertTimer(PT := TijdConvertSample); 
         //Insert Loadcell value at Start 
+		iSampleNr := iSampleNr + 1;
         SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(LoadcellConvert(iLoadCellValue), iSampleNr);
         FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1]));
-        iSampleNr := iSampleNr + 1;
-
+        
 		//go to next state
         MeasurementState := 1;
 
@@ -282,30 +251,39 @@ IF bStart AND NOT bStop THEN
         tMetingTimer(IN := TRUE); // Start timer 
 		  //wait before moving motor to chosen position			
         IF tMetingTimer.Q THEN 
-			tInsertTimer(IN := TRUE); //start timer
-			//insert data
-		 //state machine for INSERT executes
-		CASE nStep OF
-	 	0:  //Execute Encoder INSERT
-        IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[2]), cbSQLCmd := SIZEOF(SQL_Commands[2])) THEN
-            nStep := 1;
-        END_IF
-		1:	//execute Temp 1 and 2 INSERT
+		tInsertTimer(IN := TRUE); //start timer
+		//insert data for buffer
+		SampleTrigger := TRUE;
+		SampleDone := FALSE; //stop Insert
+		
+		//insert temp sensor
+		SQL_Commands[3] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor1Value), iSampleNr, iSensorIDs[1], MeasurementsCompleted);
+		SQL_Commands[4] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor2Value), iSampleNr, iSensorIDs[2], MeasurementsCompleted);
+		SQL_Commands[7] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor3Value), iSampleNr, iSensorIDs[3], MeasurementsCompleted);
+		SQL_Commands[8] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor4Value), iSampleNr, iSensorIDs[4], MeasurementsCompleted);
+		CASE TempInsert OF
+		0:	//execute Temp 1 INSERT
 		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[3]), cbSQLCmd := SIZEOF(SQL_Commands[3])) THEN
-            nStep := 2;
+            TempInsert := 1;
         END_IF
-		2:	//execute Temp 3 and 4 INSERT
+		1:	//execute Temp 2 INSERT
 		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[4]), cbSQLCmd := SIZEOF(SQL_Commands[4])) THEN
-            nStep := 3;
+            TempInsert := 2;
         END_IF
-		3:	//execute Capactive Sensors INSERT
-		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[5]), cbSQLCmd := SIZEOF(SQL_Commands[5])) THEN
-            nStep := 0;
+		2:	//execute Temp 3 INSERT
+		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[7]), cbSQLCmd := SIZEOF(SQL_Commands[7])) THEN
+            TempInsert := 3;
+        END_IF
+		3:	//execute Temp 4 INSERT
+		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[8]), cbSQLCmd := SIZEOF(SQL_Commands[8])) THEN
+            TempInsert := 0;
         END_IF
 		END_CASE
 		
-		 //sampling done move to position	
+		 //sampling done move to position and insert data	
 		 IF tInsertTimer.Q THEN
+		 	SampleDone := TRUE; //start insert
+			
             IF iEncoderMotor > 0.1 THEN
                 oMotorPosition := MotorLeftEdge; 
             ELSE
@@ -317,9 +295,9 @@ IF bStart AND NOT bStop THEN
        	 END_IF
 		END_IF
 		
-      2: //move to chosen degrees
+      2: //move to chosen degrees 
         IF ABS(iEncoderDegrees - iEncoderMotor) < 0.1 THEN
-            oMotorExecute := FALSE; //stop motor
+    	    oMotorExecute := FALSE; //stop motor
             tMetingTimer(IN := FALSE); // Stop Metingtimer
             tUitwijkingTimer(IN := TRUE);  //start Uitijwkingtimer
         END_IF
@@ -349,8 +327,8 @@ IF bStart AND NOT bStop THEN
 
       5: // Stop measurement
         bStop := TRUE; // reset bStop
-        MeasurementState := 0; // optional reset state machine
-
+        MeasurementState := 0; //reset state machine
+ 
  
 
     END_CASE
@@ -359,21 +337,28 @@ END_IF
 // end measurements
 IF bStop AND HomingDone THEN
     Process_Status := FALSE; //hmi update
-    oMotorEnable := FALSE;
-    oMotorExecute := FALSE;
+	bStart := FALSE;
+	InsertingDone := fbBufferManager.bInsertingData;
+	IF(RealMotorPosition <> oStartPosition) THEN
+		oMotorPosition := oStartPosition;
+		oMotorExecute := TRUE;
+	ELSE
+		oMotorEnable := FALSE;
+    	oMotorExecute := FALSE;
+	END_IF
+    
     
 END_IF
-
-//set file name to save
-fbGetSystemTime(timeLoDW=>fileTime.dwLowDateTime, timeHiDW=>fileTime.dwHighDateTime );
-sTime := SYSTEMTIME_TO_STRING( FILETIME_TO_SYSTEMTIME( fileTime ) );
-SaveFileName := CONCAT(CONCAT('\Measurement_', sTime), '.csv');
-//close file
-//fbFileClose(sNetId := T_AmsNetId, 
-//			hFile := fbFileOpen.hFile,
-//			bExecute := TRUE,
-//			tTimeout := T#5S);
-
+	//insert buffer to database
+	fbBufferManager(
+    SampleDone := SampleDone,
+	SampleTrigger := SampleTrigger,
+    SampleNr := iSampleNr,
+	SamplesPerMeasurement := iTijdSample * SamplingRate_Hz,
+    MeasurementNr := MeasurementsCompleted,
+    EncoderValue := iEncoderValue,
+    Cap1Value := iCapacitief1Value,
+    Cap2Value := iCapacitief2Value);
 (*	
   // Prepare SELECT Query
         sSelectDataCommand := 'SELECT TOP(10) [SensorValue], [SampleNr], [Time], [SensorID] FROM [db_accessadmin].[TempSensor] ORDER BY TIME DESC;';

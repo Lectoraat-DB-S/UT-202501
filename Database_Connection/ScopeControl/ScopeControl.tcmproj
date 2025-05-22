@@ -2,11 +2,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{b912361f-9f20-4329-808c-bde0f0946554}</ProjectGuid>
+    <ProjectGuid>{8e3d9941-41ef-409e-b171-ad12c45d93a7}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>MyApplication</RootNamespace>
     <AssemblyName>MyApplication</AssemblyName>
-    <Name>HMI Scope</Name>
+    <Name>ScopeControl</Name>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="ScopeWizard.tcscopex">

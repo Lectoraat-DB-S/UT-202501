@@ -93,24 +93,16 @@
 				</Target>
 			</Licenses>
 			<Tasks>
-				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+				<Task Id="3" Priority="20" CycleTime="10000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
 				</Task>
 			</Tasks>
 		</System>
 		<Plc>
 			<Project GUID="{F88F7A59-9E7F-4523-9C0E-4BD9DABD5D28}" Name="Database_Code" PrjFilePath="Database_Code\Database_Code.plcproj" TmcFilePath="Database_Code\Database_Code.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{990AAE32-CD6B-8347-1FE4-EDB6117C5AE4}" TmcPath="Database_Code\Database_Code.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{63771D8F-8520-679E-D613-DF6C3168111C}" TmcPath="Database_Code\Database_Code.tmc">
 					<Name>Database_Code Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
-					<Vars VarGrpType="8" AreaNo="4">
-						<Name>PlcTask Retains</Name>
-						<Var>
-							<Name>MAIN.iSampleNr</Name>
-							<Type>INT</Type>
-							<InOut>7</InOut>
-						</Var>
-					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
 						<Var>
@@ -127,20 +119,20 @@
 							<Type>INT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.oMotorPosition</Name>
-							<Type>UDINT</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.oStartPosition</Name>
-							<Type>UDINT</Type>
-						</Var>
-						<Var>
 							<Name>MAIN.oEnableStart</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.oMotorReset</Name>
 							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.oMotorPosition</Name>
+							<Type>UDINT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.oStartPosition</Name>
+							<Type>UDINT</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.oMotorStartType</Name>
@@ -153,10 +145,6 @@
 							<Name>MAIN.iLoadCellValue</Name>
 							<Comment><![CDATA[inputs from sensor]]></Comment>
 							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.iLichtSluisValue1</Name>
-							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.iTempSensor1Value</Name>
@@ -179,11 +167,19 @@
 							<Type>UDINT</Type>
 						</Var>
 						<Var>
+							<Name>MAIN.iLichtSluisValue1</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>MAIN.iLichtSluisValue2</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.iCapacitiefValue</Name>
+							<Name>MAIN.iCapacitief1Value</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.iCapacitief2Value</Name>
 							<Type>INT</Type>
 						</Var>
 						<Var>
@@ -232,6 +228,13 @@
 							</OwnerB>
 						</OwnerA>
 					</UnrestoredVarLinks>
+					<UnrestoredVarLinks ImportTime="2025-05-16T11:40:42">
+						<OwnerA Name="InputDst" Prefix="TIPC^Database_Code^Database_Code Instance" Type="1">
+							<OwnerB Name="TIID^Device 3 (EtherCAT)^Term 6 (EK1100)^Term 7 (EL3074)">
+								<Link VarA="MAIN.iCapacitiefValue" TypeA="INT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000006}" VarB="AI Standard Channel 2^Value" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
 					<Contexts>
 						<Context>
 							<Id>0</Id>
@@ -240,7 +243,7 @@
 								<OTCID>#x02010030</OTCID>
 							</ManualConfig>
 							<Priority>20</Priority>
-							<CycleTime>10000000</CycleTime>
+							<CycleTime>1000000</CycleTime>
 						</Context>
 					</Contexts>
 					<TaskPouOids>
@@ -1298,7 +1301,8 @@ Bit1: Value smaller than Limit2]]></Comment>
 				<Link VarA="PlcTask Outputs^MAIN.oStartPosition" VarB="ENC Control^Set counter value"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 3 (EtherCAT)^Term 6 (EK1100)^Term 7 (EL3074)">
-				<Link VarA="PlcTask Inputs^MAIN.iCapacitiefValue" VarB="AI Standard Channel 2^Value"/>
+				<Link VarA="PlcTask Inputs^MAIN.iCapacitief1Value" VarB="AI Standard Channel 2^Value"/>
+				<Link VarA="PlcTask Inputs^MAIN.iCapacitief2Value" VarB="AI Standard Channel 3^Value"/>
 				<Link VarA="PlcTask Inputs^MAIN.iLoadCellValue" VarB="AI Standard Channel 1^Value"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 3 (EtherCAT)^Term 6 (EK1100)^Term 8 (EL5032)">

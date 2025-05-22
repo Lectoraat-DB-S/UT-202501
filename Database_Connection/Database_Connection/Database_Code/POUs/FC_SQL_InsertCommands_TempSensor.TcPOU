@@ -6,14 +6,17 @@ VAR_INPUT
     iSensorValue: STRING;
     iSampleNr: INT;
 	iSensorID: INT;
+	iMeasurementNr: INT;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[FC_SQL_InsertCommands_TempSensor := 'INSERT INTO [db_accessadmin].[TempSensor] (SensorValue, SampleNr, Time, SensorID) VALUES (';
+      <ST><![CDATA[FC_SQL_InsertCommands_TempSensor := 'INSERT INTO [db_accessadmin].[TempSensor] (SensorValue, SampleNr, Time, SensorID, MeasurementNr) VALUES (';
 FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_TempSensor, iSensorValue);
 FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_TempSensor, ', ');
 FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_TempSensor, INT_TO_STRING(iSampleNr));
 FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_TempSensor, ', GETDATE(), ');
 FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_TempSensor, INT_TO_STRING(iSensorID));
+FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_TempSensor, ', ');
+FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_TempSensor, INT_TO_STRING(iMeasurementNr));
 FC_SQL_InsertCommands_TempSensor := CONCAT(FC_SQL_InsertCommands_TempSensor, ');');]]></ST>
     </Implementation>
   </POU>

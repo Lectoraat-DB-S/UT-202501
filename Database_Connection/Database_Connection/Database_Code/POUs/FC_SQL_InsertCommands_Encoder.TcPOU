@@ -5,14 +5,18 @@
 VAR_INPUT
     iSensorValue: LREAL;
     iSampleNr: INT;
+	iMeasurementNr: INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[FC_SQL_InsertCommands_Encoder := 'INSERT INTO [db_accessadmin].[Encoder] (SensorValue, SampleNr, Time) VALUES (';
+      <ST><![CDATA[FC_SQL_InsertCommands_Encoder := 'INSERT INTO [db_accessadmin].[Encoder] (SensorValue, SampleNr, Time, MeasurementNr) VALUES (';
 FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, LREAL_TO_STRING(iSensorValue));
 FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, ', ');
 FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, INT_TO_STRING(iSampleNr));
-FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, ', GETDATE());');]]></ST>
+FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, ', GETDATE() ');
+FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, ', ');
+FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, INT_TO_STRING(iMeasurementNr));
+FC_SQL_InsertCommands_Encoder := CONCAT(FC_SQL_InsertCommands_Encoder, ');');]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
