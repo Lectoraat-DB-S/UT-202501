@@ -66,13 +66,14 @@ https://learn.microsoft.com/nl-nl/ssms/release-history#release-dates-and-build-n
    ![image](https://github.com/user-attachments/assets/772efe5d-19a5-4327-b006-900c34b5b29b) <br>
 3. open twincat XAE Shell 64-bit en klik op Git > Clone Repository: <br>
    ![image](https://github.com/user-attachments/assets/2c6351d9-d070-423c-b695-c165d03b9fd3) <br>
-4. vul de link samen met de aangemaakt map in en klik op OK: <br>
+4. vul de link samen met de aangemaakt map in en klik op Clone: <br>
    ![image](https://github.com/user-attachments/assets/a8705371-7156-432e-a9ae-633d11540bcb) <br>
 5. Klik op file > Open > Project/Solution en Selecteer de Database_Connection folder en op Database_connection.sln: <br>
    ![image](https://github.com/user-attachments/assets/e1341da3-3d98-4b2d-bc5c-680a2a18d76d) <br>
 6. solution is nu succesvol geopend. <br>   
 7. zet in de SQL Server management studio de database door de volgende stappen te doen. <br>
  7.1 Login in op en gebruikt SQL server authentication als authentication method <br>
+     ![image](https://github.com/user-attachments/assets/6a93a2ee-8cd9-4001-ac1b-fa8ff2ac343a) <br>
  7.2 Rechte muis klik op databases <br>
  7.3 Klik op New Database:<br>
    ![image](https://github.com/user-attachments/assets/a6dd6c1c-d2ae-4dc5-9eef-8d8e62505f75) <br>
@@ -115,3 +116,4 @@ of door in van deze twee knoppen te klikken(Groen is *Run Mode*, Blauw is *confi
 13. Selecteer de gekozen browser om de hmi hierin te openen: <br>
    ![image](https://github.com/user-attachments/assets/e6d5b4a8-3374-4fcd-8c47-e6e786f5faa1) <br>	 
 14. in de live view kan je instellingen invoeren en metingen uitvoeren die naar de database worden geschreven. <br>
+voor verdere uitleg van het programma en waar de data zich bevindt volg de gebruiksaanwijzing van het programma.
