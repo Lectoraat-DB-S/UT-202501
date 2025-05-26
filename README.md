@@ -12,8 +12,9 @@ AI-generated content may be incorrect., Picture
 
 
 ### Software
-Twincat is gebruikt om de software te schrijven voor de **PLC**. het programma is geprogrammeerd in **Structured Text**. Als Twincat in Run mode(![image](https://github.com/user-attachments/assets/295a928c-e540-48e3-ae08-55f0b2185e94)
-) wordt gezet is het programma op de plc gezet. om metingen uit te voeren wordt in de **Solution** het **HMI_Actuator** project geopent en hierin de actuator_view om dit in live view te zetten. hierin kan je nu instellingen invoeren en metingen uitvoeren.
+Twincat is gebruikt om de software te schrijven voor de **PLC**. het programma is geprogrammeerd in **Structured Text**. 
+Als Twincat in Run mode(![image](https://github.com/user-attachments/assets/295a928c-e540-48e3-ae08-55f0b2185e94)) wordt gezet is het programma op de plc gezet. 
+om metingen uit te voeren wordt in de **Solution** het **HMI_Actuator** project geopent en hierin de actuator_view om dit in live view te zetten. hierin kan je nu instellingen invoeren en metingen uitvoeren.
 
 
 ## Imports en versies
@@ -25,8 +26,12 @@ SQl Server Management studio 20
 
 ### Imports
 De volgende libraries zijn toegevoegd aan de twincat solution:
+
 ![image](https://github.com/user-attachments/assets/48139cae-06ba-42c3-ae01-b5a68a94a0e7)
+
+
 De volgende libraries zijn toegevoegd aan de HMI:
+
 ![image](https://github.com/user-attachments/assets/259ac83a-64d5-4052-99c3-b4707e22707b)
 
 
