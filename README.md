@@ -82,62 +82,27 @@ https://learn.microsoft.com/nl-nl/ssms/release-history#release-dates-and-build-n
  3.1  klik op new DB connection: <br>
    ![image](https://github.com/user-attachments/assets/0e093b66-f8a4-45c8-8217-f0af25ead18f)
    
- 3.2 vul de correcte gegevens in, bij server je eigen server naam van de SQL server management studio en bij database de naam van jouw database. om in te loggen is *user*  de naam en wachtwoord:
-   ![image](https://github.com/user-attachments/assets/07b52374-6e03-4c5e-b2fa-8017e3db2bae)
-   
-    hier kan je de gegevens vinden om in te vullen:
-   ![image](https://github.com/user-attachments/assets/db25447a-95b2-4b51-b61d-8b624bae956e)
-   
- 3.3 klik op check:
-   ![image](https://github.com/user-attachments/assets/7641ad87-4858-487b-a8b1-32be7a39e245)
-   
- 3.4 klik op SQL Query editor knop:
-   ![image](https://github.com/user-attachments/assets/faf67c30-3ef4-487f-a9b8-798870a20446)
-   
- 3.5 refresh de database:
-   ![image](https://github.com/user-attachments/assets/f89fda4f-c1f6-42d1-8ee3-37d9968bff1c)
-   
- 3.6 als de database verschijnt is er correct verbonden met de plc en database
-5. Doe twincat in *run mode* of *config mode* dit kan door de volgende commands in de command window in twincat te typen:
-Enter the command doas TcSysExe.exe --config in the console to put TwinCAT into Config mode.
-Enter the command doas TcSysExe.exe --run in the console to put TwinCAT into Run mode.
-of door in van deze twee knoppen te klikken(Groen is *Run Mode*, Blauw is *config mode* ):
-  ![image](https://github.com/user-attachments/assets/f97ed723-4457-4e52-b5dd-7c58a7bc715a)
-  
-6. Zet twincat in *Run mode*  
-7. Ga naar de **HMI_Actuator** project in de solution en open de *Actuator_view*
-   ![image](https://github.com/user-attachments/assets/9d63bd20-e1e6-46aa-9994-84a504c2f393)
-   
-9. Open de live view:
-   ![image](https://github.com/user-attachments/assets/3444464c-4dcf-46b2-afa2-60208baed08a)
-   
-11. Selecteer de gekozen browser om de hmi hierin te openen:
-   ![image](https://github.com/user-attachments/assets/e6d5b4a8-3374-4fcd-8c47-e6e786f5faa1)
-	 
-13. in de live view kan je instellingen invoeren en metingen uitvoeren die naar de database worden geschreven.
-
-   
-# template-repository 🦾
-codering
-Tijdens het opleveren van code zien we graag dat er een README bestand wordt meegeleverd, dit maakt het gemakkelijker voor een ander om met jouw code verder te gaan of er gebruik van te maken.
-Deze README beschrijft het project, wat je nodig hebt om de code te gebruiken en hoe je de code kunt gebruiken. Uiteraard kan dit ietsje afwijken aan de hand van welke taal je hebt geprogrammeerd, maar blijf het liefst zo dicht bij mogelijk bij deze standaarden.
-
-De volgende dingen zien we graag in een README:
-- beschrijving: graag zien we een korte beschrijving van je project. dus een korte uitleg wat je code doet als je het gebruikt.
-- imports en versies: graag zien we een lijst met alle imports, packages, software, etc die je hebt gebruikt met de versies. Denk hierbij aan je python versie, dat je iets met "pip install" hebt geinstalleerd of dat je ubuntu 23.04 als operating system hebt gebruikt (dus ook welke versie je hebt geinstalleerd). (test dus ook je code op een andere laptop!!! hierdoor weet je zeker dat je alles genoteerd hebt)
-- architectuur: graag zien we een korte beschrijving van de architectuur van je project. welke bestanden hebben welke bestanden nodig en wat kun je in welk bestand vinden.
-- reference: graag zien we een lijst met welke code je niet zelf hebt gemaakt of gebaseerd hebt op een ander zijn code met daarbij een link naar de originele code en een datum waarop je die code hebt geraadpleegd. Dit zorgt ervoor dat de juiste mensen credit krijgen. (let op, ook als je een functie ergens vandaan haalt en aanpast hoor je nog steeds te zeggen wie daar credit voor krijgt).
-- usage: op het moment dat je extra hardware zoals een robot gebruikt is het fijn als er ook iets uitgelegd wordt over hoe je alles hebt aangesloten en opgestart. Misschien is het wel van belang dat je eerst het programma op de cobot start voordat je de python code op je laptop start.
-
-- commenting: in code is het vrij normaal om comments te gebruiken om je code duidelijker te maken. Graag zien we dan ook dat dit gedaan wordt.
-	- functie beschrijving: Liefst zien we dat er per functie met een comment uitgelegd wordt hoe de functie werkt en waarvoor ie bedoeld wordt (dit kan vaak in 1 zin). mocht de functie lang zijn dan zien we ook graag comments tussendoor.
-	- Bestand beschrijving: Liefst zien we bovenaan elk bestand dat er een korte beschrijving staat van welke functies er in het bestand geprogrammeerd zijn.
-	- Variabele beschrijving:
-
-Een ReadMe schrijf je in Markdown. in de volgende link vind je wat voorbeelden over hoe je deze kunt stylen:
-https://github.com/lifeparticle/Markdown-Cheatsheet
-
-mocht je wat inspiratie willen kun je op de github hieronder even kijken.
-https://github.com/matiassingers/awesome-readme
-
-https://integrity.mit.edu/handbook/academic-integrity-handbook
+ 3.2 vul de correcte gegevens in, bij server je eigen server naam van de SQL server management studio en bij database de naam van jouw database. om in te loggen is *user*  de naam en wachtwoord: <br>
+   ![image](https://github.com/user-attachments/assets/07b52374-6e03-4c5e-b2fa-8017e3db2bae) <br>
+    hier kan je de gegevens vinden om in te vullen: <br>
+   ![image](https://github.com/user-attachments/assets/db25447a-95b2-4b51-b61d-8b624bae956e) <br>
+ 3.3 klik op check: <br>
+   ![image](https://github.com/user-attachments/assets/7641ad87-4858-487b-a8b1-32be7a39e245) <br>
+ 3.4 klik op SQL Query editor knop: <br>
+   ![image](https://github.com/user-attachments/assets/faf67c30-3ef4-487f-a9b8-798870a20446) <br>
+ 3.5 refresh de database: <br>
+   ![image](https://github.com/user-attachments/assets/f89fda4f-c1f6-42d1-8ee3-37d9968bff1c) <br>
+ 3.6 als de database verschijnt is er correct verbonden met de plc en database <br>
+5. Doe twincat in *run mode* of *config mode* dit kan door de volgende commands in de command window in twincat te typen: <br>
+Enter the command doas TcSysExe.exe --config in the console to put TwinCAT into Config mode. <br>
+Enter the command doas TcSysExe.exe --run in the console to put TwinCAT into Run mode. <br>
+of door in van deze twee knoppen te klikken(Groen is *Run Mode*, Blauw is *config mode* ): <br>
+  ![image](https://github.com/user-attachments/assets/f97ed723-4457-4e52-b5dd-7c58a7bc715a) <br>
+6. Zet twincat in *Run mode*  <br>
+7. Ga naar de **HMI_Actuator** project in de solution en open de *Actuator_view* <br>
+   ![image](https://github.com/user-attachments/assets/9d63bd20-e1e6-46aa-9994-84a504c2f393) <br>
+9. Open de live view: <br>
+   ![image](https://github.com/user-attachments/assets/3444464c-4dcf-46b2-afa2-60208baed08a) <br>
+10. Selecteer de gekozen browser om de hmi hierin te openen: <br>
+   ![image](https://github.com/user-attachments/assets/e6d5b4a8-3374-4fcd-8c47-e6e786f5faa1) <br>	 
+11. in de live view kan je instellingen invoeren en metingen uitvoeren die naar de database worden geschreven. <br>
