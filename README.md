@@ -13,7 +13,7 @@ De EK1100 module is gekoppeld op de volgende manier aan de andere modules:
 
 ### Software
 Twincat is gebruikt om de software te schrijven voor de **PLC**. het programma is geprogrammeerd in **Structured Text**.<br>
-Als Twincat in Run mode(![image](https://github.com/user-attachments/assets/9d0f8dd2-c0be-4e2c-9367-fac5449f06c1) wordt gezet is het programma op de plc gezet. 
+Als Twincat in Run mode(![image](https://github.com/user-attachments/assets/9d0f8dd2-c0be-4e2c-9367-fac5449f06c1)) wordt gezet is het programma op de plc gezet. 
 om metingen uit te voeren wordt in de **Solution** het **HMI_Actuator** project geopent en hierin de actuator_view om dit in live view te zetten. hierin kan je nu instellingen invoeren en metingen uitvoeren.
 
 
