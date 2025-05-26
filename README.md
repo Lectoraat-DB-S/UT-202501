@@ -35,10 +35,9 @@ De volgende libraries zijn toegevoegd aan de HMI: <br>
 
 ### Drivers
 voor de EtherCAT communcicatie is in twincat de realtime etherCAT driver geinstalleerd. dit kan op de volgende manier.
-in de Twincat 3 Shell
+in de Twincat 3 Shell en selecteer de correcte poort waarop de plc is verbonden en installeer de driver.
 ![image](https://github.com/user-attachments/assets/fb88b882-ae06-4654-b26e-18970ee53bff)
 
-en selecteer de correcte poort waarop de plc is verbonden en installeer de driver.
 
 ## Architectuur
 Main:
