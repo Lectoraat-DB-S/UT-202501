@@ -61,48 +61,57 @@ SQL Server management studio om de database te hosten op je lokale pc. hiervoor 
 https://learn.microsoft.com/nl-nl/ssms/release-history#release-dates-and-build-numbers
 
 
-1. Clone de repository naar je gekozen locatie.
-2. zet in de SQL Server management studio de database door de volgende stappen te doen. <br>
- 2.1 Login in op en gebruikt SQL server authentication als authentication method <br>
- 2.2 Rechte muis klik op databases <br>
- 2.3 Klik op New Database:<br>
+1. Maak een map aan waarin je het project wil bewaren. <br>
+2. Kopieer de github repository link: <br>
+   ![image](https://github.com/user-attachments/assets/772efe5d-19a5-4327-b006-900c34b5b29b) <br>
+3. open twincat XAE Shell 64-bit en klik op Git > Clone Repository: <br>
+   ![image](https://github.com/user-attachments/assets/2c6351d9-d070-423c-b695-c165d03b9fd3) <br>
+4. vul de link samen met de aangemaakt map in en klik op OK: <br>
+   ![image](https://github.com/user-attachments/assets/a8705371-7156-432e-a9ae-633d11540bcb) <br>
+5. Klik op file > Open > Project/Solution en Selecteer de Database_Connection folder en op Database_connection.sln: <br>
+   ![image](https://github.com/user-attachments/assets/e1341da3-3d98-4b2d-bc5c-680a2a18d76d) <br>
+6. solution is nu succesvol geopend. <br>   
+7. zet in de SQL Server management studio de database door de volgende stappen te doen. <br>
+ 7.1 Login in op en gebruikt SQL server authentication als authentication method <br>
+ 7.2 Rechte muis klik op databases <br>
+ 7.3 Klik op New Database:<br>
    ![image](https://github.com/user-attachments/assets/a6dd6c1c-d2ae-4dc5-9eef-8d8e62505f75) <br>
- 2.4 Maak een database aan met een zelfgekozen naam: <br>
+ 7.4 Maak een database aan met een zelfgekozen naam: <br>
    ![image](https://github.com/user-attachments/assets/d01f722b-abb2-45e1-9561-4cc78c5b9c0d) <br>
- 2.5 Klik op OK <br>
- 2.6 de Database zou nu moeten verschijnen: <br>
+ 7.5 Klik op OK <br>
+ 7.6 de Database zou nu moeten verschijnen: <br>
    ![image](https://github.com/user-attachments/assets/18bd853a-ee42-4f2a-83fd-6848b00ea61f) <br>
- 2.7 Klik op restore database: <br>
+ 7.7 Klik op restore database: <br>
    ![image](https://github.com/user-attachments/assets/a6dd6c1c-d2ae-4dc5-9eef-8d8e62505f75) <br>
- 2.8 klik bij source op device en *add* de .bak file: <br>
+ 7.8 klik bij source op device en *add* de .bak file: <br>
    ![image](https://github.com/user-attachments/assets/c3534333-7bb2-4742-9a90-8688082d1a79) <br>
- 2.9 de restore moet eruit zien als hierboven klik daarna op OK. <br>
- 2.10 de database is nu overgenomen. <br>            
-3. Open de TF6240 Database server <br>
- 3.1  klik op new DB connection: <br>
+ 7.9 de restore moet eruit zien als hierboven klik daarna op OK. <br>
+ 7.10 de database is nu overgenomen. <br>            
+8. Open de TF6240 Database server <br>
+ 8.1  klik op new DB connection: <br>
    ![image](https://github.com/user-attachments/assets/0e093b66-f8a4-45c8-8217-f0af25ead18f)
    
- 3.2 vul de correcte gegevens in, bij server je eigen server naam van de SQL server management studio en bij database de naam van jouw database. om in te loggen is *user*  de naam en wachtwoord: <br>
+ 8.2 vul de correcte gegevens in, bij server je eigen server naam van de SQL server management studio en bij database de naam van jouw database. om in te loggen is *user*  de naam en wachtwoord: <br>
    ![image](https://github.com/user-attachments/assets/07b52374-6e03-4c5e-b2fa-8017e3db2bae) <br>
     hier kan je de gegevens vinden om in te vullen: <br>
    ![image](https://github.com/user-attachments/assets/db25447a-95b2-4b51-b61d-8b624bae956e) <br>
- 3.3 klik op check: <br>
+ 8.3 klik op check: <br>
    ![image](https://github.com/user-attachments/assets/7641ad87-4858-487b-a8b1-32be7a39e245) <br>
- 3.4 klik op SQL Query editor knop: <br>
+ 8.4 klik op SQL Query editor knop: <br>
    ![image](https://github.com/user-attachments/assets/faf67c30-3ef4-487f-a9b8-798870a20446) <br>
- 3.5 refresh de database: <br>
+ 8.5 refresh de database: <br>
    ![image](https://github.com/user-attachments/assets/f89fda4f-c1f6-42d1-8ee3-37d9968bff1c) <br>
- 3.6 als de database verschijnt is er correct verbonden met de plc en database <br>
-5. Doe twincat in *run mode* of *config mode* dit kan door de volgende commands in de command window in twincat te typen: <br>
+ 8.6 als de database verschijnt is er correct verbonden met de plc en database <br>
+9. Doe twincat in *run mode* of *config mode* dit kan door de volgende commands in de command window in twincat te typen: <br>
 Enter the command doas TcSysExe.exe --config in the console to put TwinCAT into Config mode. <br>
 Enter the command doas TcSysExe.exe --run in the console to put TwinCAT into Run mode. <br>
 of door in van deze twee knoppen te klikken(Groen is *Run Mode*, Blauw is *config mode* ): <br>
   ![image](https://github.com/user-attachments/assets/f97ed723-4457-4e52-b5dd-7c58a7bc715a) <br>
-6. Zet twincat in *Run mode*  <br>
-7. Ga naar de **HMI_Actuator** project in de solution en open de *Actuator_view* <br>
+10. Zet twincat in *Run mode*  <br>
+11. Ga naar de **HMI_Actuator** project in de solution en open de *Actuator_view* <br>
    ![image](https://github.com/user-attachments/assets/9d63bd20-e1e6-46aa-9994-84a504c2f393) <br>
-9. Open de live view: <br>
+12. Open de live view: <br>
    ![image](https://github.com/user-attachments/assets/3444464c-4dcf-46b2-afa2-60208baed08a) <br>
-10. Selecteer de gekozen browser om de hmi hierin te openen: <br>
+13. Selecteer de gekozen browser om de hmi hierin te openen: <br>
    ![image](https://github.com/user-attachments/assets/e6d5b4a8-3374-4fcd-8c47-e6e786f5faa1) <br>	 
-11. in de live view kan je instellingen invoeren en metingen uitvoeren die naar de database worden geschreven. <br>
+14. in de live view kan je instellingen invoeren en metingen uitvoeren die naar de database worden geschreven. <br>
