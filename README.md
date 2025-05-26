@@ -51,8 +51,11 @@ de bovengenoemde libraries
 
 ## References
 Voor verbinding naar de database is gebruik gemaakt van de volgende tutorial: https://twincontrols.com/community/twincat-knowledgebase/read-write-ms-sql-database-in-twincat-3/
+
 de communicatie tussen de plc en de database verloopt via de tc3_database library en de TF6240 database server van beckhoff.
+
 De buffer voor data logging is gebaseerd op: https://infosys.beckhoff.com/english.php?content=../content/1033/tf6420_tc3_database_server/6263315851.html&id=
+
 voor verbinding maken tussen een scope en de HMI is de er gebruik gemaakt van de volgende tutorial: https://www.hemelix.com/scada-hmi/twincat-hmi/twincat-hmi-scope/
 
 ## Usage
