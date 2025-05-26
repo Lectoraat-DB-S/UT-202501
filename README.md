@@ -20,11 +20,9 @@ om metingen uit te voeren wordt in de **Solution** het **HMI_Actuator** project 
 ## Imports en versies
 Voor dit project zijn een heel aantal extra softwareonderdelen geïnstalleerd. 
 Dit is getest op:  
-Twincat 3 XAE Shell 64-bit Build 4026.14 
-
-TF6240 Database server
-
-SQl Server Management studio 20
+Twincat 3 XAE Shell 64-bit Build 4026.14 <br>
+TF6240 Database server <br>
+SQl Server Management studio 20 <br>
 
 ### Imports
 De volgende libraries zijn toegevoegd aan de twincat solution:
