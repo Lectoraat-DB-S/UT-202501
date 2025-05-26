@@ -19,19 +19,91 @@ Twincat is gebruikt om de software te schrijven voor de **PLC**. het programma i
 ## Imports en versies
 Voor dit project zijn een heel aantal extra softwareonderdelen geïnstalleerd. 
 Dit is getest op:  
-Twincat XAE Shell 64-bit Build 4026.14  
+Twincat 3 XAE Shell 64-bit Build 4026.14 
+TF6240 Database server
+SQl Server Management studio 20
+
+### Imports
+De volgende libraries zijn toegevoegd aan de twincat solution:
+![image](https://github.com/user-attachments/assets/48139cae-06ba-42c3-ae01-b5a68a94a0e7)
+De volgende libraries zijn toegevoegd aan de HMI:
+![image](https://github.com/user-attachments/assets/259ac83a-64d5-4052-99c3-b4707e22707b)
 
 
+### Drivers
+voor de EtherCAT communcicatie is in twincat de realtime etherCAT driver geinstalleerd. dit kan op de volgende manier.
+in de Twincat 3 Shell
+![image](https://github.com/user-attachments/assets/fb88b882-ae06-4654-b26e-18970ee53bff)
+
+en selecteer de correcte poort waarop de plc is verbonden en installeer de driver.
+
+## Architectuur
+Main:
+de bovengenoemde libraries 
+    
+HMI:  
+de bovengenoemde libraries
+
+## References
+Voor verbinding naar de database is gebruik gemaakt van de volgende tutorial: https://twincontrols.com/community/twincat-knowledgebase/read-write-ms-sql-database-in-twincat-3/
+de communicatie tussen de plc en de database verloopt via de tc3_database library en de TF6240 database server van beckhoff.
+De buffer voor data logging is gebaseerd op: https://infosys.beckhoff.com/english.php?content=../content/1033/tf6420_tc3_database_server/6263315851.html&id=
+voor verbinding maken tussen een scope en de HMI is de er gebruik gemaakt van de volgende tutorial: https://www.hemelix.com/scada-hmi/twincat-hmi/twincat-hmi-scope/
+
+## Usage
+voordat je het programma kan runnnen moet de volgende software worden geïnstalleerd:
+Twincat package manager om de twincat XAE shell, database server en hmi modules te installeren
+https://www.beckhoff.com/en-en/products/automation/twincat/twincat-3-build-4026/
+SQL Server management studio om de database te hosten op je lokale pc. hiervoor is versie 20.2.1 gebruikt.
+https://learn.microsoft.com/nl-nl/ssms/release-history#release-dates-and-build-numbers
 
 
+1. Clone de repository en naar je gekozen locatie
+2. zet in de SQL Server management studio de database door de volgende stappen te doen
+ 2.1 Login in op en gebruikt SQL server authentication als authentication method
+ 2.2 Rechte muis klik op databases
+ 2.3 Klik op New Database:
+   ![image](https://github.com/user-attachments/assets/a6dd6c1c-d2ae-4dc5-9eef-8d8e62505f75)
+ 2.4 Maak een database aan met een zelfgekozen naam:
+   ![image](https://github.com/user-attachments/assets/d01f722b-abb2-45e1-9561-4cc78c5b9c0d)
+ 2.5 Klik op OK
+ 2.6 de Database zou nu moeten verschijnen:
+   ![image](https://github.com/user-attachments/assets/18bd853a-ee42-4f2a-83fd-6848b00ea61f)    
+ 2.7 Klik op restore database :
+   ![image](https://github.com/user-attachments/assets/a6dd6c1c-d2ae-4dc5-9eef-8d8e62505f75)
+ 2.8 klik bij source op device en *add* de .bak file:
+   ![image](https://github.com/user-attachments/assets/c3534333-7bb2-4742-9a90-8688082d1a79)
+ 2.9 de restore moet eruit zien als hierboven klik daarna op OK.
+ 2.10 de database is nu overgenomen             
+3. Open de TF6240 Database server
+ 3.1  klik op new DB connection:
+   ![image](https://github.com/user-attachments/assets/0e093b66-f8a4-45c8-8217-f0af25ead18f)
+ 3.2 vul de correcte gegevens in, bij server je eigen server naam van de SQL server management studio en bij database de naam van jouw database. om in te loggen is *user*  de naam en wachtwoord:
+   ![image](https://github.com/user-attachments/assets/07b52374-6e03-4c5e-b2fa-8017e3db2bae)
+    hier kan je de gegevens vinden om in te vullen:
+   ![image](https://github.com/user-attachments/assets/db25447a-95b2-4b51-b61d-8b624bae956e)		
+ 3.3 klik op check:
+   ![image](https://github.com/user-attachments/assets/7641ad87-4858-487b-a8b1-32be7a39e245)
+ 3.4 klik op SQL Query editor knop:
+   ![image](https://github.com/user-attachments/assets/faf67c30-3ef4-487f-a9b8-798870a20446)
+ 3.5 refresh de database:
+   ![image](https://github.com/user-attachments/assets/f89fda4f-c1f6-42d1-8ee3-37d9968bff1c)
+ 3.6 als de database verschijnt is er correct verbonden met de plc en database
+4. Doe twincat in *run mode* of *config mode* dit kan door de volgende commands in de command window in twincat te typen:
+Enter the command doas TcSysExe.exe --config in the console to put TwinCAT into Config mode.
+Enter the command doas TcSysExe.exe --run in the console to put TwinCAT into Run mode.
+of door in van deze twee knoppen te klikken(Groen is *Run Mode*, Blauw is *config mode* ):
+  ![image](https://github.com/user-attachments/assets/f97ed723-4457-4e52-b5dd-7c58a7bc715a)
+5. Zet twincat in *Run mode*  
+6. Ga naar de **HMI_Actuator** project in de solution en open de *Actuator_view*
+   ![image](https://github.com/user-attachments/assets/9d63bd20-e1e6-46aa-9994-84a504c2f393) 
+7. Open de live view:
+   ![image](https://github.com/user-attachments/assets/3444464c-4dcf-46b2-afa2-60208baed08a)
+8. Selecteer de gekozen browser om de hmi hierin te openen:
+   ![image](https://github.com/user-attachments/assets/e6d5b4a8-3374-4fcd-8c47-e6e786f5faa1)	 
+9. in de live view kan je instellingen invoeren en metingen uitvoeren die naar de database worden geschreven.
 
-
-
-
-
-
-
-
+   
 # template-repository 🦾
 codering
 Tijdens het opleveren van code zien we graag dat er een README bestand wordt meegeleverd, dit maakt het gemakkelijker voor een ander om met jouw code verder te gaan of er gebruik van te maken.
