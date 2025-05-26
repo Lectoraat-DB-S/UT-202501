@@ -40,7 +40,7 @@ in de Twincat 3 Shell en selecteer de correcte poort waarop de plc is verbonden 
 
 
 ## Architectuur
-Main:
+Main: <br> 
 de bovengenoemde libraries 
     
 HMI:  
