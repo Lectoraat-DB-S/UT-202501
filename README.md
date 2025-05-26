@@ -57,12 +57,12 @@ voordat je het programma kan runnnen moet de volgende software worden geïnstall
 Twincat package manager om de twincat XAE shell, database server en hmi modules te installeren
 https://www.beckhoff.com/en-en/products/automation/twincat/twincat-3-build-4026/
 
-SQL Server management studio om de database te hosten op je lokale pc. hiervoor is versie 20.2.1 gebruikt.
+SQL Server management studio om de database te hosten op je lokale pc. hiervoor is versie **20.2.1** gebruikt.
 https://learn.microsoft.com/nl-nl/ssms/release-history#release-dates-and-build-numbers
 
 
-1. Clone de repository en naar je gekozen locatie
-2. zet in de SQL Server management studio de database door de volgende stappen te doen
+1. Clone de repository naar je gekozen locatie.
+2. zet in de SQL Server management studio de database door de volgende stappen te doen. <br>
  2.1 Login in op en gebruikt SQL server authentication als authentication method <br>
  2.2 Rechte muis klik op databases <br>
  2.3 Klik op New Database:<br>
