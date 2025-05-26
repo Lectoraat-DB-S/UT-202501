@@ -63,29 +63,23 @@ https://learn.microsoft.com/nl-nl/ssms/release-history#release-dates-and-build-n
 
 1. Clone de repository en naar je gekozen locatie
 2. zet in de SQL Server management studio de database door de volgende stappen te doen
- 2.1 Login in op en gebruikt SQL server authentication als authentication method
- 2.2 Rechte muis klik op databases
- 2.3 Klik op New Database:
-   ![image](https://github.com/user-attachments/assets/a6dd6c1c-d2ae-4dc5-9eef-8d8e62505f75)
- 2.4 Maak een database aan met een zelfgekozen naam:
-   ![image](https://github.com/user-attachments/assets/d01f722b-abb2-45e1-9561-4cc78c5b9c0d)
-   
- 2.5 Klik op OK
- 2.6 de Database zou nu moeten verschijnen:
-
-   ![image](https://github.com/user-attachments/assets/18bd853a-ee42-4f2a-83fd-6848b00ea61f) 
-   
- 2.7 Klik op restore database :
-   
-   ![image](https://github.com/user-attachments/assets/a6dd6c1c-d2ae-4dc5-9eef-8d8e62505f75)
-   
- 2.8 klik bij source op device en *add* de .bak file:
-   ![image](https://github.com/user-attachments/assets/c3534333-7bb2-4742-9a90-8688082d1a79)
-   
- 2.9 de restore moet eruit zien als hierboven klik daarna op OK.
- 2.10 de database is nu overgenomen             
-4. Open de TF6240 Database server
- 3.1  klik op new DB connection:
+ 2.1 Login in op en gebruikt SQL server authentication als authentication method <br>
+ 2.2 Rechte muis klik op databases <br>
+ 2.3 Klik op New Database:<br>
+   ![image](https://github.com/user-attachments/assets/a6dd6c1c-d2ae-4dc5-9eef-8d8e62505f75) <br>
+ 2.4 Maak een database aan met een zelfgekozen naam: <br>
+   ![image](https://github.com/user-attachments/assets/d01f722b-abb2-45e1-9561-4cc78c5b9c0d) <br>
+ 2.5 Klik op OK <br>
+ 2.6 de Database zou nu moeten verschijnen: <br>
+   ![image](https://github.com/user-attachments/assets/18bd853a-ee42-4f2a-83fd-6848b00ea61f) <br>
+ 2.7 Klik op restore database: <br>
+   ![image](https://github.com/user-attachments/assets/a6dd6c1c-d2ae-4dc5-9eef-8d8e62505f75) <br>
+ 2.8 klik bij source op device en *add* de .bak file: <br>
+   ![image](https://github.com/user-attachments/assets/c3534333-7bb2-4742-9a90-8688082d1a79) <br>
+ 2.9 de restore moet eruit zien als hierboven klik daarna op OK. <br>
+ 2.10 de database is nu overgenomen. <br>            
+3. Open de TF6240 Database server <br>
+ 3.1  klik op new DB connection: <br>
    ![image](https://github.com/user-attachments/assets/0e093b66-f8a4-45c8-8217-f0af25ead18f)
    
  3.2 vul de correcte gegevens in, bij server je eigen server naam van de SQL server management studio en bij database de naam van jouw database. om in te loggen is *user*  de naam en wachtwoord:
