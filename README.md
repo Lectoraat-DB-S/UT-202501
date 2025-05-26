@@ -25,14 +25,12 @@ TF6240 Database server <br>
 SQl Server Management studio 20 <br>
 
 ### Imports
-De volgende libraries zijn toegevoegd aan de twincat solution:
+De volgende libraries zijn toegevoegd aan de twincat solution: <br>
+![image](https://github.com/user-attachments/assets/48139cae-06ba-42c3-ae01-b5a68a94a0e7) <br>
 
-![image](https://github.com/user-attachments/assets/48139cae-06ba-42c3-ae01-b5a68a94a0e7)
 
-
-De volgende libraries zijn toegevoegd aan de HMI:
-
-![image](https://github.com/user-attachments/assets/259ac83a-64d5-4052-99c3-b4707e22707b)
+De volgende libraries zijn toegevoegd aan de HMI: <br>
+![image](https://github.com/user-attachments/assets/259ac83a-64d5-4052-99c3-b4707e22707b) <br>
 
 
 ### Drivers
@@ -44,7 +42,6 @@ en selecteer de correcte poort waarop de plc is verbonden en installeer de drive
 
 ## Architectuur
 Main:
-
 de bovengenoemde libraries 
     
 HMI:  
