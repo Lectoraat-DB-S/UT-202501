@@ -44,6 +44,7 @@ en selecteer de correcte poort waarop de plc is verbonden en installeer de drive
 
 ## Architectuur
 Main:
+
 de bovengenoemde libraries 
     
 HMI:  
@@ -62,6 +63,7 @@ voor verbinding maken tussen een scope en de HMI is de er gebruik gemaakt van de
 voordat je het programma kan runnnen moet de volgende software worden geïnstalleerd:
 Twincat package manager om de twincat XAE shell, database server en hmi modules te installeren
 https://www.beckhoff.com/en-en/products/automation/twincat/twincat-3-build-4026/
+
 SQL Server management studio om de database te hosten op je lokale pc. hiervoor is versie 20.2.1 gebruikt.
 https://learn.microsoft.com/nl-nl/ssms/release-history#release-dates-and-build-numbers
 
