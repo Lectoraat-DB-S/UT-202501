@@ -12,8 +12,7 @@ AI-generated content may be incorrect., Picture
 
 
 ### Software
-Twincat is gebruikt om de software te schrijven voor de **PLC**. het programma is geprogrammeerd in **Structured Text**.
-
+Twincat is gebruikt om de software te schrijven voor de **PLC**. het programma is geprogrammeerd in **Structured Text**.<br>
 Als Twincat in Run mode(![image](https://github.com/user-attachments/assets/295a928c-e540-48e3-ae08-55f0b2185e94)) wordt gezet is het programma op de plc gezet. 
 om metingen uit te voeren wordt in de **Solution** het **HMI_Actuator** project geopent en hierin de actuator_view om dit in live view te zetten. hierin kan je nu instellingen invoeren en metingen uitvoeren.
 
