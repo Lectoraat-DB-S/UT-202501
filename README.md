@@ -1,3 +1,37 @@
+# README
+
+## Beschrijving
+Dit project bevat de code om een meetopstelling automatisch te laten bewegen en de meetgegevens op te slaan in een database. de meetopstelling bevat een sensorblok die naar een gekozen hoeveelheid graden wordt uitgeweken op basis van de HMI en weer terug naar nul punt gaat wanneer een meting wordt uitgevoerd en opgeslagen in een database.
+
+### Hardware
+Voor deze realisatie is gebruik gemaakt van een  Beckhoff CX5130 PLC die de data ontvangt van de EK1100 module en dit doorstuurt naar de laptop.
+De EK1100 module is gekoppeld op de volgende manier aan de andere modules:
+A diagram of a device
+
+AI-generated content may be incorrect., Picture
+
+
+### Software
+Twincat is gebruikt om de software te schrijven voor de **PLC**. het programma is geprogrammeerd in **Structured Text**. Als Twincat in Run mode(![image](https://github.com/user-attachments/assets/295a928c-e540-48e3-ae08-55f0b2185e94)
+) wordt gezet is het programma op de plc gezet. om metingen uit te voeren wordt in de **Solution** het **HMI_Actuator** project geopent en hierin de actuator_view om dit in live view te zetten. hierin kan je nu instellingen invoeren en metingen uitvoeren.
+
+
+## Imports en versies
+Voor dit project zijn een heel aantal extra softwareonderdelen geïnstalleerd. 
+Dit is getest op:  
+Twincat XAE Shell 64-bit Build 4026.14  
+
+
+
+
+
+
+
+
+
+
+
+
 # template-repository 🦾
 codering
 Tijdens het opleveren van code zien we graag dat er een README bestand wordt meegeleverd, dit maakt het gemakkelijker voor een ander om met jouw code verder te gaan of er gebruik van te maken.
