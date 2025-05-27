@@ -3,7 +3,15 @@
   <POU Name="MAIN" Id="{4ef234f8-6ebd-4fcd-beba-a435a8463d67}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR CONSTANT
-	BufferSampleSize : INT := 999;
+		PositiveDegrees : REAL := 0.1; 
+		DifferenceDegrees : REAL := 0.1; 
+		UpperBoundDegrees : INT := 9;
+		LowerBoundDegrees : INT := -9;
+		SlowestMotorSpeed : INT := 100;
+		FastestMotorSpeed : INT := 1500;
+		DefaultMotorSpeed : INT := 500;
+		ConvertToSec : INT := 1000;
+		InvertDegrees : INT := -1;
 END_VAR
 
 
@@ -34,9 +42,7 @@ VAR
 	fbBufferManager: FB_BufferManager;
 	//sample control
 	SampleDone : BOOL; 
-	SampleCounter : INT;
 	SampleTrigger: BOOL;
-	SamplingRate_Hz : INT := 1000;
 	InsertingDone : BOOL;
 	// INSERT state machine control
 	TempInsert: INT ;
@@ -165,7 +171,7 @@ CASE Homing OF
     oEnableStart := TRUE;
     oEnableStart := FALSE;
     oMotorEnable := TRUE;
-    oMotorVelocity := 500;
+    oMotorVelocity := DefaultMotorSpeed;
 	HomingDelayTimer(PT := tHomingInterval);
 	HomingStartTimer(PT := tHomingStartInterval);
     Homing := 1;
@@ -209,14 +215,14 @@ ELSE
 	
 	//HMI Controls
 IF bConfirm AND HomingDone THEN
-		TijdConvertUitwijking := INT_TO_TIME(iTijd) * 1000; //set to seconds
-		TijdConvertMeting := INT_TO_TIME(iTijdMeting) * 1000; //set to seconds
-		TijdConvertSample := INT_TO_TIME(iTijdSample) * 1000; //set to seconds
-		IF iEncoderMotor > 9 OR iEncoderMotor < -9 THEN
+		TijdConvertUitwijking := INT_TO_TIME(iTijd) * ConvertToSec; //set to seconds
+		TijdConvertMeting := INT_TO_TIME(iTijdMeting) * ConvertToSec; //set to seconds
+		TijdConvertSample := INT_TO_TIME(iTijdSample) * ConvertToSec; //set to seconds
+		IF iEncoderMotor > UpperBoundDegrees OR iEncoderMotor < LowerBoundDegrees THEN
 		iEncoderMotor := 0.0;
 		END_IF
-		IF iMotorSpeed < 100 OR iMotorSpeed > 4000 THEN
-			iMotorSpeed := 500;
+		IF iMotorSpeed < SlowestMotorSpeed OR iMotorSpeed > FastestMotorSpeed THEN
+			iMotorSpeed := DefaultMotorSpeed;
 		END_IF
 		bStartEnabled := TRUE;
 		//reset state for next measurement
@@ -293,7 +299,7 @@ IF bStart AND NOT bStop THEN
 		 IF tInsertTimer.Q THEN
 		 	SampleDone := TRUE; //start insert
 			
-            IF iEncoderMotor > 0.1 THEN
+            IF iEncoderMotor > PositiveDegrees THEN
                 oMotorPosition := MotorLeftEdge; 
             ELSE
                 oMotorPosition := MotorRightEdge;
@@ -305,7 +311,7 @@ IF bStart AND NOT bStop THEN
 		END_IF
 		
       2: //move to chosen degrees 
-        IF ABS(iEncoderDegrees - iEncoderMotor) < 0.1 THEN
+        IF ABS(iEncoderDegrees - iEncoderMotor) < DifferenceDegrees THEN
     	    oMotorExecute := FALSE; //stop motor
             tMetingTimer(IN := FALSE); // Stop Metingtimer
             tUitwijkingTimer(IN := TRUE);  //start Uitijwkingtimer
@@ -323,6 +329,7 @@ IF bStart AND NOT bStop THEN
             MeasurementsCompleted := MeasurementsCompleted + 1;
             tUitwijkingTimer(IN := FALSE); // Stop timer
             oMotorExecute := FALSE; //stop motor
+			iEncoderMotor := iEncoderMotor * InvertDegrees;
             MeasurementState := 4;
         END_IF
 
@@ -358,7 +365,6 @@ END_IF
     SampleDone := SampleDone,
 	SampleTrigger := SampleTrigger,
     SampleNr := iSampleNr,
-	SamplesPerMeasurement := iTijdSample * SamplingRate_Hz,
     MeasurementNr := MeasurementsCompleted,
     EncoderValue := iEncoderValue,
     Cap1Value := iCapacitief1Value,

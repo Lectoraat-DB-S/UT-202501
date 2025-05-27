@@ -25,7 +25,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
+      <ST><![CDATA[//THIS MOVES THE MACHINE TO THE OUTER 2 POINTS FOR A NUMBER OF TIMES
+//Copy to main to test it 
 // === Test Movement State Machine ===
 CASE State OF
 

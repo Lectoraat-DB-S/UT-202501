@@ -100,20 +100,11 @@
 		</System>
 		<Plc>
 			<Project GUID="{F88F7A59-9E7F-4523-9C0E-4BD9DABD5D28}" Name="Database_Code" PrjFilePath="Database_Code\Database_Code.plcproj" TmcFilePath="Database_Code\Database_Code.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{B05F21C2-5F97-30BC-6CBE-A4D380C3F2C5}" TmcPath="Database_Code\Database_Code.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{C2209478-1688-F6ED-BEB6-9C16CFB1E30D}" TmcPath="Database_Code\Database_Code.tmc">
 					<Name>Database_Code Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>MAIN.iMotorExecutePOS</Name>
-							<Comment><![CDATA[motor loadcell control]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.iMotorExecuteNEG</Name>
-							<Type>BOOL</Type>
-						</Var>
 						<Var>
 							<Name>MAIN.oMotorEnable</Name>
 							<Comment><![CDATA[motor controls]]></Comment>
@@ -146,6 +137,15 @@
 						<Var>
 							<Name>MAIN.oMotorStartType</Name>
 							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.iMotorExecutePOS</Name>
+							<Comment><![CDATA[motor loadcell control]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.iMotorExecuteNEG</Name>
+							<Type>BOOL</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="1">

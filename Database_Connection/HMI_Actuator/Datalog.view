@@ -103,7 +103,7 @@
 
 <script data-tchmi-target-attribute="data-tchmi-scope-config" type="application/json">
 {
-  "name": "ScopeHMI",
+  "name": "HMI_Scope",
   "chart": "YT Chart"
 }
 </script>
@@ -112,7 +112,7 @@
 
 <script data-tchmi-target-attribute="data-tchmi-scope-config" type="application/json">
 {
-  "name": "ScopeHMI",
+  "name": "HMI_Scope",
   "chart": "YT Chart (1)"
 }
 </script>

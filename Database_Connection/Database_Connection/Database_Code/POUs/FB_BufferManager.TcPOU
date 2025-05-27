@@ -6,7 +6,6 @@ VAR_INPUT
     SampleDone : BOOL;
 	SampleTrigger : BOOL;
     SampleNr : INT;
-	SamplesPerMeasurement : INT;
     MeasurementNr : INT;
     EncoderValue : UDINT;
     Cap1Value : INT;
