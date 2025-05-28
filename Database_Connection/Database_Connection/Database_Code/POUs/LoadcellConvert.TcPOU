@@ -10,8 +10,9 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[Voltage := INT_TO_REAL(LoadCellValue)/32768 * 10;
-
+      <ST><![CDATA[// Convert raw value to voltage
+Voltage := INT_TO_REAL(LoadCellValue)/32767 * 10;
+//convert voltage to Newtons(N) 
 LoadCellConvert := REAL_TO_INT(Voltage * 980.7);
 
 ]]></ST>

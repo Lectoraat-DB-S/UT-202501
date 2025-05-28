@@ -29,11 +29,11 @@
   <KeepPreviousImageExports>false</KeepPreviousImageExports>
   <Layout>&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;Layout&gt;
-  &lt;Window Guid="dad457ad-e5ab-4b85-a67f-295675ccaf3b" LastFocused="133923764833403348" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="250, 400" DocumentWindowGroupGuid="e9ff3a2d-be7a-4b9e-b019-f5cd7415f066" DocumentIndexInWindowGroup="1" DocumentSplitPath="0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
+  &lt;Window Guid="dad457ad-e5ab-4b85-a67f-295675ccaf3b" LastFocused="133928991080425233" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="250, 400" DocumentWindowGroupGuid="e9ff3a2d-be7a-4b9e-b019-f5cd7415f066" DocumentIndexInWindowGroup="1" DocumentSplitPath="0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
   &lt;Window Guid="057d0495-d28b-49c0-995b-e854e77336f3" LastFocused="133923849711559076" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="250, 400" DocumentWindowGroupGuid="e9ff3a2d-be7a-4b9e-b019-f5cd7415f066" DocumentIndexInWindowGroup="0" DocumentSplitPath="0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
   &lt;DocumentContainer Dock="5"&gt;
     &lt;SplitLayoutSystem WorkingSize="250, 400" SplitMode="0"&gt;
-      &lt;ControlLayoutSystem WorkingSize="250, 400" Guid="e9ff3a2d-be7a-4b9e-b019-f5cd7415f066" Collapsed="0" SelectedControl="057d0495-d28b-49c0-995b-e854e77336f3"&gt;
+      &lt;ControlLayoutSystem WorkingSize="250, 400" Guid="e9ff3a2d-be7a-4b9e-b019-f5cd7415f066" Collapsed="0" SelectedControl="dad457ad-e5ab-4b85-a67f-295675ccaf3b"&gt;
         &lt;Controls&gt;
           &lt;Control Guid="057d0495-d28b-49c0-995b-e854e77336f3" /&gt;
           &lt;Control Guid="dad457ad-e5ab-4b85-a67f-295675ccaf3b" /&gt;
@@ -406,7 +406,7 @@
           <DataType>REAL64</DataType>
           <DisplayColor>Black</DisplayColor>
           <Enabled>true</Enabled>
-          <FileHandle>1</FileHandle>
+          <FileHandle>0</FileHandle>
           <ForceOversampling>false</ForceOversampling>
           <Guid>6a964349-0480-4b88-addb-e54a78323fce</Guid>
           <IndexGroup>16448</IndexGroup>
@@ -482,7 +482,7 @@
         </AdsAcquisition>
         <AdsAcquisition AssemblyName="TwinCAT.Measurement.Scope.API.Model">
           <AmsNetId>10.100.5.10.1.1</AmsNetId>
-          <Area>Input</Area>
+          <Area>Local</Area>
           <ArrayLength>0</ArrayLength>
           <BaseSampleTime>10000</BaseSampleTime>
           <ChannelStyleInformation />
@@ -501,18 +501,18 @@
               </TimeTangeInfo>
             </DataAccessMode>
           </DataAccess>
-          <DataType>INT16</DataType>
+          <DataType>REAL64</DataType>
           <DisplayColor>Black</DisplayColor>
           <Enabled>true</Enabled>
-          <FileHandle>2</FileHandle>
+          <FileHandle>0</FileHandle>
           <ForceOversampling>false</ForceOversampling>
-          <Guid>1bd54492-b6db-4ca8-9bc3-fd5358c48c38</Guid>
-          <IndexGroup>61472</IndexGroup>
-          <IndexOffset>435820</IndexOffset>
+          <Guid>2fe280f1-1856-49ae-83d0-62d415fe0698</Guid>
+          <IndexGroup>16448</IndexGroup>
+          <IndexOffset>443912</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
-          <Name>iCapacitief2Value</Name>
+          <Name>CapacitiveDistance1</Name>
           <Oversample>0</Oversample>
           <RawUnit>
             <Transformation>
@@ -561,7 +561,7 @@
                 <Int32>0</Int32>
               </DetailLevel>
               <DisplayColor>Black</DisplayColor>
-              <Guid>2fc7b6db-c3f2-41a1-a91e-95a9e275384f</Guid>
+              <Guid>2c68c5c7-7a06-4ddb-966d-ddb6d9b4d85b</Guid>
               <Name>MeasurementMemberBase</Name>
               <SortPriority>100</SortPriority>
               <Title>MeasurementMemberBase</Title>
@@ -569,18 +569,18 @@
             </NameRelationInfo>
           </SubMember>
           <SymbolBased>true</SymbolBased>
-          <SymbolName>MAIN.iCapacitief2Value</SymbolName>
+          <SymbolName>MAIN.CapacitiveDistance1</SymbolName>
           <TargetPort>851</TargetPort>
           <TimeOffset>0</TimeOffset>
           <Title>MeasurementMemberBase</Title>
           <UseLocalServer>true</UseLocalServer>
           <UseTaskSampleTime>true</UseTaskSampleTime>
           <UTF8Encoding>false</UTF8Encoding>
-          <VariableSize>2</VariableSize>
+          <VariableSize>8</VariableSize>
         </AdsAcquisition>
         <AdsAcquisition AssemblyName="TwinCAT.Measurement.Scope.API.Model">
           <AmsNetId>10.100.5.10.1.1</AmsNetId>
-          <Area>Input</Area>
+          <Area>Local</Area>
           <ArrayLength>0</ArrayLength>
           <BaseSampleTime>10000</BaseSampleTime>
           <ChannelStyleInformation />
@@ -599,18 +599,18 @@
               </TimeTangeInfo>
             </DataAccessMode>
           </DataAccess>
-          <DataType>INT16</DataType>
+          <DataType>REAL64</DataType>
           <DisplayColor>Black</DisplayColor>
           <Enabled>true</Enabled>
-          <FileHandle>3</FileHandle>
+          <FileHandle>0</FileHandle>
           <ForceOversampling>false</ForceOversampling>
-          <Guid>f99acf45-a350-41f3-a4c0-d8ee348c7a65</Guid>
-          <IndexGroup>61472</IndexGroup>
-          <IndexOffset>435818</IndexOffset>
+          <Guid>26d23e90-ec55-461e-a381-d2b3596faa4d</Guid>
+          <IndexGroup>16448</IndexGroup>
+          <IndexOffset>443920</IndexOffset>
           <IsEvent>false</IsEvent>
           <IsHistorical>false</IsHistorical>
           <IsTimeline>false</IsTimeline>
-          <Name>iCapacitief1Value</Name>
+          <Name>CapacitiveDistance2</Name>
           <Oversample>0</Oversample>
           <RawUnit>
             <Transformation>
@@ -659,7 +659,7 @@
                 <Int32>0</Int32>
               </DetailLevel>
               <DisplayColor>Black</DisplayColor>
-              <Guid>f976ebd4-7de5-4123-9675-055e81515a38</Guid>
+              <Guid>a4abba12-777b-425c-8170-4f74f3a40a5e</Guid>
               <Name>MeasurementMemberBase</Name>
               <SortPriority>100</SortPriority>
               <Title>MeasurementMemberBase</Title>
@@ -667,14 +667,14 @@
             </NameRelationInfo>
           </SubMember>
           <SymbolBased>true</SymbolBased>
-          <SymbolName>MAIN.iCapacitief1Value</SymbolName>
+          <SymbolName>MAIN.CapacitiveDistance2</SymbolName>
           <TargetPort>851</TargetPort>
           <TimeOffset>0</TimeOffset>
           <Title>MeasurementMemberBase</Title>
           <UseLocalServer>true</UseLocalServer>
           <UseTaskSampleTime>true</UseTaskSampleTime>
           <UTF8Encoding>false</UTF8Encoding>
-          <VariableSize>2</VariableSize>
+          <VariableSize>8</VariableSize>
         </AdsAcquisition>
       </SubMember>
       <Title>MeasurementMemberBase</Title>
@@ -774,139 +774,6 @@
           <ShowTitle>False</ShowTitle>
           <SortPriority>10</SortPriority>
           <SubMember>
-            <Channel AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-              <Comment />
-              <DisplayColor>-16776961</DisplayColor>
-              <Enabled>true</Enabled>
-              <Guid>e0b24077-adc7-4487-bfa1-69211b62bbe5</Guid>
-              <Name>iCapacitief1Value</Name>
-              <SortPriority>10</SortPriority>
-              <SubMember>
-                <AcquisitionInterpreter AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-                  <AcquisitionGUID>f99acf45-a350-41f3-a4c0-d8ee348c7a65</AcquisitionGUID>
-                  <BitMask>18446744073709551615</BitMask>
-                  <Comment />
-                  <DisplayColor>Black</DisplayColor>
-                  <Guid>cddeabf7-678b-45d1-be8b-9c98dc3848cd</Guid>
-                  <Name>Y: iCapacitief1Value</Name>
-                  <Offset>0</Offset>
-                  <ResultingUnit>
-                    <Transformation>
-                      <BaseUnitValue>0</BaseUnitValue>
-                      <Name>None</Name>
-                      <ScaleFactor>1</ScaleFactor>
-                      <SourceUnitPrefix>none</SourceUnitPrefix>
-                      <SourceUnitString />
-                      <Symbol>1</Symbol>
-                      <TargetUnitString />
-                      <TargetUnitValue>0</TargetUnitValue>
-                    </Transformation>
-                    <Unit>
-                      <BaseUnitString />
-                      <BaseUnitValue>0</BaseUnitValue>
-                      <NameExtension />
-                      <Offset>0</Offset>
-                      <Prefix>none</Prefix>
-                      <ReturnText> (None) </ReturnText>
-                      <ScaleFactor>1</ScaleFactor>
-                      <Symbol></Symbol>
-                    </Unit>
-                    <UnitOffsetResult>0</UnitOffsetResult>
-                    <UnitScaleResult>1</UnitScaleResult>
-                    <UserUnit>
-                      <BaseName>UnitOfOne</BaseName>
-                      <BaseUnitString />
-                      <BaseUnitValue>0</BaseUnitValue>
-                      <Name>None</Name>
-                      <NameExtension />
-                      <Offset>0</Offset>
-                      <Prefix>none</Prefix>
-                      <ScaleFactor>1</ScaleFactor>
-                      <Symbol></Symbol>
-                      <UserPrefix>none</UserPrefix>
-                    </UserUnit>
-                  </ResultingUnit>
-                  <ScaleFactor>1</ScaleFactor>
-                  <ShortInfo />
-                  <SortPriority>2</SortPriority>
-                  <SubMember>
-                    <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-                      <Comment />
-                      <DetailLevel>
-                        <Int32>0</Int32>
-                      </DetailLevel>
-                      <DisplayColor>Black</DisplayColor>
-                      <Guid>a50f7d89-5937-476d-b19e-f88f4df3093b</Guid>
-                      <Name>MeasurementMemberBase</Name>
-                      <SortPriority>100</SortPriority>
-                      <Title>MeasurementMemberBase</Title>
-                      <UsedNameType>Acquisition</UsedNameType>
-                    </NameRelationInfo>
-                  </SubMember>
-                  <Title>MeasurementMemberBase</Title>
-                  <Usage>Y</Usage>
-                </AcquisitionInterpreter>
-                <ChannelStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-                  <Comment />
-                  <DisplayColor>Black</DisplayColor>
-                  <Guid>619992ff-2638-4ad1-ab80-d33fbfbb186d</Guid>
-                  <Name>Channel Style (1)</Name>
-                  <SortPriority>100</SortPriority>
-                  <SubMember>
-                    <SeriesStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-                      <Antialias>true</Antialias>
-                      <Comment />
-                      <DisplayColor>-16776961</DisplayColor>
-                      <FillColor>838861055</FillColor>
-                      <FillMode>None</FillMode>
-                      <Guid>b5cb9e4e-076f-4b5a-98fd-bbc696ae195e</Guid>
-                      <LineWidth>2</LineWidth>
-                      <MarkColor>-16776961</MarkColor>
-                      <MarkSize>2</MarkSize>
-                      <MarkState>Auto</MarkState>
-                      <Name>Series Style (1)</Name>
-                      <SeriesType>Line</SeriesType>
-                      <SortPriority>100</SortPriority>
-                      <Title>MeasurementMemberBase</Title>
-                    </SeriesStyle>
-                    <MinMaxStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-                      <Comment />
-                      <DisplayColor>Black</DisplayColor>
-                      <Guid>26648d25-fbc6-45be-9959-13f2f5de4e18</Guid>
-                      <Name>Min/Max Style (1)</Name>
-                      <ShowMax>false</ShowMax>
-                      <ShowMin>false</ShowMin>
-                      <SortPriority>100</SortPriority>
-                      <Title>MeasurementMemberBase</Title>
-                    </MinMaxStyle>
-                    <TimeShiftStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-                      <Comment />
-                      <DisplayColor>Black</DisplayColor>
-                      <Guid>ec158401-0cf8-4fd1-ba07-7c5668a4a8da</Guid>
-                      <Name>MeasurementMemberBase (1)</Name>
-                      <SortPriority>100</SortPriority>
-                      <TimeShift>0</TimeShift>
-                      <Title>MeasurementMemberBase</Title>
-                    </TimeShiftStyle>
-                  </SubMember>
-                  <Title>MeasurementMemberBase</Title>
-                  <Visible>true</Visible>
-                </ChannelStyle>
-                <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-                  <Comment />
-                  <DetailLevel>
-                    <Int32>0</Int32>
-                  </DetailLevel>
-                  <DisplayColor>Black</DisplayColor>
-                  <Guid>eeec3b83-6375-47bb-8bed-910f7b8be85a</Guid>
-                  <Name>MeasurementMemberBase</Name>
-                  <SortPriority>100</SortPriority>
-                  <Title>MeasurementMemberBase</Title>
-                  <UsedNameType>Acquisition</UsedNameType>
-                </NameRelationInfo>
-              </SubMember>
-              <Title>MeasurementMemberBase</Title>
-            </Channel>
             <TimeAxis AssemblyName="TwinCAT.Measurement.Scope.API.Model">
               <AbsoluteTimesFormat>HH:mm:ss.fff</AbsoluteTimesFormat>
               <Comment />
@@ -994,34 +861,21 @@
               <SubMember />
               <Title>MeasurementMemberBase</Title>
             </MarkerContainer>
-          </SubMember>
-          <Title>Axis Group</Title>
-        </AxisGroup>
-        <AxisGroup AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-          <ChannelRelatedGuid>00000000-0000-0000-0000-000000000000</ChannelRelatedGuid>
-          <Comment />
-          <DisplayColor>-657931</DisplayColor>
-          <Enabled>true</Enabled>
-          <Guid>cf1ac531-f31c-4e26-93fd-76bf65ef1c77</Guid>
-          <Name>Axis Group (2)</Name>
-          <ShowTitle>False</ShowTitle>
-          <SortPriority>11</SortPriority>
-          <SubMember>
             <Channel AssemblyName="TwinCAT.Measurement.Scope.API.Model">
               <Comment />
               <DisplayColor>-23296</DisplayColor>
               <Enabled>true</Enabled>
-              <Guid>80a15235-6a2a-459a-9923-f399ff45c591</Guid>
-              <Name>iCapacitief2Value</Name>
-              <SortPriority>10</SortPriority>
+              <Guid>ad4186cc-2e37-49ee-a1c7-0685d238871b</Guid>
+              <Name>CapacitiveDistance1</Name>
+              <SortPriority>11</SortPriority>
               <SubMember>
                 <AcquisitionInterpreter AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-                  <AcquisitionGUID>1bd54492-b6db-4ca8-9bc3-fd5358c48c38</AcquisitionGUID>
+                  <AcquisitionGUID>2fe280f1-1856-49ae-83d0-62d415fe0698</AcquisitionGUID>
                   <BitMask>18446744073709551615</BitMask>
                   <Comment />
                   <DisplayColor>Black</DisplayColor>
-                  <Guid>d110c4d7-3d7a-47e2-8851-938e989b6fad</Guid>
-                  <Name>Y: iCapacitief2Value</Name>
+                  <Guid>88253ca8-3ff6-45f9-8e03-df4b3ee65766</Guid>
+                  <Name>Y: CapacitiveDistance1</Name>
                   <Offset>0</Offset>
                   <ResultingUnit>
                     <Transformation>
@@ -1069,7 +923,7 @@
                         <Int32>0</Int32>
                       </DetailLevel>
                       <DisplayColor>Black</DisplayColor>
-                      <Guid>94071cc8-fbed-4b35-addd-66a20248ab61</Guid>
+                      <Guid>78229304-34f6-4973-a3da-b89406255550</Guid>
                       <Name>MeasurementMemberBase</Name>
                       <SortPriority>100</SortPriority>
                       <Title>MeasurementMemberBase</Title>
@@ -1082,7 +936,7 @@
                 <ChannelStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
                   <Comment />
                   <DisplayColor>Black</DisplayColor>
-                  <Guid>5b2c37a6-624b-4c6d-9917-8bb0c97eafd0</Guid>
+                  <Guid>6269f450-2887-4a62-abeb-ff39205d01ab</Guid>
                   <Name>Channel Style (2)</Name>
                   <SortPriority>100</SortPriority>
                   <SubMember>
@@ -1092,7 +946,7 @@
                       <DisplayColor>-23296</DisplayColor>
                       <FillColor>855614720</FillColor>
                       <FillMode>None</FillMode>
-                      <Guid>7810b616-197b-43a7-ba75-8f6a6bb565da</Guid>
+                      <Guid>02c63e85-cd7c-449a-9543-b9a4ed9a4462</Guid>
                       <LineWidth>2</LineWidth>
                       <MarkColor>-23296</MarkColor>
                       <MarkSize>2</MarkSize>
@@ -1105,7 +959,7 @@
                     <MinMaxStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
                       <Comment />
                       <DisplayColor>Black</DisplayColor>
-                      <Guid>22095444-e6db-4222-b2fa-86acef6b71ec</Guid>
+                      <Guid>84e7f582-2778-4b64-aa2e-76cc31d217d9</Guid>
                       <Name>Min/Max Style (2)</Name>
                       <ShowMax>false</ShowMax>
                       <ShowMin>false</ShowMin>
@@ -1115,7 +969,7 @@
                     <TimeShiftStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
                       <Comment />
                       <DisplayColor>Black</DisplayColor>
-                      <Guid>99f90d33-d00c-43c8-8534-f0822ae5d9ab</Guid>
+                      <Guid>357a9cf4-1702-42d8-a581-4fdeb965023b</Guid>
                       <Name>MeasurementMemberBase (2)</Name>
                       <SortPriority>100</SortPriority>
                       <TimeShift>0</TimeShift>
@@ -1131,7 +985,7 @@
                     <Int32>0</Int32>
                   </DetailLevel>
                   <DisplayColor>Black</DisplayColor>
-                  <Guid>e1ae048e-4a11-45f5-9afa-54e1e028b300</Guid>
+                  <Guid>ce2e6b15-4084-41c2-8298-05cbfa614bd8</Guid>
                   <Name>MeasurementMemberBase</Name>
                   <SortPriority>100</SortPriority>
                   <Title>MeasurementMemberBase</Title>
@@ -1140,54 +994,139 @@
               </SubMember>
               <Title>MeasurementMemberBase</Title>
             </Channel>
-            <RefGuid-TimeAxis>cd99ad12-2628-438f-8c20-74a996dd9712</RefGuid-TimeAxis>
-            <ValueAxis AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+            <Channel AssemblyName="TwinCAT.Measurement.Scope.API.Model">
               <Comment />
-              <DisplayColor>Black</DisplayColor>
-              <Guid>f4b035fc-311a-4a99-b0d3-459540420a3a</Guid>
-              <Inverted>false</Inverted>
-              <Logarithmic>false</Logarithmic>
-              <ManualMax>0.5</ManualMax>
-              <ManualMin>-0.5</ManualMin>
-              <Name>Value Axis (2)</Name>
-              <Orientation>Y</Orientation>
-              <ScalingMode>AutoGrowOnly</ScalingMode>
-              <SortPriority>100</SortPriority>
+              <DisplayColor>-16711936</DisplayColor>
+              <Enabled>true</Enabled>
+              <Guid>aff024ee-aa51-4b45-bf1a-9c5f3cdb7b39</Guid>
+              <Name>CapacitiveDistance2</Name>
+              <SortPriority>12</SortPriority>
               <SubMember>
-                <AxisStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-                  <ChannelRelatedGuid>00000000-0000-0000-0000-000000000000</ChannelRelatedGuid>
-                  <ColorMode>CustomColor</ColorMode>
+                <AcquisitionInterpreter AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                  <AcquisitionGUID>26d23e90-ec55-461e-a381-d2b3596faa4d</AcquisitionGUID>
+                  <BitMask>18446744073709551615</BitMask>
                   <Comment />
-                  <DisplayColor>-14803426</DisplayColor>
-                  <Grid>true</Grid>
-                  <GridColor>-14803426</GridColor>
-                  <GridDivisions>10</GridDivisions>
-                  <GridLineWidth>1</GridLineWidth>
-                  <Guid>485a3f48-af5a-4756-b7ba-0eaaf056030c</Guid>
-                  <LineWidth>1</LineWidth>
-                  <Name>Axis Style (4)</Name>
-                  <Precision>6</Precision>
-                  <ShowName>False</ShowName>
-                  <ShowUnit>AllChannels</ShowUnit>
-                  <SortPriority>100</SortPriority>
-                  <SubGrid>false</SubGrid>
-                  <SubGridDivisions>5</SubGridDivisions>
+                  <DisplayColor>Black</DisplayColor>
+                  <Guid>65d8faaa-6276-4dbf-9928-a876edff0fac</Guid>
+                  <Name>Y: CapacitiveDistance2</Name>
+                  <Offset>0</Offset>
+                  <ResultingUnit>
+                    <Transformation>
+                      <BaseUnitValue>0</BaseUnitValue>
+                      <Name>None</Name>
+                      <ScaleFactor>1</ScaleFactor>
+                      <SourceUnitPrefix>none</SourceUnitPrefix>
+                      <SourceUnitString />
+                      <Symbol>1</Symbol>
+                      <TargetUnitString />
+                      <TargetUnitValue>0</TargetUnitValue>
+                    </Transformation>
+                    <Unit>
+                      <BaseUnitString />
+                      <BaseUnitValue>0</BaseUnitValue>
+                      <NameExtension />
+                      <Offset>0</Offset>
+                      <Prefix>none</Prefix>
+                      <ReturnText> (None) </ReturnText>
+                      <ScaleFactor>1</ScaleFactor>
+                      <Symbol></Symbol>
+                    </Unit>
+                    <UnitOffsetResult>0</UnitOffsetResult>
+                    <UnitScaleResult>1</UnitScaleResult>
+                    <UserUnit>
+                      <BaseName>UnitOfOne</BaseName>
+                      <BaseUnitString />
+                      <BaseUnitValue>0</BaseUnitValue>
+                      <Name>None</Name>
+                      <NameExtension />
+                      <Offset>0</Offset>
+                      <Prefix>none</Prefix>
+                      <ScaleFactor>1</ScaleFactor>
+                      <Symbol></Symbol>
+                      <UserPrefix>none</UserPrefix>
+                    </UserUnit>
+                  </ResultingUnit>
+                  <ScaleFactor>1</ScaleFactor>
+                  <ShortInfo />
+                  <SortPriority>2</SortPriority>
+                  <SubMember>
+                    <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                      <Comment />
+                      <DetailLevel>
+                        <Int32>0</Int32>
+                      </DetailLevel>
+                      <DisplayColor>Black</DisplayColor>
+                      <Guid>bc9e4527-db76-4326-bb00-22c3031927c9</Guid>
+                      <Name>MeasurementMemberBase</Name>
+                      <SortPriority>100</SortPriority>
+                      <Title>MeasurementMemberBase</Title>
+                      <UsedNameType>Acquisition</UsedNameType>
+                    </NameRelationInfo>
+                  </SubMember>
                   <Title>MeasurementMemberBase</Title>
-                  <UseScientificNotation>true</UseScientificNotation>
+                  <Usage>Y</Usage>
+                </AcquisitionInterpreter>
+                <ChannelStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                  <Comment />
+                  <DisplayColor>Black</DisplayColor>
+                  <Guid>4fc48b6f-a20e-4308-b1f9-18675fe9d160</Guid>
+                  <Name>Channel Style (3)</Name>
+                  <SortPriority>100</SortPriority>
+                  <SubMember>
+                    <SeriesStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                      <Antialias>true</Antialias>
+                      <Comment />
+                      <DisplayColor>-16711936</DisplayColor>
+                      <FillColor>838926080</FillColor>
+                      <FillMode>None</FillMode>
+                      <Guid>cda48735-f11d-46f0-99a3-8e98a85bdbcd</Guid>
+                      <LineWidth>2</LineWidth>
+                      <MarkColor>-16711936</MarkColor>
+                      <MarkSize>2</MarkSize>
+                      <MarkState>Auto</MarkState>
+                      <Name>Series Style (3)</Name>
+                      <SeriesType>Line</SeriesType>
+                      <SortPriority>100</SortPriority>
+                      <Title>MeasurementMemberBase</Title>
+                    </SeriesStyle>
+                    <MinMaxStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                      <Comment />
+                      <DisplayColor>Black</DisplayColor>
+                      <Guid>3fe6b07f-1fad-4e61-951f-dae3cf1525ce</Guid>
+                      <Name>Min/Max Style (3)</Name>
+                      <ShowMax>false</ShowMax>
+                      <ShowMin>false</ShowMin>
+                      <SortPriority>100</SortPriority>
+                      <Title>MeasurementMemberBase</Title>
+                    </MinMaxStyle>
+                    <TimeShiftStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                      <Comment />
+                      <DisplayColor>Black</DisplayColor>
+                      <Guid>290a0841-4749-4f9d-842b-f50b921d321f</Guid>
+                      <Name>MeasurementMemberBase (3)</Name>
+                      <SortPriority>100</SortPriority>
+                      <TimeShift>0</TimeShift>
+                      <Title>MeasurementMemberBase</Title>
+                    </TimeShiftStyle>
+                  </SubMember>
+                  <Title>MeasurementMemberBase</Title>
                   <Visible>true</Visible>
-                </AxisStyle>
+                </ChannelStyle>
+                <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                  <Comment />
+                  <DetailLevel>
+                    <Int32>0</Int32>
+                  </DetailLevel>
+                  <DisplayColor>Black</DisplayColor>
+                  <Guid>3827d382-29e8-4b34-89f5-23c2d95f3e89</Guid>
+                  <Name>MeasurementMemberBase</Name>
+                  <SortPriority>100</SortPriority>
+                  <Title>MeasurementMemberBase</Title>
+                  <UsedNameType>Acquisition</UsedNameType>
+                </NameRelationInfo>
               </SubMember>
-              <Title>Value Axis</Title>
-            </ValueAxis>
-            <MarkerContainer AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-              <Comment />
-              <DisplayColor>Black</DisplayColor>
-              <Guid>bb960dee-ebea-4d9a-a2e4-75495eecd65f</Guid>
-              <Name>Marker Container (3)</Name>
-              <SortPriority>100</SortPriority>
-              <SubMember />
               <Title>MeasurementMemberBase</Title>
-            </MarkerContainer>
+            </Channel>
           </SubMember>
           <Title>Axis Group</Title>
         </AxisGroup>

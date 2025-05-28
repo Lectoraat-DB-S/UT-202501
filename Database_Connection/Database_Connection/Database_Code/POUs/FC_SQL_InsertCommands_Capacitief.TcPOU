@@ -3,7 +3,7 @@
   <POU Name="FC_SQL_InsertCommands_Capacitief" Id="{f105113b-04e7-42e5-bac4-35a9eab28bd9}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION FC_SQL_InsertCommands_Capacitief : STRING(255)
 VAR_INPUT
-    iSensorValue: INT;
+    iSensorValue: lREAL;
     iSampleNr: INT;
 	iSensorID: INT;
 	iMeasurementNr: INT; 
@@ -11,7 +11,7 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[FC_SQL_InsertCommands_Capacitief := 'INSERT INTO [db_accessadmin].[Capacitief] (SensorValue, SampleNr, Time, SensorID, MeasurementNr) VALUES (';
-FC_SQL_InsertCommands_Capacitief := CONCAT(FC_SQL_InsertCommands_Capacitief, INT_TO_STRING(iSensorValue));
+FC_SQL_InsertCommands_Capacitief := CONCAT(FC_SQL_InsertCommands_Capacitief, LREAL_TO_STRING(iSensorValue));
 FC_SQL_InsertCommands_Capacitief := CONCAT(FC_SQL_InsertCommands_Capacitief, ', ');
 FC_SQL_InsertCommands_Capacitief := CONCAT(FC_SQL_InsertCommands_Capacitief, INT_TO_STRING(iSampleNr));
 FC_SQL_InsertCommands_Capacitief := CONCAT(FC_SQL_InsertCommands_Capacitief, ', GETDATE(), ');

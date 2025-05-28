@@ -10,7 +10,7 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[TempConvert := CONCAT(INT_TO_STRING(iTempSensorValue / 10), '.');   // Whole number part
-	TempConvert := CONCAT(TempConvert, INT_TO_STRING(ABS(iTempSensorValue MOD 10)));  // Decimal part]]></ST>
+TempConvert := CONCAT(TempConvert, INT_TO_STRING(ABS(iTempSensorValue MOD 10)));  // Decimal part]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

@@ -12,7 +12,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[EncoderConvert := DINT_TO_LREAL(UDINT_TO_DINT(iEncoderValue) - 1305092900) / 163750000.0 * 180.0 / PI; ]]></ST>
+      <ST><![CDATA[//convert raw value to Degrees
+EncoderConvert := DINT_TO_LREAL(UDINT_TO_DINT(iEncoderValue) - 1305092900) / 163750000.0 * 180.0 / PI; ]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

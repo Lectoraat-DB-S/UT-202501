@@ -53,8 +53,8 @@ IF  NOT SampleDone AND SampleTrigger  THEN
     g_aSensorBuffer[nWriteBufferIndex, nWriteIndex].SampleNumber  := SampleNr;
     g_aSensorBuffer[nWriteBufferIndex, nWriteIndex].MeasurementNr := MeasurementNr;
     g_aSensorBuffer[nWriteBufferIndex, nWriteIndex].EncoderValue  := EncoderConvert(EncoderValue);
-    g_aSensorBuffer[nWriteBufferIndex, nWriteIndex].Cap1Value     := Cap1Value;
-    g_aSensorBuffer[nWriteBufferIndex, nWriteIndex].Cap2Value     := Cap2Value;
+    g_aSensorBuffer[nWriteBufferIndex, nWriteIndex].Cap1Value     := CapacitiveConvert(Cap1Value);
+    g_aSensorBuffer[nWriteBufferIndex, nWriteIndex].Cap2Value     := CapacitiveConvert(Cap2Value);
 	
     nWriteIndex := nWriteIndex + 1;
 	

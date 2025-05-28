@@ -5,22 +5,22 @@
   <Children>
     <Node>
       <Title>ScopeWizard</Title>
-      <Expanded>False</Expanded>
+      <Expanded>True</Expanded>
       <FileName>C:\Users\Jonathan\FvdT-Repo\Database_Connection\ScopeControl\ScopeWizard.tcscopex</FileName>
       <Children>
         <Node>
           <Title>DataPool</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
-              <Title>iCapacitief1Value</Title>
+              <Title>CapacitiveDistance1</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>iCapacitief2Value</Title>
+              <Title>CapacitiveDistance2</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -60,24 +60,17 @@
           <Children>
             <Node>
               <Title>Axis Group (1)</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>iCapacitief1Value</Title>
+                  <Title>CapacitiveDistance1</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>Axis Group (2)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
                 <Node>
-                  <Title>iCapacitief2Value</Title>
+                  <Title>CapacitiveDistance2</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />

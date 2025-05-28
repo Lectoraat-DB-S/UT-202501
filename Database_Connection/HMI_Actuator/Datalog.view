@@ -67,19 +67,19 @@
 </div>
 <div id="DisplayTemp4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="42" data-tchmi-height-unit="px" data-tchmi-left="308" data-tchmi-left-unit="px" data-tchmi-top="678" data-tchmi-top-unit="px" data-tchmi-width="48" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="2" data-tchmi-text-font-size="23" data-tchmi-text="%s%ADS.PLC1.MAIN.Temp4Value%/s%">
 </div>
-<div id="TcHmiTextblock_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="309" data-tchmi-left-unit="px" data-tchmi-text="Temperatuur sensor 3" data-tchmi-top="584" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="2">
+<div id="TcHmiTextblock_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="309" data-tchmi-left-unit="px" data-tchmi-text="Rechts Boven" data-tchmi-top="584" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="2">
 </div>
-<div id="TcHmiTextblock_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="44" data-tchmi-left-unit="px" data-tchmi-text="Temperatuur sensor 2" data-tchmi-top="652" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="2">
+<div id="TcHmiTextblock_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="44" data-tchmi-left-unit="px" data-tchmi-text="Loadcell motor" data-tchmi-top="652" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="2">
 </div>
-<div id="TcHmiTextblock_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="44" data-tchmi-left-unit="px" data-tchmi-text="Temperatuur sensor 1" data-tchmi-top="584" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="2">
+<div id="TcHmiTextblock_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="44" data-tchmi-left-unit="px" data-tchmi-text="Links boven" data-tchmi-top="584" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="2">
 </div>
-<div id="TcHmiTextblock_4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="309" data-tchmi-left-unit="px" data-tchmi-text="Temperatuur sensor 4" data-tchmi-top="652" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="2">
+<div id="TcHmiTextblock_4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="309" data-tchmi-left-unit="px" data-tchmi-text="sensorblok motor" data-tchmi-top="652" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="2">
 </div>
 <div id="FrameTemperatuur" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="199" data-tchmi-height-unit="px" data-tchmi-left="26" data-tchmi-left-unit="px" data-tchmi-top="554" data-tchmi-top-unit="px" data-tchmi-width="529" data-tchmi-width-unit="px" data-tchmi-zindex="1">
 </div>
 <div id="TextTemperatuur" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="56" data-tchmi-height-unit="px" data-tchmi-left="162" data-tchmi-left-unit="px" data-tchmi-text="Temperatuursensoren" data-tchmi-top="489" data-tchmi-top-unit="px" data-tchmi-width="276" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-style="Auto" data-tchmi-text-font-weight="Bold" data-tchmi-text-font-size="32" data-tchmi-zindex="2">
 </div>
-<div id="TcHmiTextblock_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="56" data-tchmi-height-unit="px" data-tchmi-left="162" data-tchmi-left-unit="px" data-tchmi-text="Encoder" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="276" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-style="Auto" data-tchmi-text-font-weight="Bold" data-tchmi-text-font-size="32" data-tchmi-zindex="2">
+<div id="TcHmiTextblock_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="56" data-tchmi-height-unit="px" data-tchmi-left="162" data-tchmi-left-unit="px" data-tchmi-text="Encoder (°)" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="276" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-style="Auto" data-tchmi-text-font-weight="Bold" data-tchmi-text-font-size="32" data-tchmi-zindex="2">
 </div>
 <div id="TextCelsiusSign" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="42" data-tchmi-height-unit="px" data-tchmi-left="92" data-tchmi-left-unit="px" data-tchmi-text="°C" data-tchmi-top="678" data-tchmi-top-unit="px" data-tchmi-width="40" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="23" data-tchmi-zindex="1">
 </div>
@@ -89,7 +89,7 @@
 </div>
 <div id="TextCelsiusSign_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="42" data-tchmi-height-unit="px" data-tchmi-left="356" data-tchmi-left-unit="px" data-tchmi-text="°C" data-tchmi-top="610" data-tchmi-top-unit="px" data-tchmi-width="40" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="23" data-tchmi-zindex="1">
 </div>
-<div id="TextCapacitief" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="56" data-tchmi-height-unit="px" data-tchmi-left="931" data-tchmi-left-unit="px" data-tchmi-text="Capacitief" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="276" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-style="Auto" data-tchmi-text-font-weight="Bold" data-tchmi-text-font-size="32" data-tchmi-zindex="2">
+<div id="TextCapacitief" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="56" data-tchmi-height-unit="px" data-tchmi-left="931" data-tchmi-left-unit="px" data-tchmi-text="Capacitief (µm)" data-tchmi-top="10" data-tchmi-top-unit="px" data-tchmi-width="276" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-style="Auto" data-tchmi-text-font-weight="Bold" data-tchmi-text-font-size="32" data-tchmi-zindex="2">
 </div>
 <div id="TextLoadcell" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="56" data-tchmi-height-unit="px" data-tchmi-left="931" data-tchmi-left-unit="px" data-tchmi-text="LoadCell" data-tchmi-top="486" data-tchmi-top-unit="px" data-tchmi-width="276" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-style="Auto" data-tchmi-text-font-weight="Bold" data-tchmi-text-font-size="32" data-tchmi-zindex="2">
 </div>
@@ -99,7 +99,9 @@
 </div>
 <div id="FrameLoadCell" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="199" data-tchmi-height-unit="px" data-tchmi-left="894" data-tchmi-left-unit="px" data-tchmi-top="545" data-tchmi-top-unit="px" data-tchmi-width="314" data-tchmi-width-unit="px" data-tchmi-zindex="0">
 </div>
-<div id="TcHmiScopeControl_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl" data-tchmi-height="400" data-tchmi-height-unit="px" data-tchmi-left="44" data-tchmi-left-unit="px" data-tchmi-top="76" data-tchmi-top-unit="px" data-tchmi-width="750" data-tchmi-width-unit="px" data-tchmi-enable-record-controls="true">
+<div id="ScopeControlEncoder" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl" data-tchmi-height="400" data-tchmi-height-unit="px" data-tchmi-left="44" data-tchmi-left-unit="px" data-tchmi-top="76" data-tchmi-top-unit="px" data-tchmi-width="750" data-tchmi-width-unit="px" data-tchmi-enable-record-controls="true">
+
+
 
 <script data-tchmi-target-attribute="data-tchmi-scope-config" type="application/json">
 {
@@ -108,7 +110,11 @@
 }
 </script>
 </div>
-<div id="TcHmiScopeControl_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl" data-tchmi-height="400" data-tchmi-height-unit="px" data-tchmi-left="894" data-tchmi-left-unit="px" data-tchmi-top="76" data-tchmi-top-unit="px" data-tchmi-width="750" data-tchmi-width-unit="px" data-tchmi-enable-record-controls="true">
+<div id="ScopecontrolCapacitief" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl" data-tchmi-height="400" data-tchmi-height-unit="px" data-tchmi-left="894" data-tchmi-left-unit="px" data-tchmi-top="76" data-tchmi-top-unit="px" data-tchmi-width="750" data-tchmi-width-unit="px" data-tchmi-enable-record-controls="true">
+
+
+
+
 
 <script data-tchmi-target-attribute="data-tchmi-scope-config" type="application/json">
 {

@@ -6,8 +6,8 @@ STRUCT
     SampleNumber    : INT;
     MeasurementNr   : INT;
     EncoderValue    : LREAL;
-    Cap1Value       : INT;
-    Cap2Value       : INT;
+    Cap1Value       : LREAL;
+    Cap2Value       : LREAL;
 END_STRUCT
 END_TYPE]]></Declaration>
   </DUT>

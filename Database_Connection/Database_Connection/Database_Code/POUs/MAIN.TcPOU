@@ -118,6 +118,8 @@ VAR
 	//conversion variables
 	TestForce : INT;
 	iEncoderDegrees: LREAL;
+	CapacitiveDistance1 : LREAL;
+	CapacitiveDistance2 : LREAL;
 	
 	
 	
@@ -133,6 +135,8 @@ END_VAR]]></Declaration>
 //conversion variables for measurement and hmi control
 iEncoderDegrees := EncoderConvert(iEncoderValue); 
 TestForce := LoadcellConvert(iLoadCellValue);
+CapacitiveDistance1 := CapacitiveConvert(iCapacitief1Value);
+CapacitiveDistance2 := CapacitiveConvert(iCapacitief2Value);
 Temp1Value := TempConvert(iTempSensor1Value);
 Temp2Value := Tempconvert(iTempSensor2Value);
 Temp3Value := TempConvert(iTempSensor3Value);
