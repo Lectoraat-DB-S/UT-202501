@@ -3,20 +3,29 @@
   <POU Name="MAIN" Id="{4ef234f8-6ebd-4fcd-beba-a435a8463d67}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR CONSTANT
-		PositiveDegrees : REAL := 0.1; 
-		DifferenceDegrees : REAL := 0.1; 
-		UpperBoundDegrees : INT := 9;
-		LowerBoundDegrees : INT := -9;
-		SlowestMotorSpeed : INT := 100;
-		FastestMotorSpeed : INT := 1500;
-		DefaultMotorSpeed : INT := 500;
-		ConvertToSec : INT := 1000;
-		InvertDegrees : INT := -1;
+	//check variables
+	PositiveDegrees : REAL := 0.1; 
+	DifferenceDegrees : REAL := 0.1; 
+	UpperBoundDegrees : INT := 9;
+	LowerBoundDegrees : INT := -9;
+	ZeroDegrees : REAL := 0.0;
+	//convert variables
+	ConvertToSec : INT := 1000;
+	InvertDegrees : INT := -1;
+	//time constant	
+	tHomingStartInterval: TIME := T#25S;
+	tHomingInterval: TIME := T#5S;
+	//motor constants
+	SlowestMotorSpeed : INT := 100;
+	FastestMotorSpeed : INT := 1500;
+	DefaultMotorSpeed : INT := 500;
+	MotorLeftEdge : UDINT := 314000;
+	MotorRightEdge : UDINT := 0;
+	MotorStartValue : UDINT := 157000;
 END_VAR
 
 
 VAR
-	
     //database variables
 	FB_SQLDatabaseEvt : FB_SQLDatabaseEvt(sNetID := sLocalID, tTimeout := T#10S);
     FB_SQLCommandEvt  : FB_SQLCommandEvt(sNetID := sLocalID, tTimeout := T#10S);
@@ -47,7 +56,7 @@ VAR
 	// INSERT state machine control
 	TempInsert: INT ;
 	
-	//HMI variables
+	//HMI Outputs
 	iEncoderMotor : REAL;
 	iLoadCellMotor : INT;
 	iMotorSpeed : INT;
@@ -55,14 +64,15 @@ VAR
 	iTijd : INT;
 	iTijdMeting : INT;
 	iTijdSample : INT;
-	bConfirm : BOOL;
+	
 	//hmi display variables
 	Temp1Value: STRING;  
 	Temp2Value: STRING;
 	Temp3Value: STRING;
 	Temp4Value: STRING;
 	
-	
+	//hmi variables
+	bConfirm : BOOL;
 	bStart : BOOL;
 	bStop : BOOL := TRUE;
 	Process_Status : BOOL; 
@@ -70,7 +80,7 @@ VAR
 	bDatalogView : BOOL;
 	bActuatorView : BOOL;
 	
-	//hmi control
+	//measurement control
 	TijdConvertUitwijking : TIME;
 	TijdConvertMeting : TIME;
 	TijdConvertSample: TIME;
@@ -80,8 +90,6 @@ VAR
 	MeasurementsCompleted : INT;
 	RealMotorPosition AT %I* : UDINT;
 	MeasurementState: INT;
-	
-
 	
 	//motor controls
 	oMotorEnable AT %Q*: BOOL;
@@ -103,27 +111,17 @@ VAR
 	Homing : INT := 0;
 	HomingDone : BOOL;
 	HomingDelayTimer: TON;
-	tHomingInterval: TIME := T#5S;
 	HomingStartTimer : TON;
-	tHomingStartInterval: TIME := T#25S;
-	MotorLeftEdge : UDINT := 314000;
-	MotorRightEdge : UDINT := 0;
-	MotorStartValue : UDINT := 157000;
+
 	//motor loadcell control
 	iMotorExecutePOS AT %Q* : BOOL;
 	iMotorExecuteNEG AT %Q* : BOOL;
-
-	
 	
 	//conversion variables
 	TestForce : INT;
 	iEncoderDegrees: LREAL;
 	CapacitiveDistance1 : LREAL;
 	CapacitiveDistance2 : LREAL;
-	
-	
-	
-	
 
 END_VAR
 
@@ -223,7 +221,7 @@ IF bConfirm AND HomingDone THEN
 		TijdConvertMeting := INT_TO_TIME(iTijdMeting) * ConvertToSec; //set to seconds
 		TijdConvertSample := INT_TO_TIME(iTijdSample) * ConvertToSec; //set to seconds
 		IF iEncoderMotor > UpperBoundDegrees OR iEncoderMotor < LowerBoundDegrees THEN
-		iEncoderMotor := 0.0;
+		iEncoderMotor := ZeroDegrees;
 		END_IF
 		IF iMotorSpeed < SlowestMotorSpeed OR iMotorSpeed > FastestMotorSpeed THEN
 			iMotorSpeed := DefaultMotorSpeed;
