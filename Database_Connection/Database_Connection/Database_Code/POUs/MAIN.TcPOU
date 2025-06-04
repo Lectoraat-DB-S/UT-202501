@@ -243,6 +243,7 @@ IF bStart AND NOT bStop THEN
         tUitwijkingTimer(PT := TijdConvertUitwijking); 
         tMetingTimer(PT := TijdConvertMeting);
 		tInsertTimer(PT := TijdConvertSample);
+		
 		IF TestForce < iLoadCellMotor THEN
 			//move motor Clockwise
 			iMotorExecuteNEG := TRUE;
@@ -250,6 +251,7 @@ IF bStart AND NOT bStop THEN
 			//move motor CounterClockwise
 			iMotorExecutePOS := TRUE;
 		END_IF
+		
 		//loadcell is set at chosen Newtons 
        // IF TestForce = iLoadCellMotor THEN
 		//stop motor
