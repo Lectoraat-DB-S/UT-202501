@@ -77,22 +77,9 @@ https://learn.microsoft.com/nl-nl/ssms/release-history#release-dates-and-build-n
    ![image](https://github.com/user-attachments/assets/1ba7a6d6-ada9-4643-be90-dd4d3f95c436) <br>
 9. twincat is nu succesvol ingesteld  
 10. zet in de SQL Server management studio de database door de volgende stappen te doen. <br>
- 10.1 Login in op en gebruikt SQL server authentication als authentication method <br>
-     ![image](https://github.com/user-attachments/assets/6a93a2ee-8cd9-4001-ac1b-fa8ff2ac343a) <br>
- 10.2 Rechte muis klik op databases <br>
- 10.3 Klik op New Database:<br>
-   ![image](https://github.com/user-attachments/assets/a6dd6c1c-d2ae-4dc5-9eef-8d8e62505f75) <br>
- 10.4 Maak een database aan met een zelfgekozen naam: <br>
-   ![image](https://github.com/user-attachments/assets/d01f722b-abb2-45e1-9561-4cc78c5b9c0d) <br>
- 10.5 Klik op OK <br>
- 10.6 de Database zou nu moeten verschijnen: <br>
-   ![image](https://github.com/user-attachments/assets/18bd853a-ee42-4f2a-83fd-6848b00ea61f) <br>
- 10.7 Klik op restore database: <br>
-   ![image](https://github.com/user-attachments/assets/a6dd6c1c-d2ae-4dc5-9eef-8d8e62505f75) <br>
- 10.8 klik bij source op device en *add* de .bak file: <br>
-   ![image](https://github.com/user-attachments/assets/c3534333-7bb2-4742-9a90-8688082d1a79) <br>
- 10.9 de restore moet eruit zien als hierboven klik daarna op OK. <br>
- 10.10 de database is nu overgenomen. <br>            
+ 10.1 Open de scripts.sql bestand in SQL Server management en klik op 'Execute' <br>
+     ![image](https://github.com/user-attachments/assets/c8e73acd-2dd0-451c-9f8b-1c8cc2136727)<br>
+ 10.2 de database is nu overgenomen. <br>            
 11. Open de TF6240 Database server <br>
  11.1  klik op new DB connection: <br>
    ![image](https://github.com/user-attachments/assets/0e093b66-f8a4-45c8-8217-f0af25ead18f) <br>
