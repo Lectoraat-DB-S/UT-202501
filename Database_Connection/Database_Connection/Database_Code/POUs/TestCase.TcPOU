@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TestCase" Id="{a3fe7a8e-f4e4-476a-ae55-c6e8c16791f1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION TestCase : BOOL
+VAR_INPUT
+	
+END_VAR
+VAR
+	//test case variables
+ 	CycleCounter : INT := 0;
+    State : INT := 0;
+	TargetPosition: UDINT;
+	WaitingAtMid : BOOL;
+	//timer for motor delay
+	tHomeTimer: TON;
+	tHomeInterval: TIME := T#10S;
+	//variables that needs to be connected to motor
+	oMotorVelocity : INT;
+	oMotorPosition : UDINT;
+	oMotorExecute : BOOL;
+	oStartPosition : UDINT;
+	RealMotorPosition : UDINT;
+	iMotorReady : BOOL;
+	iMotorBusy : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//THIS MOVES THE MACHINE TO THE OUTER 2 POINTS FOR A NUMBER OF TIMES
+//Copy to main to test it 
+// === Test Movement State Machine ===
+CASE State OF
+
+0: // Initialization
+    oMotorVelocity := 400;
+	tHomeTimer(PT := tHomeInterval);
+    WaitingAtMid := FALSE;
+    State := 1;
+
+1: // Prepare move
+    IF iMotorReady THEN
+        oMotorPosition := TargetPosition;
+        oMotorExecute := TRUE;
+        State := 2;
+    END_IF
+
+2: // Wait for motion to midpoint or endpoint
+    IF NOT WaitingAtMid AND ABS(RealMotorPosition - oStartPosition) < 100 THEN
+        oMotorExecute := FALSE; // Stop motor at center
+        WaitingAtMid := TRUE;
+    END_IF
+
+    IF WaitingAtMid THEN
+        tHomeTimer(IN := TRUE);
+        IF tHomeTimer.Q THEN
+            // Start move to end after wait
+            oMotorPosition := TargetPosition;
+            oMotorExecute := TRUE;
+            WaitingAtMid := FALSE;
+            //TimerDone := TRUE; // Optional flag to track post-wait move
+            tHomeTimer(IN := FALSE);
+        END_IF
+    ELSE
+        tHomeTimer(IN := FALSE);
+    END_IF
+
+    // Wait for endpoint after resume
+    IF  ABS(RealMotorPosition - TargetPosition) < 100 THEN
+        oMotorExecute := FALSE; // Stop after reaching end
+        //TimerDone := FALSE;
+        State := 3;
+    END_IF
+
+3: // Toggle position and increment counter
+    IF TargetPosition = 0 THEN
+        TargetPosition := 314000;
+    ELSE
+        TargetPosition := 0;
+    END_IF
+
+    CycleCounter := CycleCounter + 1;
+
+    IF CycleCounter >= 5 THEN
+        State := 4;
+    ELSE
+        State := 1;
+    END_IF
+
+4: // Final stop
+    IF iMotorReady THEN
+	oMotorPosition := oStartPosition;
+    oMotorExecute := TRUE;
+	END_IF
+    IF NOT iMotorBusy THEN
+        oMotorExecute := FALSE;
+    END_IF
+
+END_CASE 
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

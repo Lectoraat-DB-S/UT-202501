@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="TempConvert" Id="{f87405c0-04cc-4aa6-a539-60033f466e23}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION TempConvert : STRING
+VAR_INPUT
+	iTempSensorValue : INT;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[TempConvert := CONCAT(INT_TO_STRING(iTempSensorValue / 10), '.');   // Whole number part
+TempConvert := CONCAT(TempConvert, INT_TO_STRING(ABS(iTempSensorValue MOD 10)));  // Decimal part]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

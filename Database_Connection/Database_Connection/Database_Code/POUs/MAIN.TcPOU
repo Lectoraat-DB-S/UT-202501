@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="MAIN" Id="{4ef234f8-6ebd-4fcd-beba-a435a8463d67}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR CONSTANT
+	//check variables
+	PositiveDegrees : REAL := 0.1; 
+	DifferenceDegrees : REAL := 0.1; 
+	UpperBoundDegrees : INT := 9;
+	LowerBoundDegrees : INT := -9;
+	ZeroDegrees : REAL := 0.0;
+	//convert variables
+	ConvertToSec : INT := 1000;
+	InvertDegrees : INT := -1;
+	//time constant	
+	tHomingStartInterval: TIME := T#25S;
+	tHomingInterval: TIME := T#5S;
+	//motor constants
+	SlowestMotorSpeed : INT := 100;
+	FastestMotorSpeed : INT := 1500;
+	DefaultMotorSpeed : INT := 500;
+	MotorLeftEdge : UDINT := 314000;
+	MotorRightEdge : UDINT := 0;
+	MotorStartValue : UDINT := 157000;
+END_VAR
+
+
+VAR
+    //database variables
+	FB_SQLDatabaseEvt : FB_SQLDatabaseEvt(sNetID := sLocalID, tTimeout := T#10S);
+    FB_SQLCommandEvt  : FB_SQLCommandEvt(sNetID := sLocalID, tTimeout := T#10S);
+    FB_SQLResultEvt   : FB_SQLResultEvt(sNetID := sLocalID, tTimeout := T#10S);
+	SQL_Commands: ARRAY[1..10] OF STRING(500);
+	DataBase_Connection: BOOL := FALSE;
+   
+	//inputs from sensor
+    iLoadCellValue AT %I*: INT;
+	iLoadCellPreviousValue : INT;
+	iTempSensor1Value AT %I*: INT;
+	iTempSensor2Value AT %I*: INT;
+	iTempSensor3Value AT %I*: INT;
+	iTempSensor4Value AT %I*: INT;
+	iEncoderValue AT %I*: UDINT;
+	iLichtSluisValue1 AT %I* : BOOL;
+	iLichtSluisValue2 AT %I* : BOOL;
+	iCapacitief1Value AT %I* : INT;
+	iCapacitief2Value AT %I* : INT;
+
+	//Strings to insert
+	iSensorIDs : ARRAY[1..4] OF INT := [1,2,3,4];
+	fbBufferManager: FB_BufferManager;
+	//sample control
+	SampleDone : BOOL; 
+	SampleTrigger: BOOL;
+	InsertingDone : BOOL;
+	// INSERT state machine control
+	TempInsert: INT ;
+	
+	//HMI Outputs
+	iEncoderMotor : REAL;
+	iLoadCellMotor : INT;
+	iMotorSpeed : INT;
+	iMetingen : INT;
+	iTijd : INT;
+	iTijdMeting : INT;
+	iTijdSample : INT;
+	
+	//hmi display variables
+	Temp1Value: STRING;  
+	Temp2Value: STRING;
+	Temp3Value: STRING;
+	Temp4Value: STRING;
+	
+	//hmi variables
+	bConfirm : BOOL;
+	bStart : BOOL;
+	bStop : BOOL := TRUE;
+	Process_Status : BOOL; 
+	bStartEnabled: BOOL;
+	bDatalogView : BOOL;
+	bActuatorView : BOOL;
+	
+	//measurement control
+	TijdConvertUitwijking : TIME;
+	TijdConvertMeting : TIME;
+	TijdConvertSample: TIME;
+	tUitwijkingTimer: TON; (* Timer to control wait time *) 
+	tMetingTimer : TON; (* Timer to control measurement time*)
+	tInsertTimer: TON; (* Timer to control insert intervals *)
+	MeasurementsCompleted : INT;
+	RealMotorPosition AT %I* : UDINT;
+	MeasurementState: INT;
+	
+	//motor controls
+	oMotorEnable AT %Q*: BOOL;
+	oMotorExecute AT %Q*: BOOL;
+	oMotorVelocity AT %Q*: INT;
+	oMotorPosition AT %Q*: UDINT;
+	oStartPosition AT %Q* : UDINT;
+	oEnableStart AT %Q* : BOOL;
+	oMotorStartType AT %Q* : INT;
+	oMotorReset AT %Q* : BOOL;
+	iMotorStatus AT %I* : BOOL;
+	iMotorCalibrated AT %I* : BOOL;
+	iMotorReady AT %I* : BOOL;
+	iMotorBusy AT %I* : BOOL;
+	iMotorWarning AT %I* : BOOL;
+	//Homing controls
+	HomingEdgeR : F_TRIG;
+	HomingEdgeL : F_TRIG;
+	Homing : INT := 0;
+	HomingDone : BOOL;
+	HomingDelayTimer: TON;
+	HomingStartTimer : TON;
+
+	//motor loadcell control
+	iMotorExecutePOS AT %Q* : BOOL;
+	iMotorExecuteNEG AT %Q* : BOOL;
+	
+	//conversion variables
+	TestForce : INT;
+	iEncoderDegrees: LREAL;
+	CapacitiveDistance1 : LREAL;
+	CapacitiveDistance2 : LREAL;
+
+END_VAR
+
+VAR PERSISTENT
+		iSampleNr: INT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+//conversion variables for measurement and hmi control
+iEncoderDegrees := EncoderConvert(iEncoderValue); 
+TestForce := LoadcellConvert(iLoadCellValue);
+CapacitiveDistance1 := CapacitiveConvert(iCapacitief1Value);
+CapacitiveDistance2 := CapacitiveConvert(iCapacitief2Value);
+Temp1Value := TempConvert(iTempSensor1Value);
+Temp2Value := Tempconvert(iTempSensor2Value);
+Temp3Value := TempConvert(iTempSensor3Value);
+Temp4Value := TempConvert(iTempSensor4Value);
+
+//make connection to the database
+IF NOT DataBase_Connection THEN
+    FB_SQLDatabaseEvt.Connect(hDBID := 1);  // Attempt to connect
+
+    // Wait until the connection is established
+    IF FB_SQLDatabaseEvt.bConnected THEN
+        FB_SQLDatabaseEvt.CreateCmd(pSQLCommand := ADR(FB_SQLCommandEvt));
+        DataBase_Connection := TRUE;
+    END_IF;
+
+END_IF
+
+
+//check status of motor and reset if necessary
+IF iMotorStatus OR NOT iMotorCalibrated THEN
+    oMotorReset := TRUE;
+ELSE
+    oMotorReset := FALSE;
+END_IF
+
+//execute homing process
+IF NOT HomingDone THEN
+// === Edge Detection (run every cycle) ===	
+HomingEdgeR(CLK := iLichtSluisValue2); // Falling edge
+HomingEdgeL(CLK := iLichtSluisValue1); // Falling edge
+
+// === Homing State Machine ===
+CASE Homing OF
+0: // Initialization
+    oStartPosition := MotorStartValue;
+    oEnableStart := TRUE;
+    oEnableStart := FALSE;
+    oMotorEnable := TRUE;
+    oMotorVelocity := DefaultMotorSpeed;
+	HomingDelayTimer(PT := tHomingInterval);
+	HomingStartTimer(PT := tHomingStartInterval);
+    Homing := 1;
+
+1: // Try moving CW
+    IF iLichtSluisValue1 THEN
+        oMotorPosition := MotorRightEdge;
+        oMotorExecute := TRUE;
+        Homing := 10;
+    ELSE
+        Homing := 2; // Try CCW
+    END_IF
+
+2: // Try moving CCW
+    IF iLichtSluisValue2 THEN
+        oMotorPosition := MotorLeftEdge;
+        oMotorExecute := TRUE;
+        Homing := 10;
+    ELSE
+        Homing := 1; // Back to CW
+    END_IF
+
+10: // Wait for sensor falling edge (center detected)
+	HomingStartTimer(IN:= TRUE);
+    IF (HomingEdgeL.Q OR HomingEdgeR.Q) OR HomingStartTimer.Q THEN
+        oMotorExecute := FALSE;
+        Homing := 11;
+    END_IF
+
+11: // Finalize homing
+    oStartPosition := MotorStartValue;
+    oEnableStart := TRUE;
+	//wait for motor to turn off 
+	HomingDelayTimer(IN:= TRUE);
+    IF HomingDelayTimer.Q THEN
+        HomingDone := TRUE;
+    END_IF
+END_CASE
+
+ELSE
+	
+	//HMI Controls
+IF bConfirm AND HomingDone THEN
+		TijdConvertUitwijking := INT_TO_TIME(iTijd) * ConvertToSec; //set to seconds
+		TijdConvertMeting := INT_TO_TIME(iTijdMeting) * ConvertToSec; //set to seconds
+		TijdConvertSample := INT_TO_TIME(iTijdSample) * ConvertToSec; //set to seconds
+		IF iEncoderMotor > UpperBoundDegrees OR iEncoderMotor < LowerBoundDegrees THEN
+		iEncoderMotor := ZeroDegrees;
+		END_IF
+		IF iMotorSpeed < SlowestMotorSpeed OR iMotorSpeed > FastestMotorSpeed THEN
+			iMotorSpeed := DefaultMotorSpeed;
+		END_IF
+		bStartEnabled := TRUE;
+		//reset state for next measurement
+		MeasurementState := 0;	
+END_IF
+	
+IF bStart AND NOT bStop THEN
+
+    CASE MeasurementState OF
+
+      0: // Initialize	
+        Process_Status := TRUE;
+        oMotorEnable := TRUE;
+        oMotorVelocity := iMotorSpeed;
+        //Create timers
+        tUitwijkingTimer(PT := TijdConvertUitwijking); 
+        tMetingTimer(PT := TijdConvertMeting);
+		tInsertTimer(PT := TijdConvertSample);
+		
+		IF TestForce < iLoadCellMotor THEN
+			//move motor Clockwise
+			iMotorExecuteNEG := TRUE;
+		ELSIF TestForce > iLoadCellmotor THEN
+			//move motor CounterClockwise
+			iMotorExecutePOS := TRUE;
+		END_IF
+		
+		//loadcell is set at chosen Newtons 
+       // IF TestForce = iLoadCellMotor THEN
+		//stop motor
+		iMotorExecutePOS := FALSE;
+		iMotorExecuteNEG := FALSE;	
+		//Insert Loadcell value at Start 
+		iSampleNr := iSampleNr + 1;
+        SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(LoadcellConvert(iLoadCellValue), iSampleNr);
+        FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1]));
+        
+		//go to next state
+        MeasurementState := 1;
+		//END_IF
+
+      1: //Wait at start
+        tMetingTimer(IN := TRUE); // Start timer 
+		  //wait before moving motor to chosen position			
+        IF tMetingTimer.Q THEN 
+		tInsertTimer(IN := TRUE); //start timer
+		//insert data for buffer
+		SampleTrigger := TRUE;
+		SampleDone := FALSE; //stop Insert
+		
+		//insert temp sensor
+		SQL_Commands[3] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor1Value), iSampleNr, iSensorIDs[1], MeasurementsCompleted);
+		SQL_Commands[4] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor2Value), iSampleNr, iSensorIDs[2], MeasurementsCompleted);
+		SQL_Commands[7] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor3Value), iSampleNr, iSensorIDs[3], MeasurementsCompleted);
+		SQL_Commands[8] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor4Value), iSampleNr, iSensorIDs[4], MeasurementsCompleted);
+		CASE TempInsert OF
+		0:	//execute Temp 1 INSERT
+		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[3]), cbSQLCmd := SIZEOF(SQL_Commands[3])) THEN
+            TempInsert := 1;
+        END_IF
+		1:	//execute Temp 2 INSERT
+		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[4]), cbSQLCmd := SIZEOF(SQL_Commands[4])) THEN
+            TempInsert := 2;
+        END_IF
+		2:	//execute Temp 3 INSERT
+		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[7]), cbSQLCmd := SIZEOF(SQL_Commands[7])) THEN
+            TempInsert := 3;
+        END_IF
+		3:	//execute Temp 4 INSERT
+		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[8]), cbSQLCmd := SIZEOF(SQL_Commands[8])) THEN
+            TempInsert := 0;
+        END_IF
+		END_CASE
+		
+		 //sampling done move to position and insert data	
+		 IF tInsertTimer.Q THEN
+		 	SampleDone := TRUE; //start insert
+			
+            IF iEncoderMotor > PositiveDegrees THEN
+                oMotorPosition := MotorLeftEdge; 
+            ELSE
+                oMotorPosition := MotorRightEdge;
+            END_IF
+			tInsertTimer(IN := FALSE); //stop timer
+            oMotorExecute := TRUE;
+            MeasurementState := 2;     
+       	 END_IF
+		END_IF
+		
+      2: //move to chosen degrees 
+        IF ABS(iEncoderDegrees - iEncoderMotor) < DifferenceDegrees THEN
+    	    oMotorExecute := FALSE; //stop motor
+            tMetingTimer(IN := FALSE); // Stop Metingtimer
+            tUitwijkingTimer(IN := TRUE);  //start Uitijwkingtimer
+        END_IF
+        //wait at chosen degrees
+        IF tUitwijkingTimer.Q THEN
+            //Move motor back TO start position 
+            oMotorPosition := oStartPosition;
+            oMotorExecute := TRUE;
+            MeasurementState := 3;     
+        END_IF
+
+      3: //restart measurement
+        IF RealMotorPosition = oStartPosition THEN
+            MeasurementsCompleted := MeasurementsCompleted + 1;
+            tUitwijkingTimer(IN := FALSE); // Stop timer
+            oMotorExecute := FALSE; //stop motor
+			iEncoderMotor := iEncoderMotor * InvertDegrees;
+            MeasurementState := 4;
+        END_IF
+
+      4: //check if measurments are complete
+        IF MeasurementsCompleted = iMetingen THEN
+            MeasurementsCompleted := 0;  
+            MeasurementState := 5;
+        ELSE
+            MeasurementState := 1;     
+        END_IF
+
+      5: // Stop measurement
+        bStop := TRUE; // reset bStop
+        MeasurementState := 0; //reset state machine
+    END_CASE
+END_IF
+END_IF
+// end measurements
+IF bStop AND HomingDone THEN
+    Process_Status := FALSE; //hmi update
+	bStart := FALSE;
+	InsertingDone := fbBufferManager.bInsertingData;
+	IF(RealMotorPosition <> oStartPosition) THEN
+		oMotorPosition := oStartPosition;
+		oMotorExecute := TRUE;
+	ELSE
+		oMotorEnable := FALSE;
+    	oMotorExecute := FALSE;
+	END_IF    
+END_IF
+	//insert buffer to database
+	fbBufferManager(
+    SampleDone := SampleDone,
+	SampleTrigger := SampleTrigger,
+    SampleNr := iSampleNr,
+    MeasurementNr := MeasurementsCompleted,
+    EncoderValue := iEncoderValue,
+    Cap1Value := iCapacitief1Value,
+    Cap2Value := iCapacitief2Value);
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

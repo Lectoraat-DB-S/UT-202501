@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="Global_Variables" Id="{592dda55-669d-4363-87cb-faf5f8692ce1}">
+    <Declaration><![CDATA[VAR_GLOBAL
+    g_aSensorBuffer : ARRAY[0..g_aSensorBuffers, 0..g_aSensorBufferSize] OF ST_SensorData; // aSensorBuffers buffers of aSensorBufferSize samples each
+    g_aWriteSQL     : ARRAY[0..g_ASensorBuffers] OF BOOL;                 // Marks buffers ready for DB insert
+	
+END_VAR
+
+VAR_GLOBAL CONSTANT
+	g_aSensorBufferSize : INT := 999;
+	g_aSensorBuffers : INT := 3600;
+	sLocalID : STRING := '145.44.56.240.1.1'; //ams net id of database host
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -1,0 +1,12 @@
+{
+    "RUNTIMES": {
+        "CX-45B9A2": {
+            "ENABLED": true,
+            "NETID": "10.100.5.10.1.1",
+            "PORT": 851,
+            "READ_ONLY": false,
+            "SYMBOLS": {},
+            "USE_WHITELISTING": false
+        }
+    }
+}

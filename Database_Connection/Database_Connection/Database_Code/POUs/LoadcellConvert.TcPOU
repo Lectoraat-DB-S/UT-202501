@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="LoadcellConvert" Id="{48d51865-7f04-4765-b816-c0f17f10452b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION LoadcellConvert : INT
+VAR_INPUT
+	LoadCellValue : INT;
+END_VAR
+VAR
+	Voltage : REAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Convert raw value to voltage
+Voltage := INT_TO_REAL(LoadCellValue)/32767 * 10;
+//convert voltage to Newtons(N) 
+LoadCellConvert := REAL_TO_INT(Voltage * 980.7);
+
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="CapacitiveConvert" Id="{f9e5da16-e9c9-454f-9eeb-5ee44ea25c10}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION CapacitiveConvert : LREAL
+VAR_INPUT
+	  iRawValue     : INT;     // EL3074 raw value
+END_VAR
+VAR
+  
+    fVoltage      : LREAL;   // Converted voltage from raw value
+    fScaleFactor  : LREAL := 100;   // µm per volt (from CPL190/290 calibration)
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Convert raw value to voltage
+fVoltage := INT_TO_LREAL(iRawValue)/32767.0 * 10.0 ;
+
+// Convert voltage to distance (µm)
+CapacitiveConvert := fVoltage * fScaleFactor;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
