@@ -59,7 +59,7 @@ https://www.beckhoff.com/en-en/products/automation/twincat/twincat-3-build-4026/
 
 ###  Twincat package manager
 tijdens het opstellen van twincat package managere kies bij feeds de *Stable feed* en login met je beckhoff account.
-bij ### Intergration selecteer beide Shells. volg hierna de stappen volgens het programma.
+bij *Intergration* selecteer beide Shells. volg hierna de stappen volgens het programma.
 
 
 SQL Server management studio om de database te hosten op je lokale pc. hiervoor is versie **20.2.1** gebruikt.
