@@ -93,9 +93,9 @@
 </div>
 <div id="TextLoadcell" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="56" data-tchmi-height-unit="px" data-tchmi-left="931" data-tchmi-left-unit="px" data-tchmi-text="LoadCell" data-tchmi-top="486" data-tchmi-top-unit="px" data-tchmi-width="276" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-style="Auto" data-tchmi-text-font-weight="Bold" data-tchmi-text-font-size="32" data-tchmi-zindex="2">
 </div>
-<div id="DisplayTemp4_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="42" data-tchmi-height-unit="px" data-tchmi-left="931" data-tchmi-left-unit="px" data-tchmi-top="610" data-tchmi-top-unit="px" data-tchmi-width="51" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="2" data-tchmi-text-font-size="23" data-tchmi-text="%s%ADS.PLC1.MAIN.TestForce%/s%">
+<div id="DisplayTemp4_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="42" data-tchmi-height-unit="px" data-tchmi-left="931" data-tchmi-left-unit="px" data-tchmi-top="610" data-tchmi-top-unit="px" data-tchmi-width="71" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="2" data-tchmi-text-font-size="23" data-tchmi-text="%s%ADS.PLC1.MAIN.TestForce%/s%">
 </div>
-<div id="TextNewtonSign" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="42" data-tchmi-height-unit="px" data-tchmi-left="983" data-tchmi-left-unit="px" data-tchmi-text=" N" data-tchmi-top="610" data-tchmi-top-unit="px" data-tchmi-width="53" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="23" data-tchmi-zindex="1">
+<div id="TextNewtonSign" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="42" data-tchmi-height-unit="px" data-tchmi-left="1002" data-tchmi-left-unit="px" data-tchmi-text=" N" data-tchmi-top="610" data-tchmi-top-unit="px" data-tchmi-width="53" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-font-size="23" data-tchmi-zindex="1">
 </div>
 <div id="FrameLoadCell" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="199" data-tchmi-height-unit="px" data-tchmi-left="894" data-tchmi-left-unit="px" data-tchmi-top="545" data-tchmi-top-unit="px" data-tchmi-width="314" data-tchmi-width-unit="px" data-tchmi-zindex="0">
 </div>

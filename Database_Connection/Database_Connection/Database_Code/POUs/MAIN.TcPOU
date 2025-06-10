@@ -15,6 +15,7 @@ VAR CONSTANT
 	//time constant	
 	tHomingStartInterval: TIME := T#25S;
 	tHomingInterval: TIME := T#5S;
+	tloadcellInterval: TIME := T#5S;
 	//motor constants
 	SlowestMotorSpeed : INT := 100;
 	FastestMotorSpeed : INT := 1500;
@@ -114,9 +115,12 @@ VAR
 	HomingStartTimer : TON;
 
 	//motor loadcell control
-	iMotorExecutePOS AT %Q* : BOOL;
-	iMotorExecuteNEG AT %Q* : BOOL;
-	
+	oLoadcellPush AT %Q* : BOOL;
+	oLoadcellPull AT %Q* : BOOL;
+	oLoadcellPressure AT %Q* : INT := 0;
+	iSwitchPUSH AT %I* : BOOL;
+	iSwitchPULL AT %I* : BOOL := TRUE;
+	LoadcellDelayTimer: TON;
 	//conversion variables
 	TestForce : INT;
 	iEncoderDegrees: LREAL;
@@ -214,8 +218,32 @@ CASE Homing OF
 END_CASE
 
 ELSE
-	
-	//HMI Controls
+//loadcell switch control
+LoadcellDelayTimer(IN:= TRUE);
+IF LoadcellDelayTimer.Q THEN   
+//move loadcell based on switch input
+IF iSwitchPUSH AND NOT bStart THEN
+	//push loadcell
+	oLoadcellPull := FALSE;
+	oLoadcellPush := TRUE;
+	oLoadcellPressure := oLoadcellPressure + 3;
+	IF oLoadcellPressure > 32700 THEN
+	oLoadCellPressure := 32700;
+	END_IF		
+ELSIF iSwitchPULL AND NOT bStart THEN
+	//pull loadcell
+	oLoadcellPush := FALSE;
+	oLoadcellPull := TRUE;
+	oLoadcellPressure := oLoadcellPressure - 3;
+	IF oLoadcellPressure < 0 THEN
+	oLoadCellPressure := 0;
+	END_IF
+ELSIF NOT iSwitchPULL AND NOT iSwitchPUSH THEN
+	oLoadcellPush := FALSE;
+	oLoadcellPull := FALSE;	
+END_IF
+END_IF	
+//HMI Configuration
 IF bConfirm AND HomingDone THEN
 		TijdConvertUitwijking := INT_TO_TIME(iTijd) * ConvertToSec; //set to seconds
 		TijdConvertMeting := INT_TO_TIME(iTijdMeting) * ConvertToSec; //set to seconds
@@ -230,7 +258,7 @@ IF bConfirm AND HomingDone THEN
 		//reset state for next measurement
 		MeasurementState := 0;	
 END_IF
-	
+//Measurement	
 IF bStart AND NOT bStop THEN
 
     CASE MeasurementState OF
@@ -245,18 +273,20 @@ IF bStart AND NOT bStop THEN
 		tInsertTimer(PT := TijdConvertSample);
 		
 		IF TestForce < iLoadCellMotor THEN
-			//move motor Clockwise
-			iMotorExecuteNEG := TRUE;
+			//push pnuematic 
+			oLoadcellPush := TRUE;
+			oLoadcellPressure := oLoadcellPressure + 3;
 		ELSIF TestForce > iLoadCellmotor THEN
-			//move motor CounterClockwise
-			iMotorExecutePOS := TRUE;
+			//pull pnuematic
+			oLoadcellPull := TRUE;
+			oLoadcellPressure := oLoadcellPressure - 3;
 		END_IF
 		
 		//loadcell is set at chosen Newtons 
-       // IF TestForce = iLoadCellMotor THEN
+        IF TestForce = iLoadCellMotor THEN
 		//stop motor
-		iMotorExecutePOS := FALSE;
-		iMotorExecuteNEG := FALSE;	
+		oLoadcellPush := FALSE;
+		oLoadcellPull := FALSE;	
 		//Insert Loadcell value at Start 
 		iSampleNr := iSampleNr + 1;
         SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(LoadcellConvert(iLoadCellValue), iSampleNr);
@@ -264,7 +294,7 @@ IF bStart AND NOT bStop THEN
         
 		//go to next state
         MeasurementState := 1;
-		//END_IF
+		END_IF
 
       1: //Wait at start
         tMetingTimer(IN := TRUE); // Start timer 
@@ -355,7 +385,13 @@ END_IF
 IF bStop AND HomingDone THEN
     Process_Status := FALSE; //hmi update
 	bStart := FALSE;
+	MeasurementState := 11;
+	//reset loadcell
+	oLoadcellPull := TRUE;
+	oLoadCellPressure := 0;
+	//insert done
 	InsertingDone := fbBufferManager.bInsertingData;
+	//home back to starter position
 	IF(RealMotorPosition <> oStartPosition) THEN
 		oMotorPosition := oStartPosition;
 		oMotorExecute := TRUE;
