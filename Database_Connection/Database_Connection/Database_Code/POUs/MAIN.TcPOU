@@ -92,6 +92,7 @@ VAR
 	RealMotorPosition AT %I* : UDINT;
 	MeasurementState: INT;
 	Click : BOOL;
+	Startup : BOOL;
 	
 	//motor controls
 	oMotorEnable AT %Q*: BOOL;
@@ -118,7 +119,7 @@ VAR
 	//motor loadcell control
 	oLoadcellPush AT %Q* : BOOL;
 	oLoadcellPull AT %Q* : BOOL;
-	oLoadcellPressure AT %Q* : INT := 0;
+	oLoadcellPressure AT %Q* : INT;
 	iSwitchPUSH AT %I* : BOOL;
 	iSwitchPULL AT %I* : BOOL := TRUE;
 	LoadcellDelayTimer: TON;
@@ -215,15 +216,17 @@ CASE Homing OF
 	HomingDelayTimer(IN:= TRUE);
     IF HomingDelayTimer.Q THEN
         HomingDone := TRUE;
+		oMotorEnable := FALSE;
+    	oMotorExecute := FALSE;
     END_IF
 END_CASE
-
-ELSE
+END_IF
+	
 //loadcell switch control
 LoadcellDelayTimer(IN:= TRUE);
-IF LoadcellDelayTimer.Q THEN   
+IF LoadcellDelayTimer.Q  AND NOT bStart THEN   
 //move loadcell based on switch input
-IF iSwitchPUSH AND NOT bStart THEN
+IF iSwitchPUSH THEN
 	//push loadcell
 	oLoadcellPull := FALSE;
 	oLoadcellPush := TRUE;
@@ -231,11 +234,11 @@ IF iSwitchPUSH AND NOT bStart THEN
 	IF oLoadcellPressure > 32700 THEN
 	oLoadCellPressure := 32700;
 	END_IF		
-ELSIF iSwitchPULL AND NOT bStart THEN
+ELSIF iSwitchPULL THEN
 	//pull loadcell
 	oLoadcellPush := FALSE;
 	oLoadcellPull := TRUE;
-	oLoadcellPressure := oLoadcellPressure - 3;
+	oLoadcellPressure := 0;
 	IF oLoadcellPressure < 0 THEN
 	oLoadCellPressure := 0;
 	END_IF
@@ -243,7 +246,9 @@ ELSIF NOT iSwitchPULL AND NOT iSwitchPUSH THEN
 	oLoadcellPush := FALSE;
 	oLoadcellPull := FALSE;	
 END_IF
-END_IF	
+END_IF
+
+	
 //HMI Configuration
 IF bConfirm AND HomingDone THEN
 		TijdConvertUitwijking := INT_TO_TIME(iTijd) * ConvertToSec; //set to seconds
@@ -256,15 +261,18 @@ IF bConfirm AND HomingDone THEN
 			iMotorSpeed := DefaultMotorSpeed;
 		END_IF
 		bStartEnabled := TRUE;
+		Startup := TRUE;
 		//reset state for next measurement
 		MeasurementState := 0;	
 END_IF
 //Measurement	
-IF bStart AND NOT bStop THEN
+IF bStart AND HomingDone AND NOT bStop THEN
 
     CASE MeasurementState OF
 
-      0: // Initialize	
+      0: // Initialize
+		//run this code only once
+		IF Startup THEN	
         Process_Status := TRUE;
         oMotorEnable := TRUE;
         oMotorVelocity := iMotorSpeed;
@@ -272,20 +280,24 @@ IF bStart AND NOT bStop THEN
         tUitwijkingTimer(PT := TijdConvertUitwijking); 
         tMetingTimer(PT := TijdConvertMeting);
 		tInsertTimer(PT := TijdConvertSample);
+		oLoadcellPull := TRUE;
+		oLoadCellPressure := 0;
+		Startup := FALSE;
+		END_IF
 		
 		IF TestForce < iLoadCellMotor THEN
-			//push pnuematic 
+			//push pnuematic
+			oLoadcellPull := FALSE; 
 			oLoadcellPush := TRUE;
 			oLoadcellPressure := oLoadcellPressure + 3;
-		ELSIF TestForce > iLoadCellmotor THEN
-			//pull pnuematic
-			oLoadcellPull := TRUE;
-			oLoadcellPressure := oLoadcellPressure - 3;
+			IF oLoadcellPressure > 32700 THEN
+			   oLoadCellPressure := 32700;
+			END_IF		
 		END_IF
 		
 		//loadcell is set at chosen Newtons 
         IF TestForce = iLoadCellMotor THEN
-		//stop motor
+		//stop pnuematic
 		oLoadcellPush := FALSE;
 		oLoadcellPull := FALSE;	
 		//Insert Loadcell value at Start 
@@ -382,12 +394,12 @@ IF bStart AND NOT bStop THEN
 		Click := TRUE;
     END_CASE
 END_IF
-END_IF
+
 // end measurements
-IF bStop AND HomingDone  AND Click THEN
+IF bStop AND Click THEN
     Process_Status := FALSE; //hmi update
 	bStart := FALSE;
-	MeasurementState := 11;
+	MeasurementState := 0; //reset state machine
 	//reset loadcell
 	oLoadcellPull := TRUE;
 	oLoadCellPressure := 0;
@@ -395,13 +407,14 @@ IF bStop AND HomingDone  AND Click THEN
 	InsertingDone := fbBufferManager.bInsertingData;
 	//home back to starter position
 	IF(RealMotorPosition <> oStartPosition) THEN
+		oMotorExecute := FALSE;
 		oMotorPosition := oStartPosition;
 		oMotorExecute := TRUE;
 	ELSE
 		oMotorEnable := FALSE;
     	oMotorExecute := FALSE;
-	END_IF
-	Click := FALSE;    
+		Click := FALSE;  
+	END_IF	 
 END_IF
 	//insert buffer to database
 	fbBufferManager(
