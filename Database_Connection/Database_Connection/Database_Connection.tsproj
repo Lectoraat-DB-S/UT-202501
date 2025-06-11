@@ -101,7 +101,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{F88F7A59-9E7F-4523-9C0E-4BD9DABD5D28}" Name="Database_Code" PrjFilePath="Database_Code\Database_Code.plcproj" TmcFilePath="Database_Code\Database_Code.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{1602D9EE-FBF5-C685-79EF-23510BB3FC64}" TmcPath="Database_Code\Database_Code.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{3444E733-DAF3-071A-7559-D13AE20C137F}" TmcPath="Database_Code\Database_Code.tmc">
 					<Name>Database_Code Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -116,16 +116,12 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.oMotorVelocity</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
 							<Name>MAIN.oEnableStart</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.oMotorReset</Name>
-							<Type>BOOL</Type>
+							<Name>MAIN.oMotorVelocity</Name>
+							<Type>INT</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.oMotorPosition</Name>
@@ -138,6 +134,10 @@
 						<Var>
 							<Name>MAIN.oMotorStartType</Name>
 							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.oMotorReset</Name>
+							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.oLoadcellPush</Name>

@@ -91,6 +91,7 @@ VAR
 	MeasurementsCompleted : INT;
 	RealMotorPosition AT %I* : UDINT;
 	MeasurementState: INT;
+	Click : BOOL;
 	
 	//motor controls
 	oMotorEnable AT %Q*: BOOL;
@@ -378,11 +379,12 @@ IF bStart AND NOT bStop THEN
       5: // Stop measurement
         bStop := TRUE; // reset bStop
         MeasurementState := 0; //reset state machine
+		Click := TRUE;
     END_CASE
 END_IF
 END_IF
 // end measurements
-IF bStop AND HomingDone THEN
+IF bStop AND HomingDone  AND Click THEN
     Process_Status := FALSE; //hmi update
 	bStart := FALSE;
 	MeasurementState := 11;
@@ -398,7 +400,8 @@ IF bStop AND HomingDone THEN
 	ELSE
 		oMotorEnable := FALSE;
     	oMotorExecute := FALSE;
-	END_IF    
+	END_IF
+	Click := FALSE;    
 END_IF
 	//insert buffer to database
 	fbBufferManager(

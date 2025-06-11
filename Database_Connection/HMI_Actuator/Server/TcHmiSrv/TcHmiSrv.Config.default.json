@@ -699,6 +699,16 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.MAIN.Click": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::Click",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.MAIN.HomingDone": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -7642,6 +7652,7 @@
                 "ADS.CX_45B9A2.MAIN.iTijdMeting": 3,
                 "ADS.CheckLicense": 3,
                 "ADS.Diagnostics": 3,
+                "ADS.PLC1.MAIN.Click": 3,
                 "ADS.PLC1.MAIN.HomingDone": 3,
                 "ADS.PLC1.MAIN.InsertingDone": 3,
                 "ADS.PLC1.MAIN.MeasurementsCompleted": 3,
