@@ -58,7 +58,7 @@ Twincat package manager om de twincat XAE shell, database server en hmi modules 
 https://www.beckhoff.com/en-en/products/automation/twincat/twincat-3-build-4026/
 
 ###  Twincat package manager
-tijdens het opstellen van twincat package manager kies bij feeds de *Stable feed* en login met je beckhoff account.
+tijdens het opstellen van twincat package manager kies bij feed URL de *Stable feed* en login met je beckhoff account.
 bij *Intergration* selecteer beide Shells. volg hierna de stappen volgens het programma.
 
 
