@@ -65,6 +65,16 @@ bij *Intergration* selecteer beide Shells. volg hierna de stappen volgens het pr
 SQL Server management studio om de database te hosten op je lokale pc. hiervoor is versie **20.2.1** gebruikt.
 https://learn.microsoft.com/nl-nl/ssms/release-history#release-dates-and-build-numbers
 
+### ERRORS
+wanneer tijdens het opstellen errors zijn kunnen de volgende cursussen erg van belang zijn:
+Getting Started
+Source control
+link naar de cursussen
+https://learn.beckhoffus.com/dashboard <br>
+als er database connectie problemen zijn is de volgende tutorial handig:
+https://twincontrols.com/community/twincat-knowledgebase/read-write-ms-sql-database-in-twincat-3/ <br>
+
+
 
 1. Maak een map aan waarin je het project wil bewaren. <br>
 2. Kopieer de github repository link: <br>
