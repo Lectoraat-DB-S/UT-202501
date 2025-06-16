@@ -22,6 +22,7 @@ Voor dit project zijn een heel aantal extra softwareonderdelen geïnstalleerd.
 Dit is getest op:  
 Twincat 3 XAE Shell 64-bit Build 4026.14 <br>
 TF6420 Database server <br>
+TF2000 HMI Server? <br>
 SQl Server Management studio 20 <br>
 
 ### Imports
