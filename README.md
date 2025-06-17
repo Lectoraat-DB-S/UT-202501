@@ -50,7 +50,7 @@ de bovengenoemde libraries
 
 ## References
 Voor verbinding naar de database is gebruik gemaakt van de volgende tutorial: https://twincontrols.com/community/twincat-knowledgebase/read-write-ms-sql-database-in-twincat-3/ <br>
-de communicatie tussen de plc en de database verloopt via de *tc3_database* library en de *TF6240 database server* van beckhoff. <br>
+de communicatie tussen de plc en de database verloopt via de *tc3_database* library en de *TF6420 database server* van beckhoff. <br>
 De buffer voor data logging is gebaseerd op: https://infosys.beckhoff.com/english.php?content=../content/1033/tf6420_tc3_database_server/6263315851.html&id= <br>
 voor verbinding maken tussen een scope en de HMI is de er gebruik gemaakt van de volgende tutorial: https://www.hemelix.com/scada-hmi/twincat-hmi/twincat-hmi-scope/ <br>
 
@@ -97,7 +97,7 @@ https://twincontrols.com/community/twincat-knowledgebase/read-write-ms-sql-datab
  10.1 Open de scripts.sql bestand in SQL Server management en klik op 'Execute' <br>
      ![image](https://github.com/user-attachments/assets/c8e73acd-2dd0-451c-9f8b-1c8cc2136727)<br>
  10.2 de database is nu overgenomen. <br>            
-11. Open de TF6240 Database server <br>
+11. Open de TF6420 Database server <br>
  11.1  klik op new DB connection: <br>
    ![image](https://github.com/user-attachments/assets/0e093b66-f8a4-45c8-8217-f0af25ead18f) <br>
  11.2 vul de correcte gegevens in, bij server je eigen server naam van de SQL server management studio en bij database de naam van jouw database. om in te loggen is *user*  de naam en wachtwoord: <br>
