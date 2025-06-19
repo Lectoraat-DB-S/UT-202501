@@ -25,6 +25,7 @@ TF6420 Database server <br>
 TF2000 HMI Server / TE2000 HMI Engineering? <br>
 TE1300 Scope View? <br>
 SQl Server Management studio 20 <br>
+MS SQL Express
 
 ### Imports
 De volgende libraries zijn toegevoegd aan de twincat solution: <br>
