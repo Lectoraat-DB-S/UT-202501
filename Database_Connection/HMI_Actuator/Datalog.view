@@ -99,9 +99,7 @@
 </div>
 <div id="FrameLoadCell" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRectangle" data-tchmi-height="199" data-tchmi-height-unit="px" data-tchmi-left="894" data-tchmi-left-unit="px" data-tchmi-top="545" data-tchmi-top-unit="px" data-tchmi-width="314" data-tchmi-width-unit="px" data-tchmi-zindex="0">
 </div>
-<div id="ScopeControlEncoder" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl" data-tchmi-height="400" data-tchmi-height-unit="px" data-tchmi-left="44" data-tchmi-left-unit="px" data-tchmi-top="76" data-tchmi-top-unit="px" data-tchmi-width="750" data-tchmi-width-unit="px" data-tchmi-enable-record-controls="true">
-
-
+<div id="TcHmiScopeControl_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl" data-tchmi-height="400" data-tchmi-height-unit="px" data-tchmi-left="26" data-tchmi-left-unit="px" data-tchmi-top="76" data-tchmi-top-unit="px" data-tchmi-width="750" data-tchmi-width-unit="px">
 
 <script data-tchmi-target-attribute="data-tchmi-scope-config" type="application/json">
 {
@@ -110,11 +108,7 @@
 }
 </script>
 </div>
-<div id="ScopecontrolCapacitief" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl" data-tchmi-height="400" data-tchmi-height-unit="px" data-tchmi-left="894" data-tchmi-left-unit="px" data-tchmi-top="76" data-tchmi-top-unit="px" data-tchmi-width="750" data-tchmi-width-unit="px" data-tchmi-enable-record-controls="true">
-
-
-
-
+<div id="TcHmiScopeControl_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl" data-tchmi-height="400" data-tchmi-height-unit="px" data-tchmi-left="894" data-tchmi-left-unit="px" data-tchmi-top="76" data-tchmi-top-unit="px" data-tchmi-width="750" data-tchmi-width-unit="px">
 
 <script data-tchmi-target-attribute="data-tchmi-scope-config" type="application/json">
 {

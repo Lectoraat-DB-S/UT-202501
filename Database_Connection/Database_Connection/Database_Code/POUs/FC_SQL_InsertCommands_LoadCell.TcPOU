@@ -5,17 +5,21 @@
 VAR_INPUT
     iSensorValue: INT;
     iSampleNr: INT;
-
+	iSensorID: INT;
+	iMeasurementNr: INT;
 END_VAR
 
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[FC_SQL_InsertCommands_LoadCell := 'INSERT INTO [db_accessadmin].[LoadCell] (SensorValue, SampleNr, Time) VALUES (';
+      <ST><![CDATA[FC_SQL_InsertCommands_LoadCell := 'INSERT INTO [db_accessadmin].[LoadCell] (SensorValue, SampleNr, Time, SensorID, MeasurementNr) VALUES (';
 FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, INT_TO_STRING(iSensorValue));
 FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, ', ');
 FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, INT_TO_STRING(iSampleNr));
-FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, ', GETDATE()); ');
-]]></ST>
+FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, ', GETDATE(), ');
+FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, INT_TO_STRING(iSensorID));
+FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, ', ');
+FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, INT_TO_STRING(iMeasurementNr));
+FC_SQL_InsertCommands_LoadCell := CONCAT(FC_SQL_InsertCommands_LoadCell, ');');]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

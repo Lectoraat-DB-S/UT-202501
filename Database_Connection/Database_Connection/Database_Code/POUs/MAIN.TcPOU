@@ -9,6 +9,7 @@ VAR CONSTANT
 	UpperBoundDegrees : INT := 9;
 	LowerBoundDegrees : INT := -9;
 	ZeroDegrees : REAL := 0.0;
+	
 	//convert variables
 	ConvertToSec : INT := 1000;
 	InvertDegrees : INT := -1;
@@ -93,6 +94,7 @@ VAR
 	MeasurementState: INT;
 	Click : BOOL;
 	Startup : BOOL;
+	InitialDegrees : LREAL;
 	
 	//motor controls
 	oMotorEnable AT %Q*: BOOL;
@@ -129,14 +131,14 @@ VAR
 	CapacitiveDistance1 : LREAL;
 	CapacitiveDistance2 : LREAL;
 
+	LoadInsert: INT;
 END_VAR
 
 VAR PERSISTENT
 		iSampleNr: INT;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-//conversion variables for measurement and hmi control
+      <ST><![CDATA[//conversion variables for measurement and hmi control
 iEncoderDegrees := EncoderConvert(iEncoderValue); 
 TestForce := LoadcellConvert(iLoadCellValue);
 CapacitiveDistance1 := CapacitiveConvert(iCapacitief1Value);
@@ -296,15 +298,15 @@ IF bStart AND HomingDone AND NOT bStop THEN
 		END_IF
 		
 		//loadcell is set at chosen Newtons 
-        IF TestForce = iLoadCellMotor THEN
+        IF TestForce > iLoadCellMotor THEN
 		//stop pnuematic
 		oLoadcellPush := FALSE;
 		oLoadcellPull := FALSE;	
 		//Insert Loadcell value at Start 
 		iSampleNr := iSampleNr + 1;
-        SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(LoadcellConvert(iLoadCellValue), iSampleNr);
-        FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1]));
-        
+        //SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(LoadcellConvert(iLoadCellValue), iSampleNr, 0, MeasurementsCompleted);
+        //FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1]));
+		InitialDegrees := EncoderConvert(iEncoderValue);
 		//go to next state
         MeasurementState := 1;
 		END_IF
@@ -318,7 +320,8 @@ IF bStart AND HomingDone AND NOT bStop THEN
 		SampleTrigger := TRUE;
 		SampleDone := FALSE; //stop Insert
 		
-		//insert temp sensor
+		//insert temp sensor (and load sensor)
+		SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(LoadcellConvert(iLoadCellValue), iSampleNr, 0, MeasurementsCompleted);
 		SQL_Commands[3] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor1Value), iSampleNr, iSensorIDs[1], MeasurementsCompleted);
 		SQL_Commands[4] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor2Value), iSampleNr, iSensorIDs[2], MeasurementsCompleted);
 		SQL_Commands[7] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor3Value), iSampleNr, iSensorIDs[3], MeasurementsCompleted);
@@ -338,9 +341,15 @@ IF bStart AND HomingDone AND NOT bStop THEN
         END_IF
 		3:	//execute Temp 4 INSERT
 		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[8]), cbSQLCmd := SIZEOF(SQL_Commands[8])) THEN
-            TempInsert := 0;
+            TempInsert := 4;
+        END_IF
+		4: //execute Load sensor insert
+		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1])) THEN
+            TempInsert := 5;
         END_IF
 		END_CASE
+		
+	
 		
 		 //sampling done move to position and insert data	
 		 IF tInsertTimer.Q THEN
@@ -358,10 +367,18 @@ IF bStart AND HomingDone AND NOT bStop THEN
 		END_IF
 		
       2: //move to chosen degrees 
-        IF ABS(iEncoderDegrees - iEncoderMotor) < DifferenceDegrees THEN
-    	    oMotorExecute := FALSE; //stop motor
-            tMetingTimer(IN := FALSE); // Stop Metingtimer
-            tUitwijkingTimer(IN := TRUE);  //start Uitijwkingtimer
+	    TempInsert := 0; //reset insert loop
+        IF ABS(iEncoderDegrees - 	InitialDegrees) > ABS(iEncoderMotor)-  0.5 THEN
+			oMotorVelocity := 100;
+			IF ABS(iEncoderDegrees - 	InitialDegrees) > ABS(iEncoderMotor)- 0.25 THEN
+				oMotorVelocity := 50;
+				IF ABS(iEncoderDegrees - 	InitialDegrees)  > ABS(iEncoderMotor)  THEN
+    	    	oMotorExecute := FALSE; //stop motor
+            	tMetingTimer(IN := FALSE); // Stop Metingtimer
+            	tUitwijkingTimer(IN := TRUE);  //start Uitijwkingtimer
+				oMotorVelocity := iMotorSpeed;
+				END_IF
+			END_IF
         END_IF
         //wait at chosen degrees
         IF tUitwijkingTimer.Q THEN
@@ -424,8 +441,7 @@ END_IF
     MeasurementNr := MeasurementsCompleted,
     EncoderValue := iEncoderValue,
     Cap1Value := iCapacitief1Value,
-    Cap2Value := iCapacitief2Value);
-]]></ST>
+    Cap2Value := iCapacitief2Value);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

@@ -19,6 +19,7 @@ VAR
 	oMotorPosition : UDINT;
 	oMotorExecute : BOOL;
 	oStartPosition : UDINT;
+	oMotorEnable : BOOL;
 	RealMotorPosition : UDINT;
 	iMotorReady : BOOL;
 	iMotorBusy : BOOL;
@@ -47,11 +48,14 @@ CASE State OF
     IF NOT WaitingAtMid AND ABS(RealMotorPosition - oStartPosition) < 100 THEN
         oMotorExecute := FALSE; // Stop motor at center
         WaitingAtMid := TRUE;
+		oMotorEnable := FALSE; //mark edit stop motor
     END_IF
 
     IF WaitingAtMid THEN
         tHomeTimer(IN := TRUE);
         IF tHomeTimer.Q THEN
+			
+			oMotorEnable := TRUE; //mark edit stop motor
             // Start move to end after wait
             oMotorPosition := TargetPosition;
             oMotorExecute := TRUE;
