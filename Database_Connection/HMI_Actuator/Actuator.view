@@ -1279,7 +1279,7 @@
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:general#/definitions/String",
-          "value": "4"
+          "value": "1"
         },
         "asyncWait": true
       },
@@ -1290,7 +1290,7 @@
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:general#/definitions/String",
-          "value": "3000"
+          "value": "1500"
         },
         "asyncWait": true
       },
@@ -1301,7 +1301,7 @@
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:general#/definitions/String",
-          "value": "3"
+          "value": "10"
         },
         "asyncWait": true
       },
@@ -1312,7 +1312,7 @@
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:general#/definitions/String",
-          "value": "1000"
+          "value": "250"
         },
         "asyncWait": true
       },
@@ -1323,7 +1323,7 @@
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:general#/definitions/String",
-          "value": "3"
+          "value": "5"
         },
         "asyncWait": true
       },
@@ -1334,7 +1334,7 @@
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:general#/definitions/String",
-          "value": "10"
+          "value": "30"
         },
         "asyncWait": true
       },
@@ -1345,7 +1345,7 @@
         "value": {
           "objectType": "StaticValue",
           "valueType": "tchmi:general#/definitions/String",
-          "value": "1"
+          "value": "3"
         },
         "asyncWait": true
       },

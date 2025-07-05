@@ -18,7 +18,7 @@ VAR CONSTANT
 	tHomingInterval: TIME := T#5S;
 	tloadcellInterval: TIME := T#5S;
 	//motor constants
-	SlowestMotorSpeed : INT := 100;
+	SlowestMotorSpeed : INT := 25;
 	FastestMotorSpeed : INT := 1500;
 	DefaultMotorSpeed : INT := 500;
 	MotorLeftEdge : UDINT := 314000;
@@ -34,7 +34,9 @@ VAR
     FB_SQLResultEvt   : FB_SQLResultEvt(sNetID := sLocalID, tTimeout := T#10S);
 	SQL_Commands: ARRAY[1..10] OF STRING(500);
 	DataBase_Connection: BOOL := FALSE;
-   
+    Stiffnessmeasurement: BOOL := FALSE;
+	i: INT := 1;
+	
 	//inputs from sensor
     iLoadCellValue AT %I*: INT;
 	iLoadCellPreviousValue : INT;
@@ -122,8 +124,8 @@ VAR
 	oLoadcellPush AT %Q* : BOOL;
 	oLoadcellPull AT %Q* : BOOL;
 	oLoadcellPressure AT %Q* : INT;
-	iSwitchPUSH AT %I* : BOOL;
-	iSwitchPULL AT %I* : BOOL := TRUE;
+	//iSwitchPUSH AT %I* : BOOL;
+	//iSwitchPULL AT %I* : BOOL := TRUE;
 	LoadcellDelayTimer: TON;
 	//conversion variables
 	TestForce : INT;
@@ -223,7 +225,8 @@ CASE Homing OF
     END_IF
 END_CASE
 END_IF
-	
+
+(*	
 //loadcell switch control
 LoadcellDelayTimer(IN:= TRUE);
 IF LoadcellDelayTimer.Q  AND NOT bStart THEN   
@@ -249,7 +252,7 @@ ELSIF NOT iSwitchPULL AND NOT iSwitchPUSH THEN
 	oLoadcellPull := FALSE;	
 END_IF
 END_IF
-
+*)
 	
 //HMI Configuration
 IF bConfirm AND HomingDone THEN
@@ -278,6 +281,8 @@ IF bStart AND HomingDone AND NOT bStop THEN
         Process_Status := TRUE;
         oMotorEnable := TRUE;
         oMotorVelocity := iMotorSpeed;
+		SampleDone := TRUE;
+		SampleTrigger := FALSE;
         //Create timers
         tUitwijkingTimer(PT := TijdConvertUitwijking); 
         tMetingTimer(PT := TijdConvertMeting);
@@ -294,7 +299,9 @@ IF bStart AND HomingDone AND NOT bStop THEN
 			oLoadcellPressure := oLoadcellPressure + 3;
 			IF oLoadcellPressure > 32700 THEN
 			   oLoadCellPressure := 32700;
-			END_IF		
+			END_IF
+		ELSIF  TestForce > iLoadCellMotor + 10 THEN
+			oLoadcellPressure := oLoadcellPressure - 1;
 		END_IF
 		
 		//loadcell is set at chosen Newtons 
@@ -317,43 +324,48 @@ IF bStart AND HomingDone AND NOT bStop THEN
         IF tMetingTimer.Q THEN 
 		tInsertTimer(IN := TRUE); //start timer
 		//insert data for buffer
-		SampleTrigger := TRUE;
-		SampleDone := FALSE; //stop Insert
+
+		IF NOT Stiffnessmeasurement AND MeasurementsCompleted > 1 THEN
+			SampleTrigger := TRUE;
+			SampleDone := FALSE; //stop Insert
+		END_IF
 		
-		//insert temp sensor (and load sensor)
-		SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(LoadcellConvert(iLoadCellValue), iSampleNr, 0, MeasurementsCompleted);
-		SQL_Commands[3] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor1Value), iSampleNr, iSensorIDs[1], MeasurementsCompleted);
-		SQL_Commands[4] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor2Value), iSampleNr, iSensorIDs[2], MeasurementsCompleted);
-		SQL_Commands[7] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor3Value), iSampleNr, iSensorIDs[3], MeasurementsCompleted);
-		SQL_Commands[8] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor4Value), iSampleNr, iSensorIDs[4], MeasurementsCompleted);
+		//insert temp and load sensor
 		CASE TempInsert OF
 		0:	//execute Temp 1 INSERT
+		SQL_Commands[3] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor1Value), iSampleNr, iSensorIDs[1], MeasurementsCompleted);
 		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[3]), cbSQLCmd := SIZEOF(SQL_Commands[3])) THEN
             TempInsert := 1;
         END_IF
 		1:	//execute Temp 2 INSERT
+		SQL_Commands[4] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor2Value), iSampleNr, iSensorIDs[2], MeasurementsCompleted);
 		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[4]), cbSQLCmd := SIZEOF(SQL_Commands[4])) THEN
             TempInsert := 2;
         END_IF
 		2:	//execute Temp 3 INSERT
+		SQL_Commands[7] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor3Value), iSampleNr, iSensorIDs[3], MeasurementsCompleted);
 		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[7]), cbSQLCmd := SIZEOF(SQL_Commands[7])) THEN
             TempInsert := 3;
         END_IF
 		3:	//execute Temp 4 INSERT
+				SQL_Commands[8] := FC_SQL_InsertCommands_TempSensor(TempConvert(iTempSensor4Value), iSampleNr, iSensorIDs[4], MeasurementsCompleted);
 		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[8]), cbSQLCmd := SIZEOF(SQL_Commands[8])) THEN
             TempInsert := 4;
         END_IF
 		4: //execute Load sensor insert
+		SQL_Commands[1] := FC_SQL_InsertCommands_LoadCell(LoadcellConvert(iLoadCellValue), iSampleNr, 0, MeasurementsCompleted);
 		IF FB_SQLCommandEvt.Execute(pSQLCmd := ADR(SQL_Commands[1]), cbSQLCmd := SIZEOF(SQL_Commands[1])) THEN
             TempInsert := 5;
         END_IF
 		END_CASE
 		
-	
 		
 		 //sampling done move to position and insert data	
-		 IF tInsertTimer.Q THEN
+		 IF tInsertTimer.Q OR  MeasurementsCompleted < 2 THEN
+			 IF NOT Stiffnessmeasurement AND MeasurementsCompleted > 1 THEN
 		 	SampleDone := TRUE; //start insert
+			SampleTrigger := FALSE; 
+			END_IF
 			
             IF iEncoderMotor > PositiveDegrees THEN
                 oMotorPosition := MotorLeftEdge; 
@@ -368,9 +380,9 @@ IF bStart AND HomingDone AND NOT bStop THEN
 		
       2: //move to chosen degrees 
 	    TempInsert := 0; //reset insert loop
-        IF ABS(iEncoderDegrees - 	InitialDegrees) > ABS(iEncoderMotor)-  0.5 THEN
+        IF ABS(iEncoderDegrees - 	InitialDegrees) > ABS(iEncoderMotor)-  0.25 THEN
 			oMotorVelocity := 100;
-			IF ABS(iEncoderDegrees - 	InitialDegrees) > ABS(iEncoderMotor)- 0.25 THEN
+			IF ABS(iEncoderDegrees - 	InitialDegrees) > ABS(iEncoderMotor)- 0.1 THEN
 				oMotorVelocity := 50;
 				IF ABS(iEncoderDegrees - 	InitialDegrees)  > ABS(iEncoderMotor)  THEN
     	    	oMotorExecute := FALSE; //stop motor
@@ -380,13 +392,35 @@ IF bStart AND HomingDone AND NOT bStop THEN
 				END_IF
 			END_IF
         END_IF
+		
+		
         //wait at chosen degrees
-        IF tUitwijkingTimer.Q THEN
-            //Move motor back TO start position 
-            oMotorPosition := oStartPosition;
-            oMotorExecute := TRUE;
-            MeasurementState := 3;     
-        END_IF
+		
+		IF tUitwijkingTimer.Q THEN //adition to measure stiffness
+			IF Stiffnessmeasurement AND MeasurementsCompleted > 1 THEN
+        	        tInsertTimer(IN := TRUE); //start timer		   
+		   			SampleDone := FALSE; //restart sampling
+					SampleTrigger := TRUE;
+
+					 IF tInsertTimer.Q THEN
+
+		  				 	//Move motor back TO start position 
+            				oMotorPosition := oStartPosition;
+            				oMotorExecute := TRUE;
+            				MeasurementState := 3; 
+							SampleDone:=TRUE;
+							SampleTrigger := FALSE;
+							tInsertTimer(IN := FALSE); //stop timer
+							
+					END_IF			
+       		ELSE
+		
+		 					//Move motor back TO start position 
+            				oMotorPosition := oStartPosition;
+            				oMotorExecute := TRUE;
+            				MeasurementState := 3; 	
+			END_IF 
+		END_IF
 
       3: //restart measurement
         IF RealMotorPosition = oStartPosition THEN
@@ -398,7 +432,7 @@ IF bStart AND HomingDone AND NOT bStop THEN
         END_IF
 
       4: //check if measurments are complete
-        IF MeasurementsCompleted = iMetingen THEN
+        IF MeasurementsCompleted = iMetingen+2 THEN
             MeasurementsCompleted := 0;  
             MeasurementState := 5;
         ELSE
@@ -433,7 +467,33 @@ IF bStop AND Click THEN
 		Click := FALSE;  
 	END_IF	 
 END_IF
+
+IF i < 5 THEN // only 1/5th of frequency write position to database;
 	//insert buffer to database
+	IF SampleTrigger THEN
+		SampleTrigger := FALSE;
+		SampleDone := TRUE;
+		fbBufferManager(
+    	SampleDone := SampleDone,
+		SampleTrigger := SampleTrigger,
+    	SampleNr := iSampleNr,
+    	MeasurementNr := MeasurementsCompleted,
+    	EncoderValue := iEncoderValue,
+    	Cap1Value := iCapacitief1Value,
+    	Cap2Value := iCapacitief2Value);
+	    SampleTrigger := TRUE;
+		SampleDone := FALSE;
+	ELSE
+		fbBufferManager(
+    	SampleDone := SampleDone,
+		SampleTrigger := SampleTrigger,
+    	SampleNr := iSampleNr,
+    	MeasurementNr := MeasurementsCompleted,
+    	EncoderValue := iEncoderValue,
+    	Cap1Value := iCapacitief1Value,
+    	Cap2Value := iCapacitief2Value);
+	END_IF
+	ELSE
 	fbBufferManager(
     SampleDone := SampleDone,
 	SampleTrigger := SampleTrigger,
@@ -441,7 +501,11 @@ END_IF
     MeasurementNr := MeasurementsCompleted,
     EncoderValue := iEncoderValue,
     Cap1Value := iCapacitief1Value,
-    Cap2Value := iCapacitief2Value);]]></ST>
+    Cap2Value := iCapacitief2Value);
+	i := 0;
+END_IF
+i := i+1;
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

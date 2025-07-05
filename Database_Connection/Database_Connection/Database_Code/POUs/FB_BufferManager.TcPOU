@@ -124,7 +124,7 @@ END_IF
                 InsertState := 3;
                 InsertTriggered := FALSE;
             END_IF
-
+          
         3:
            IF NOT FB_SQLCommandEvt.bBusy THEN
                 nInsertIdx := nInsertIdx + 1;
