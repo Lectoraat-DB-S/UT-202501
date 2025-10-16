@@ -35,6 +35,7 @@ VAR
 	SQL_Commands: ARRAY[1..10] OF STRING(500);
 	DataBase_Connection: BOOL := FALSE;
     Stiffnessmeasurement: BOOL := FALSE;
+	// for stiffnessmeasurement: 0.2 graden, 0 sec startm 5 sec uitwijking, 1 sec data meten
 	i: INT := 1;
 	
 	//inputs from sensor
@@ -288,24 +289,25 @@ IF bStart AND HomingDone AND NOT bStop THEN
         tMetingTimer(PT := TijdConvertMeting);
 		tInsertTimer(PT := TijdConvertSample);
 		oLoadcellPull := TRUE;
-		oLoadCellPressure := 0;
+		oLoadCellPressure := 100; //set low value for initial contact and to overcome friction
 		Startup := FALSE;
 		END_IF
 		
+
+		
+		IF  i < 2 THEN
 		IF TestForce < iLoadCellMotor THEN
 			//push pnuematic
 			oLoadcellPull := FALSE; 
 			oLoadcellPush := TRUE;
-			oLoadcellPressure := oLoadcellPressure + 3;
+			oLoadcellPressure := oLoadcellPressure + 1;
 			IF oLoadcellPressure > 32700 THEN
 			   oLoadCellPressure := 32700;
 			END_IF
-		ELSIF  TestForce > iLoadCellMotor + 10 THEN
-			oLoadcellPressure := oLoadcellPressure - 1;
-		END_IF
+		ELSIF  TestForce >  iLoadCellMotor  THEN
 		
 		//loadcell is set at chosen Newtons 
-        IF TestForce > iLoadCellMotor THEN
+        //IF TestForce > iLoadCellMotor THEN
 		//stop pnuematic
 		oLoadcellPush := FALSE;
 		oLoadcellPull := FALSE;	
@@ -317,7 +319,8 @@ IF bStart AND HomingDone AND NOT bStop THEN
 		//go to next state
         MeasurementState := 1;
 		END_IF
-
+		END_IF
+		
       1: //Wait at start
         tMetingTimer(IN := TRUE); // Start timer 
 		  //wait before moving motor to chosen position			
